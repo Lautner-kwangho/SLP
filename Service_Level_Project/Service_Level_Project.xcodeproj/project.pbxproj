@@ -13,13 +13,16 @@
 		E4C31E9A27967B2900ACE886 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4C31E9927967B2900ACE886 /* Assets.xcassets */; };
 		E4C31E9D27967B2900ACE886 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4C31E9B27967B2900ACE886 /* LaunchScreen.storyboard */; };
 		E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */; };
-		E4C31EA72796CAAE00ACE886 /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EA62796CAAE00ACE886 /* BaseLoginViewController.swift */; };
 		E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */; };
 		E4C31EAC2796D42700ACE886 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EAB2796D42700ACE886 /* Then */; };
 		E4C31EAF2796D43300ACE886 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EAE2796D43300ACE886 /* SnapKit */; };
 		E4C31EB22796D44B00ACE886 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EB12796D44B00ACE886 /* RxCocoa */; };
 		E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EB32796D44B00ACE886 /* RxSwift */; };
-		E4C31EB82796D60A00ACE886 /* Custom+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EB72796D60A00ACE886 /* Custom+UIButton.swift */; };
+		E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EB72796D60A00ACE886 /* Custom+InputText.swift */; };
+		E4C31EBA2797B33A00ACE886 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4C31EB92797B33A00ACE886 /* GoogleService-Info.plist */; };
+		E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */; };
+		E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */; };
+		E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +34,12 @@
 		E4C31E9C27967B2900ACE886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4C31E9E27967B2900ACE886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		E4C31EA62796CAAE00ACE886 /* BaseLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLoginViewController.swift; sourceTree = "<group>"; };
 		E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		E4C31EB72796D60A00ACE886 /* Custom+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+UIButton.swift"; sourceTree = "<group>"; };
+		E4C31EB72796D60A00ACE886 /* Custom+InputText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+InputText.swift"; sourceTree = "<group>"; };
+		E4C31EB92797B33A00ACE886 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+UIButton+Rx.swift"; sourceTree = "<group>"; };
+		E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+textArea.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,12 +77,12 @@
 			isa = PBXGroup;
 			children = (
 				E4C31E9427967B2800ACE886 /* ViewController.swift */,
-				E4C31EA62796CAAE00ACE886 /* BaseLoginViewController.swift */,
 				E4C31EB62796D5CE00ACE886 /* CustomView */,
 				E4C31EB52796D59700ACE886 /* Base */,
 				E4C31E9927967B2900ACE886 /* Assets.xcassets */,
 				E4C31E9B27967B2900ACE886 /* LaunchScreen.storyboard */,
 				E4C31E9E27967B2900ACE886 /* Info.plist */,
+				E4C31EB92797B33A00ACE886 /* GoogleService-Info.plist */,
 				E4C31E9027967B2800ACE886 /* AppDelegate.swift */,
 				E4C31E9227967B2800ACE886 /* SceneDelegate.swift */,
 			);
@@ -88,6 +94,7 @@
 			children = (
 				E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */,
 				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
+				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -95,7 +102,9 @@
 		E4C31EB62796D5CE00ACE886 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				E4C31EB72796D60A00ACE886 /* Custom+UIButton.swift */,
+				E4C31EB72796D60A00ACE886 /* Custom+InputText.swift */,
+				E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */,
+				E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -171,6 +180,7 @@
 			files = (
 				E4C31E9D27967B2900ACE886 /* LaunchScreen.storyboard in Resources */,
 				E4C31E9A27967B2900ACE886 /* Assets.xcassets in Resources */,
+				E4C31EBA2797B33A00ACE886 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,12 +191,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */,
+				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
-				E4C31EB82796D60A00ACE886 /* Custom+UIButton.swift in Sources */,
+				E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */,
 				E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */,
-				E4C31EA72796CAAE00ACE886 /* BaseLoginViewController.swift in Sources */,
 				E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */,
+				E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */,
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +340,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Service_Level_Project/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SLP;
@@ -340,7 +353,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "kwanghochoi2-com.naver.blog.Service-Level-Project";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memolease.sesac1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -355,6 +368,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Service_Level_Project/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SLP;
@@ -367,7 +381,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "kwanghochoi2-com.naver.blog.Service-Level-Project";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memolease.sesac1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

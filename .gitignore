@@ -5,6 +5,8 @@
 # APIKEY
 APIKEY.swift
 Constants.swift
+# Folder
+Private_Folder/
 # FireBase
 GoogleService-Info.plist
 *.plist

@@ -51,7 +51,6 @@ enum Font {
     }
     
     func ofSize(size: CGFloat) -> UIFont {
-        
         return .systemFont(ofSize: size, weight: self.weight)
     }
     static func display1_R20() -> UIFont {
