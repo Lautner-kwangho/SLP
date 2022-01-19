@@ -10,7 +10,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;+ 앱 소개 및 UI / 특징<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 기간<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 사용 Tool<br/>
-### 1. [일일 Iteration](#일일-Iteration)<br/>
+### 2. [일일 Iteration](#일일-Iteration)<br/>
 
 <br/><br/>
 ## SLP Info
@@ -35,8 +35,8 @@
 |:---:|:-----:|-------|:-----:
 |1|1월 17일|- 팀 빌딩을 위한 코드 리뷰 및 SLP Notion 작성|- 코드 리뷰
 |2|1월 18일|- 기본 아이콘 및 폰트 세팅 <br/> - Rx Test |- 배웠던 Rx를 Test
-|3|1월 19일|- 토큰 넣기 <br/> - textField 구상하기  <br/> - 버튼 커스텀 으로 만들어보기|[3일차](IssueReadme/1월 19일.md)
-|4|1월 20일|- textInput 커스텀 <br/> - textArea 커스텀 <br/> (이거는 꼭 rx사용하기)|[4일차](IssueReadme/1월 20일.md)
+|3|1월 19일|- 토큰 넣기 <br/> - textField 구상하기  <br/> - 버튼 커스텀 으로 만들어보기|[3일차](IssueReadme/1월-19일.md)
+|4|1월 20일|- textInput 커스텀 <br/> - textArea 커스텀 <br/> (이거는 꼭 rx사용하기)|[4일차](IssueReadme/1월-20일.md)
 |-|1월 00일|- |-
 ###### * 최소 All day = 9:00 ~ 18:00
 ###### * 일정에 따라 더 많이 프로젝트 진행
