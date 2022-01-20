@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
 		E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9027967B2800ACE886 /* AppDelegate.swift */; };
 		E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9227967B2800ACE886 /* SceneDelegate.swift */; };
 		E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9427967B2800ACE886 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
 		E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Service_Level_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C31E9027967B2800ACE886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4C31E9227967B2800ACE886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		E4C31EB52796D59700ACE886 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */,
 				E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */,
 				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
 				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
@@ -200,6 +203,7 @@
 				E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */,
 				E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */,
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
+				E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -71,7 +71,7 @@ enum Font {
     static func title5_M12() -> UIFont {
         return Font.title5_M.ofSize(size: 12)
     }
-    static func title5_R12() -> UIFont {
+    static func title6_R12() -> UIFont {
         return Font.title5_R.ofSize(size: 12)
     }
     static func body1_M16() -> UIFont {
@@ -90,4 +90,31 @@ enum Font {
         return Font.caption_R.ofSize(size: 10)
     }
     
+}
+
+extension UILabel {
+    func setLineHeight(font: Font) {
+        var lineHeight: CGFloat = 0.0
+        switch font {
+            // 아 기본 160%에서 그냥 바뀐거였네.. 기본 1.08에서..
+            // 아 아니네 팀원이랑 이야기 해봐야겠다;
+        case .display1_R, .title1_M, .title2_R, .title3_M, .title4_R, .caption_R:
+            lineHeight = 1.6//1.08
+        case .title5_M, .title5_R:
+            lineHeight = 1.01
+        case .body1_M, .body2_R:
+            lineHeight = 1.25
+        case .body3_R:
+            lineHeight = 1.15
+        case .body4_R:
+            lineHeight = 1.22
+        }
+        print(lineHeight)
+        guard let text = self.text else {return}
+        let attributeString = NSMutableAttributedString(string: text)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineHeight
+        attributeString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributeString.length))
+        self.attributedText = attributeString
+    }
 }
