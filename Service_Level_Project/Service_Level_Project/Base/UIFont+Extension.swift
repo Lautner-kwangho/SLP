@@ -93,13 +93,12 @@ enum Font {
 }
 
 extension UILabel {
-    func setLineHeight(font: Font) {
+    func setLineHeight(font: Font) -> NSMutableAttributedString {
         var lineHeight: CGFloat = 0.0
         switch font {
-            // 아 기본 160%에서 그냥 바뀐거였네.. 기본 1.08에서..
-            // 아 아니네 팀원이랑 이야기 해봐야겠다;
+        // 피그마에서 준 값은 진짜 맞는지 가 궁금함 (디자이너랑 확인하면 맞는지 아닌지 알 수 있을텐데 바로 확인 못 시키니까 아쉽)
         case .display1_R, .title1_M, .title2_R, .title3_M, .title4_R, .caption_R:
-            lineHeight = 1.6//1.08
+            lineHeight = 1.08
         case .title5_M, .title5_R:
             lineHeight = 1.01
         case .body1_M, .body2_R:
@@ -109,12 +108,12 @@ extension UILabel {
         case .body4_R:
             lineHeight = 1.22
         }
-        print(lineHeight)
-        guard let text = self.text else {return}
+        guard let text = self.text else {return NSMutableAttributedString()}
         let attributeString = NSMutableAttributedString(string: text)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineHeight
         attributeString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributeString.length))
-        self.attributedText = attributeString
+//        self.attributedText = attributeString
+        return attributeString
     }
 }
