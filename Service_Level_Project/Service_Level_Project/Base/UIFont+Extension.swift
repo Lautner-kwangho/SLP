@@ -111,9 +111,8 @@ extension UILabel {
         guard let text = self.text else {return NSMutableAttributedString()}
         let attributeString = NSMutableAttributedString(string: text)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineHeight
+        paragraphStyle.lineHeightMultiple = lineHeight
         attributeString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributeString.length))
-//        self.attributedText = attributeString
         return attributeString
     }
 }

@@ -62,12 +62,6 @@ class ViewController: BaseViewController {
         }
         
         let testAreaArray: [textAreaCase] = [.active, .activeIcon]
-//        textArea.textField.rx.text
-//            .orEmpty.map(textFieldIsEmpty)
-//            .bind(onNext: { value in
-//                self.textArea.validText.onNext(value)
-//            })
-//            .disposed(by: disposeBag)
         
         view.addSubview(textArea2)
         textArea2.snp.makeConstraints {

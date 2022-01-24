@@ -37,71 +37,77 @@ class InputText: UIView {
     }
     
     var validText = BehaviorSubject<Bool>(value: false)
-    var statusText = BehaviorSubject<inputTextCase>(value: .focus)
+    var statusText = BehaviorSubject<inputTextCase>(value: .inative)
     
     let disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    convenience init(type: inputTextCase) {
+        self.init()
+        
         setConstraints()
         configure()
         
-        rxAction()
+        statusText.onNext(type)
+        textInputEditAction(type: type)
     }
     
-    func rxAction() {
-//        textField.rx.text
-//            .orEmpty
-//            .map(textFieldIsEmpty)
-//            .subscribe(onNext: { value in
-//                self.validText.onNext(value)
-//                // 여기 안에서 구독을 하니까 배수로 늘어남 (이것도 체크)
+    func textInputEditAction(type: inputTextCase) {
+        
+//        self.textField.rx.text.asDriver()
+//            .distinctUntilChanged()
+//            .map(textFieldValid)
+//            .drive(onNext: { value in
+//                print(value)
+//                self.textFieldStatus(type)
 //            })
 //            .disposed(by: disposeBag)
         statusText
+            .distinctUntilChanged()
             .map(textFieldStatus)
-            .subscribe({ value in
-                switch value {
-                case .next():
-                    print("지나감")
-                case .error(_):
-                    print("실패함")
-                case .completed:
-                    print("성공함")
+            .subscribe(onNext: { value in
+                self.statusText.bind { value in
+//                    print(value)
                 }
             })
             .disposed(by: disposeBag)
     }
-    
+
     func textFieldStatus(_ status: inputTextCase) {
         switch status {
         case .inative:
-            viewStyle(viewColor: .white, lineColor: .gray3, subLabel: nil, subHidden: true)
+            viewStyle(viewColor: .white, lineColor: .gray3, fieldColor: .gray7, subLabel: nil, subHidden: true)
         case .focus:
-            viewStyle(viewColor: .white, lineColor: .black, subLabel: nil, subHidden: true)
+            viewStyle(viewColor: .white, lineColor: .black, fieldColor: .black, subLabel: nil, subHidden: true)
         case .active:
-            viewStyle(viewColor: .white, lineColor: .gray3, subLabel: nil, subHidden: true)
+            viewStyle(viewColor: .white, lineColor: .gray3, fieldColor: .black, subLabel: nil, subHidden: true)
         case .disable:
-            viewStyle(viewColor: .gray3, lineColor: .white, subLabel: nil, subHidden: true)
+            viewStyle(viewColor: .gray3, lineColor: .white, fieldColor: .gray7, subLabel: nil, subHidden: true)
         case .error:
-            viewStyle(viewColor: .white, lineColor: .error, subLabel: "적합하지 않습니다! 다시 입력해주세요", subHidden: false)
+            viewStyle(viewColor: .white, lineColor: .error, fieldColor: .black, subLabel: "적합하지 않습니다! 다시 입력해주세요", subHidden: false)
             label.textColor = SacColor.color(.error)
         case .success:
-            viewStyle(viewColor: .white, lineColor: .success, subLabel: "정상진행 가능합니다", subHidden: false)
+            viewStyle(viewColor: .white, lineColor: .success, fieldColor: .black, subLabel: "정상진행 가능합니다", subHidden: false)
             label.textColor = SacColor.color(.success)
         }
     }
     
-    func viewStyle(viewColor: SacColor, lineColor: SacColor, subLabel: String?, subHidden: Bool) {
+    func viewStyle(viewColor: SacColor, lineColor: SacColor, fieldColor: SacColor, subLabel: String?, subHidden: Bool) {
         view.backgroundColor = SacColor.color(viewColor)
         lineView.backgroundColor = SacColor.color(lineColor)
+        textField.textColor = SacColor.color(fieldColor)
         label.text = subLabel
         label.isHidden = subHidden
     }
     
-//    func textFieldIsEmpty(_ text: String) -> Bool {
-//        return text.count > 0 ? true : false
-//    }
+    func textFieldValid(_ text: String?) -> Bool {
+        guard let count = text?.count else { return false }
+        let value = count > 0 ? true : false
+        return value
+    }
     
     func configure() {
         backgroundColor = .white

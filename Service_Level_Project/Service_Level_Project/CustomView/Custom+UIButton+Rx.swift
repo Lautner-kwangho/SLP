@@ -28,29 +28,29 @@ enum buttonCase: CaseIterable {
         
         switch type {
         case .inactive:
-            button.setTitle("버튼 내용", for: .normal)
+            button.setTitle(button.currentTitle, for: .normal)
             button.setTitleColor(SacColor.color(.black), for: .normal)
             button.backgroundColor = .clear
             button.layer.borderWidth = 1
             button.layer.borderColor = SacColor.color(.gray4).cgColor
         case .fill:
-            button.setTitle("버튼 내용", for: .normal)
+            button.setTitle(button.currentTitle, for: .normal)
             button.setTitleColor(SacColor.color(.white), for: .normal)
             button.backgroundColor = SacColor.color(.green)
             button.layer.borderWidth = 0
         case .outline:
-            button.setTitle("버튼 내용", for: .normal)
+            button.setTitle(button.currentTitle, for: .normal)
             button.setTitleColor(SacColor.color(.green), for: .normal)
             button.backgroundColor = .clear
             button.layer.borderWidth = 1
             button.layer.borderColor = SacColor.color(.green).cgColor
         case .cancel:
-            button.setTitle("버튼 내용", for: .normal)
+            button.setTitle(button.currentTitle, for: .normal)
             button.setTitleColor(SacColor.color(.black), for: .normal)
             button.backgroundColor = SacColor.color(.gray2)
             button.layer.borderWidth = 0
         case .disable:
-            button.setTitle("버튼 내용", for: .normal)
+            button.setTitle(button.currentTitle, for: .normal)
             button.setTitleColor(.red, for: .normal)
             button.setTitleColor(SacColor.color(.gray3), for: .normal)
             button.backgroundColor = SacColor.color(.gray6)
@@ -73,29 +73,29 @@ class ButtonConfiguration: UIButton {
         
         switch type {
         case .inactive:
-            self.setTitle("버튼 내용", for: .normal)
+            self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.black), for: .normal)
             self.backgroundColor = .clear
             self.layer.borderWidth = 1
             self.layer.borderColor = SacColor.color(.gray4).cgColor
         case .fill:
-            self.setTitle("버튼 내용", for: .normal)
+            self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.white), for: .normal)
             self.backgroundColor = SacColor.color(.green)
             self.layer.borderWidth = 0
         case .outline:
-            self.setTitle("버튼 내용", for: .normal)
+            self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.green), for: .normal)
             self.backgroundColor = .clear
             self.layer.borderWidth = 1
             self.layer.borderColor = SacColor.color(.green).cgColor
         case .cancel:
-            self.setTitle("버튼 내용", for: .normal)
+            self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.black), for: .normal)
             self.backgroundColor = SacColor.color(.gray2)
             self.layer.borderWidth = 0
         case .disable:
-            self.setTitle("버튼 내용", for: .normal)
+            self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(.red, for: .normal)
             self.setTitleColor(SacColor.color(.gray3), for: .normal)
             self.backgroundColor = SacColor.color(.gray6)

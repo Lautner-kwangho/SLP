@@ -6,11 +6,19 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+//      for urlContext in URLContexts {
+//          let url = urlContext.url
+//          Auth.auth().canHandle(url)
+//      }
+//      // URL not auth related, developer should handle it.
+//    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -20,8 +28,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: AuthBaseViewController())
+        window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
+//        AuthPhoneViewController
+//        AuthPhoneMessageViewController
         window?.makeKeyAndVisible()
+        
+        // Use Firebase library to configure APIs
+        FirebaseApp.configure()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
