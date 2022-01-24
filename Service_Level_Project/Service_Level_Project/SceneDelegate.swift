@@ -28,9 +28,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
+        window?.rootViewController = UINavigationController(rootViewController: SelectGenderViewController())
 //        AuthPhoneViewController
 //        AuthPhoneMessageViewController
+//        CreateNicknameViewController
+//        BirthdayViewController
+//        EmailViewController
+//        SelectGenderViewController
         window?.makeKeyAndVisible()
         
         // Use Firebase library to configure APIs

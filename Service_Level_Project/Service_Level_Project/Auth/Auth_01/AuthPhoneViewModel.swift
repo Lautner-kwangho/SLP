@@ -77,10 +77,18 @@ class AuthPhoneViewModel {
                         print("폰 에러", error.localizedDescription)
                         return
                     }
+                    UserDefaults.standard.removeObject(forKey: "FCMID")
+                    UserDefaults.standard.removeObject(forKey: "PhoneNumber")
                     guard let verificationID = verificationID else { return }
                     UserDefaults.standard.set(verificationID, forKey: "FCMID")
+                    UserDefaults.standard.set(phoneNumber, forKey: "PhoneNumber")
+                    
+                    DispatchQueue.main.async {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: AuthPhoneMessageViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
                 }
-            
         } onError: { error in
             print(error)
         }.disposed(by: disposeBag)

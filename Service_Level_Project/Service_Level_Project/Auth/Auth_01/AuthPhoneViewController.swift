@@ -107,23 +107,6 @@ extension AuthPhoneViewController: UITextFieldDelegate {
         } else {
             return true
         }
-//        let characters: CharacterSet = {
-//            var set = CharacterSet.lowercaseLetters
-//            set.insert(charactersIn: "0123456789")
-//            return set.inverted
-//        }()
-    
-//        if (textField.text?.count)! > 13 {
-//            textField.text!.removeLast()
-//            return false
-//        }
-        
-//        if string.count > 0 {
-//            guard string.rangeOfCharacter(from: characters) == nil else {
-//                return false }
-//        }
-        
-//        return true
     }
     
     func format(with mask: String, phone: String) -> String {

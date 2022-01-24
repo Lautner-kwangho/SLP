@@ -14,6 +14,7 @@ class AuthPhoneMessageViewController: AuthBaseViewController {
     }
     let sendButton = ButtonConfiguration(customType: .h40(type: .disable, icon: false)).then {
         $0.setTitle("재전송", for: .normal)
+        $0.isEnabled = false
     }
     let secondCountLabel = UILabel().then {
         $0.font = Font.title3_M14()
@@ -27,8 +28,8 @@ class AuthPhoneMessageViewController: AuthBaseViewController {
     }
     
     override func configure() {
-        viewModel.countSecond()
-        viewModel.setmessageField(messageField, sendButton, customButton)
+        viewModel.countSecond(self)
+        viewModel.setmessageField(self, messageField, sendButton, customButton)
         
         firstLabel.text = viewModel.firstText
         secondLabel.text = viewModel.secondText
@@ -36,6 +37,7 @@ class AuthPhoneMessageViewController: AuthBaseViewController {
         viewModel.secondCount.asObserver().bind(onNext: { time in
             self.secondCountLabel.text = time
         })
+        messageField.textField.delegate = self
     }
     
     override func setConstraints() {
@@ -88,5 +90,36 @@ class AuthPhoneMessageViewController: AuthBaseViewController {
             $0.trailing.equalTo(sendButton.snp.leading).inset(-20)
         }
     
+    }
+}
+
+extension AuthPhoneMessageViewController: UITextFieldDelegate {
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let characters: CharacterSet = {
+            var set = CharacterSet.lowercaseLetters
+            set.insert(charactersIn: "0123456789")
+            return set.inverted
+        }()
+        
+        if (textField.text?.count)! > 5 {
+            textField.text!.removeLast()
+            viewModel.messageText.onNext(textField.text!)
+            return false
+        }
+        
+        if string.count > 0 {
+            guard string.rangeOfCharacter(from: characters) == nil else {
+                return false }
+        }
+        
+        return true
     }
 }
