@@ -12,22 +12,37 @@ class BirthdayViewController: AuthBaseViewController {
     let calendarStatckView = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
-
     }
+    
     let yearView = UIView()
     let monthView = UIView()
     let dayView = UIView()
     
-    let yearTextField = InputText(type: .inative).then {
+    let yearTextField = InputText(type: .active).then {
         $0.textField.placeholder = "1990"
+        $0.textField.textAlignment = .center
+        $0.textField.isEnabled = false
     }
-    let monthTextField = InputText(type: .inative).then {
+    let monthTextField = InputText(type: .active).then {
         $0.textField.placeholder = "1"
+        $0.textField.textAlignment = .center
+        $0.textField.isEnabled = false
     }
-    let dayTextField = InputText(type: .inative).then {
+    let dayTextField = InputText(type: .active).then {
         $0.textField.placeholder = "1"
+        $0.textField.textAlignment = .center
+        $0.textField.isEnabled = false
     }
+    let selectDate = UIDatePicker().then {
+        $0.preferredDatePickerStyle = .wheels
+        $0.backgroundColor = SacColor.color(.gray3)
+        $0.datePickerMode = .date
+        $0.locale = Locale(identifier: "ko-KR")
+        $0.timeZone = .autoupdatingCurrent
     
+        let limitDate = Calendar.current.date(byAdding: .year, value: -17, to: Date().addingTimeInterval(32400))
+        $0.maximumDate = limitDate
+    }
     let yearLabel = UILabel().then {
         $0.text = "년"
         let lineHeight = $0.setLineHeight(font: .title2_R)
@@ -62,9 +77,21 @@ class BirthdayViewController: AuthBaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.savedBirthday(selectDate ,yearTextField, monthTextField, dayTextField)
+    }
+    
     override func configure() {
         firstLabel.text = viewModel.Title
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
+        
+        [yearTextField, monthTextField, dayTextField].forEach { view in
+            view.textField.inputView = selectDate
+        }
+        viewModel.selectedDatePicker(selectDate, yearTextField, monthTextField, dayTextField)
+        viewModel.setButtonUI(customButton)
+        viewModel.clickedButton(self, customButton)
     }
     
     override func setConstraints() {
@@ -96,6 +123,14 @@ class BirthdayViewController: AuthBaseViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(customButton.snp.top)
         }
+        
+        view.addSubview(selectDate)
+        selectDate.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(view.frame.height * 0.3)
+        }
+        
         // 아 그냥 스텍 뷰로 해줬어야 했나; 그냥 다시 깔끔하게 스텍뷰로 하자
         middleView.addSubview(calendarStatckView)
         [yearView, monthView, dayView].forEach {
@@ -105,6 +140,7 @@ class BirthdayViewController: AuthBaseViewController {
         calendarStatckView.snp.makeConstraints {
             $0.centerY.equalTo(middleView)
             $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(middleView)
         }
         
         yearView.addSubview(yearTextField)
@@ -117,7 +153,7 @@ class BirthdayViewController: AuthBaseViewController {
             $0.centerY.equalTo(yearTextField.textField)
             $0.leading.equalTo(yearTextField.snp.trailing).offset(4)
         }
-        
+
         monthView.addSubview(monthTextField)
         monthView.addSubview(monthLabel)
         monthTextField.snp.makeConstraints {
@@ -128,7 +164,7 @@ class BirthdayViewController: AuthBaseViewController {
             $0.centerY.equalTo(monthTextField.textField)
             $0.leading.equalTo(monthTextField.snp.trailing).offset(4)
         }
-        
+
         dayView.addSubview(dayTextField)
         dayView.addSubview(dayLabel)
         dayTextField.snp.makeConstraints {
@@ -139,7 +175,6 @@ class BirthdayViewController: AuthBaseViewController {
             $0.centerY.equalTo(dayTextField.textField)
             $0.leading.equalTo(dayTextField.snp.trailing).offset(4)
         }
-        
-        
+
     }
 }

@@ -11,6 +11,7 @@ class EmailViewController: AuthBaseViewController {
     
     let emailTextField = InputText(type: .inative).then {
         $0.textField.placeholder = "SeSAC@gmail.com"
+        $0.textField.keyboardType = .emailAddress
     }
     let viewModel = EmailViewModel()
     
@@ -18,10 +19,17 @@ class EmailViewController: AuthBaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.savedEmail(emailTextField, customButton)
+    }
+    
     override func configure() {
         firstLabel.text = viewModel.Title
         secondLabel.text = viewModel.subTItle
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
+        viewModel.setTextField(emailTextField, customButton)
+        viewModel.clickedEmailButton(self, customButton)
     }
     
     override func setConstraints() {

@@ -110,12 +110,6 @@ extension AuthPhoneMessageViewController: UITextFieldDelegate {
             return set.inverted
         }()
         
-//        if (textField.text?.count)! > 5 {
-//            textField.text!.removeLast()
-//            viewModel.messageText.onNext(textField.text!)
-//            return false
-//        }
-        
         if string.count > 0 {
             guard string.rangeOfCharacter(from: characters) == nil else {
                 return false }

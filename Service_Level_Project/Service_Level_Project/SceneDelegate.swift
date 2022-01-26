@@ -45,6 +45,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
+                // 앱 지우고 다시 설치하니까 이런 오류 뜸(체크하기) -> 근데 두번째 빌드에서는 받아옴;
+                // Failed to checkin before token registration.
             } else if let token = token {
                 print("FCM registration token: \(token)")
                 UserDefaults.standard.set(token, forKey: "fcmToken")

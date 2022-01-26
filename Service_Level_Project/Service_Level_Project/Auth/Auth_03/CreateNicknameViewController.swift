@@ -20,11 +20,28 @@ class CreateNicknameViewController: AuthBaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let nickname = UserDefaults.standard.string(forKey: "nickname")
+        guard let nickname = nickname else { return }
+        nicknameTextField.textField.text = nickname
+    }
+    
     override func configure() {
         firstLabel.text = viewModel.Title
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
         
-        viewModel.setUI(self, nicknameTextField, customButton)
+        viewModel.setUI(self, nicknameTextField, customButton) { text in
+            if text.count > 0 {
+                self.nicknameTextField.statusText.onNext(.focus)
+                self.customButton.isEnabled = true
+                buttonCase.customLayout(self.customButton, .fill)
+            } else {
+                self.nicknameTextField.statusText.onNext(.inative)
+                self.customButton.isEnabled = false
+                buttonCase.customLayout(self.customButton, .disable)
+            }
+        }
         viewModel.nextButtonClicked(self, customButton)
     }
     

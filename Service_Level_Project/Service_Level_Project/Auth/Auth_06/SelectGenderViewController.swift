@@ -8,7 +8,7 @@
 import UIKit
 
 class SelectGenderViewController: AuthBaseViewController {
-    // 버튼으로 바꿔서 작업하기 ... 
+    // 버튼으로 바꿔서 작업하기 ... -> 완료
     let maleButton = UIButton(type: .custom).then {
         var configuration = UIButton.Configuration.filled()
         configuration.image = UIImage(named: "man")
@@ -49,8 +49,12 @@ class SelectGenderViewController: AuthBaseViewController {
         firstLabel.text = viewModel.Title
         secondLabel.text = viewModel.subTItle
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
+        customButton.isEnabled = true
+        buttonCase.customLayout(customButton, .fill)
         maleButton.addTarget(self, action: #selector(maleButtonClicked), for: .touchUpInside)
         femaleButton.addTarget(self, action: #selector(femaleButtonClicked), for: .touchUpInside)
+        
+        viewModel.clickedGenderButton(self,customButton)
     }
     
     @objc func maleButtonClicked(_ sender: UIButton) {
