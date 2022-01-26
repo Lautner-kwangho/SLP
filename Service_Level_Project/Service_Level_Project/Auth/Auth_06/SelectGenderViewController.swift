@@ -9,11 +9,34 @@ import UIKit
 
 class SelectGenderViewController: AuthBaseViewController {
     // 버튼으로 바꿔서 작업하기 ... 
-    let maleView = UIView().then {
-        $0.backgroundColor = .blue
+    let maleButton = UIButton(type: .custom).then {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(named: "man")
+        configuration.imagePlacement = .top
+        configuration.subtitle = "남자"
+        configuration.attributedSubtitle?.font = Font.title2_R16()
+        configuration.titleAlignment = .center
+        configuration.baseBackgroundColor = .clear
+        configuration.baseForegroundColor = SacColor.color(.success)
+        configuration.background.strokeColor = SacColor.color(.gray3)
+        configuration.background.strokeWidth = 1
+        configuration.buttonSize = .large
+        $0.configuration = configuration
+        // configurationUpdateHandler 이용해서 해보려니까 잘 안돼서 그냥 tap이나 action추가해서 해야겠
     }
-    let femaleView = UIView().then {
-        $0.backgroundColor = .cyan
+    let femaleButton = UIButton().then {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(named: "woman")
+        configuration.imagePlacement = .top
+        configuration.subtitle = "여자"
+        configuration.attributedSubtitle?.font = Font.title2_R16()
+        configuration.titleAlignment = .center
+        configuration.baseBackgroundColor = .clear
+        configuration.baseForegroundColor = SacColor.color(.error)
+        configuration.background.strokeColor = SacColor.color(.gray3)
+        configuration.background.strokeWidth = 1
+        configuration.buttonSize = .large
+        $0.configuration = configuration
     }
     
     let viewModel = SelectGenderViewModel()
@@ -26,6 +49,20 @@ class SelectGenderViewController: AuthBaseViewController {
         firstLabel.text = viewModel.Title
         secondLabel.text = viewModel.subTItle
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
+        maleButton.addTarget(self, action: #selector(maleButtonClicked), for: .touchUpInside)
+        femaleButton.addTarget(self, action: #selector(femaleButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func maleButtonClicked(_ sender: UIButton) {
+        viewModel.maleClicked = !viewModel.maleClicked
+        let backgroundColor = viewModel.maleClicked ? SacColor.color(.whitegreen) : .clear
+        sender.configuration?.baseBackgroundColor = backgroundColor
+    }
+    
+    @objc func femaleButtonClicked(_ sender: UIButton) {
+        viewModel.femaleClicked = !viewModel.femaleClicked
+        let backgroundColor = viewModel.femaleClicked ? SacColor.color(.whitegreen) : .clear
+        sender.configuration?.baseBackgroundColor = backgroundColor
     }
     
     override func setConstraints() {
@@ -58,16 +95,18 @@ class SelectGenderViewController: AuthBaseViewController {
             $0.bottom.equalTo(customButton.snp.top)
         }
         
-        view.addSubview(maleView)
-        maleView.snp.makeConstraints {
-            $0.leading.top.bottom.equalTo(middleView).inset(16)
+        middleView.addSubview(maleButton)
+        maleButton.snp.makeConstraints {
+            $0.leading.equalTo(middleView).inset(16)
             $0.width.equalTo(view.frame.width * 0.44)
+            $0.centerY.equalTo(middleView)
         }
         
-        view.addSubview(femaleView)
-        femaleView.snp.makeConstraints {
-            $0.trailing.top.bottom.equalTo(middleView).inset(16)
+        middleView.addSubview(femaleButton)
+        femaleButton.snp.makeConstraints {
+            $0.trailing.equalTo(middleView).inset(16)
             $0.width.equalTo(view.frame.width * 0.44)
+            $0.centerY.equalTo(middleView)
         }
     }
 }

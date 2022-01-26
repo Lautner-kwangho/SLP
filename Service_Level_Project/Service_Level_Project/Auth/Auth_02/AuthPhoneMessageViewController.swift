@@ -30,6 +30,7 @@ class AuthPhoneMessageViewController: AuthBaseViewController {
     override func configure() {
         viewModel.countSecond(self)
         viewModel.setmessageField(self, messageField, sendButton, customButton)
+        viewModel.authButtonClicked(customButton, self)
         
         firstLabel.text = viewModel.firstText
         secondLabel.text = viewModel.secondText
@@ -109,11 +110,11 @@ extension AuthPhoneMessageViewController: UITextFieldDelegate {
             return set.inverted
         }()
         
-        if (textField.text?.count)! > 5 {
-            textField.text!.removeLast()
-            viewModel.messageText.onNext(textField.text!)
-            return false
-        }
+//        if (textField.text?.count)! > 5 {
+//            textField.text!.removeLast()
+//            viewModel.messageText.onNext(textField.text!)
+//            return false
+//        }
         
         if string.count > 0 {
             guard string.rangeOfCharacter(from: characters) == nil else {

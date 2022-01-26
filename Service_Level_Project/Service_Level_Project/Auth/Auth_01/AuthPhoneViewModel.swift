@@ -61,11 +61,7 @@ class AuthPhoneViewModel {
         
     }
     
-    func setButtonSetting(_ button: UIButton) {
-        button.addTarget(self, action: #selector(clickedButton), for: .touchUpInside)
-    }
-    
-    @objc func clickedButton() {
+    func clickedButton(_ vc: UIViewController) {
         phoneText.subscribe { text in
             let phoneNumber = "+82" + text
             Auth.auth().languageCode = "ko-KR"
@@ -74,19 +70,21 @@ class AuthPhoneViewModel {
                 .provider()
                 .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
                     if let error = error {
-                        print("폰 에러", error.localizedDescription)
+                        // 이렇게 두개 뜨는데 애초에 번호를 잘못 넣을 수 없으니까 처리 안해줘도 되지 않을까 싶은데
+                        // User interaction is still ongoing, another view cannot be presented.
+                        //The interaction was cancelled by the user
+                        // print("사용자 에러", error.localizedDescription)
                         return
                     }
-                    UserDefaults.standard.removeObject(forKey: "FCMID")
+                    UserDefaults.standard.removeObject(forKey: "idToken")
                     UserDefaults.standard.removeObject(forKey: "PhoneNumber")
                     guard let verificationID = verificationID else { return }
-                    UserDefaults.standard.set(verificationID, forKey: "FCMID")
+                    UserDefaults.standard.set(verificationID, forKey: "idToken")
                     UserDefaults.standard.set(phoneNumber, forKey: "PhoneNumber")
-                    
-                    DispatchQueue.main.async {
-                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: AuthPhoneMessageViewController())
-                        windowScene.windows.first?.makeKeyAndVisible()
+                    if verificationID != "" {
+                        DispatchQueue.main.async {
+                            vc.navigationController?.pushViewController(AuthPhoneMessageViewController(), animated: true)
+                        }
                     }
                 }
         } onError: { error in

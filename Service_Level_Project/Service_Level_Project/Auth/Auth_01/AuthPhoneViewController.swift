@@ -36,10 +36,14 @@ class AuthPhoneViewController: AuthBaseViewController {
         viewModel.setInputTextPhoneNumber(inputPhoneNumber, customButton)
         
         // 버튼 처리
-        viewModel.setButtonSetting(customButton)
+        customButton.addTarget(self, action: #selector(customButtonClicked), for: .touchUpInside)
         
         // 정규식 적용
         viewModel.textFieldRegex()
+    }
+    
+    @objc func customButtonClicked() {
+        viewModel.clickedButton(self)
     }
     
     override func setConstraints() {

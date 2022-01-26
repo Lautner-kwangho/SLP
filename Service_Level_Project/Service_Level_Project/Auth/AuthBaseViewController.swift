@@ -27,9 +27,7 @@ class AuthBaseViewController: BaseViewController {
         $0.textAlignment = .center
         $0.font = Font.title2_R16()
     }
-    var middleView = UIView().then {
-        $0.backgroundColor = .systemGray4
-    }
+    var middleView = UIView()
     
     var customButton = ButtonConfiguration(customType: .h48(type: .disable, icon: false)).then {
         $0.setTitle("인증 번호 받기", for: .normal)

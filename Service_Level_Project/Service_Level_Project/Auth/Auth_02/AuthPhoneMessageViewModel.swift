@@ -16,7 +16,7 @@ class AuthPhoneMessageViewModel {
     
     let disposeBag = DisposeBag()
     
-    let fcmToken = UserDefaults.standard.string(forKey: "FCMID")
+    let idToken = UserDefaults.standard.string(forKey: "idToken")
     let phoneNumber = UserDefaults.standard.string(forKey: "PhoneNumber")
     
     var count = 60
@@ -31,7 +31,7 @@ class AuthPhoneMessageViewModel {
             .distinctUntilChanged()
             .bind { value in
                 self.messageText.onNext(value)
-                if value.count > 5 {
+                if value.count == 6 {
                     authButton.isEnabled = true
                     buttonCase.customLayout(authButton, .fill)
                 } else {
@@ -41,9 +41,16 @@ class AuthPhoneMessageViewModel {
             }
             .disposed(by: disposeBag)
         
-        authButton.addTarget(self, action: #selector(authButtonClicked), for: .touchUpInside)
-        
         vc.view.makeToast("인증번호를 보냈습니다")
+        
+        secondCount
+            .subscribe(onNext: { text in
+                if text == "00:00" {
+                    authButton.isEnabled = false
+                    buttonCase.customLayout(authButton, .disable)
+                }
+            })
+            .disposed(by: disposeBag)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             resendButton.isEnabled = true
@@ -54,9 +61,6 @@ class AuthPhoneMessageViewModel {
             .map { vc.view.makeToast("", duration: 0.5, title:"잠시만 기다려주세요")}
             .debounce(RxTimeInterval.seconds(5), scheduler: MainScheduler.instance)
             .subscribe(onNext: { value in
-                vc.view.makeToast("재전송했습니다")
-                self.count = 60
-                
                 guard let phoneNumber = self.phoneNumber else { return }
 
                 Auth.auth().languageCode = "ko-KR"
@@ -69,47 +73,71 @@ class AuthPhoneMessageViewModel {
                             return
                         }
                         guard let verificationID = verificationID else { return }
-                        UserDefaults.standard.removeObject(forKey: "FCMID")
-                        UserDefaults.standard.set(verificationID, forKey: "FCMID")
+                        UserDefaults.standard.removeObject(forKey: "idToken")
+                        UserDefaults.standard.set(verificationID, forKey: "idToken")
+                        self.count = 60
+                        self.countSecond(vc)
+                        vc.view.makeToast("재전송했습니다")
                     }
+                
             },onError: { error in
                 print(error)
             })
             .disposed(by: disposeBag)
     }
     
-    @objc func authButtonClicked() {
+    func authButtonClicked(_ button: UIButton, _ vc: UIViewController) {
+        var number = ""
         self.messageText
             .distinctUntilChanged()
             .subscribe(onNext: { text in
-                guard let fcmID = self.fcmToken else { return }
-                
+                number = text
+            }, onError: { error in
+                print("인증 에러", error)
+            }).disposed(by: self.disposeBag)
+        
+        button.rx.tap.asDriver()
+            .drive(onNext: { _ in
+                guard let idToken = self.idToken else { return }
+
                 let credential = PhoneAuthProvider.provider().credential(
-                    withVerificationID: fcmID,
-                    verificationCode: text
+                    withVerificationID: idToken,
+                    verificationCode: number
                 )
                 
                 Auth.auth().signIn(with: credential) { authResult, error in
                     if let error = error {
                         let authError = error as NSError
-                        if authError.code == AuthErrorCode.secondFactorRequired.rawValue {
-                            let resolver = authError.userInfo[AuthErrorUserInfoMultiFactorResolverKey] as! MultiFactorResolver
-                            var displayNameString = ""
-                            for tmpFactorInfo in resolver.hints {
-                                displayNameString += tmpFactorInfo.displayName ?? ""
-                                displayNameString += " "
-                            }
-                        }
+                        print("에러 코드 발생",authError.code)
+                        
+                        let errorText = AuthError.authCheckError(authError.code)
+                        vc.view.makeToast(errorText)
+                        
                         return
                     }
                     // User is Signed in
-                    print(authResult?.user.uid)
+                    guard let authResult = authResult else {return}
+                    print("성공했음", authResult.user.uid)
+                    print(idToken)
+                    dump(authResult.user.refreshToken)
                     
+                    let currentUser = Auth.auth().currentUser
+                    currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                        guard let error = error else {return}
+                        
+                        // 맞다면 저장해줘야할 듯!
+                        print(idToken)
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
                 }
-                
-            }, onError: { error in
-                print("인증 에러", error)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     func countSecond(_ vc: UIViewController) {

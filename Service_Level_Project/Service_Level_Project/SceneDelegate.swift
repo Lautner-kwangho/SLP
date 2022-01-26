@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: SelectGenderViewController())
+        window?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
 //        AuthPhoneViewController
 //        AuthPhoneMessageViewController
 //        CreateNicknameViewController
@@ -39,8 +39,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
+        // Firebase FCM token
+        
+        Messaging.messaging().delegate = self
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                UserDefaults.standard.set(token, forKey: "fcmToken")
+            }
+        }
     }
-
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+          name: Notification.Name("FCMToken"),
+          object: nil,
+          userInfo: dataDict
+        )
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

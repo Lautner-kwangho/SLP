@@ -25,6 +25,8 @@
 		E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E341279F2518004C68AC /* SelectGenderViewController.swift */; };
 		E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E343279F253E004C68AC /* SelectGenderViewModel.swift */; };
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
+		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
+		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
 		E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9027967B2800ACE886 /* AppDelegate.swift */; };
 		E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9227967B2800ACE886 /* SceneDelegate.swift */; };
 		E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9427967B2800ACE886 /* ViewController.swift */; };
@@ -58,6 +60,10 @@
 		E458E341279F2518004C68AC /* SelectGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewController.swift; sourceTree = "<group>"; };
 		E458E343279F253E004C68AC /* SelectGenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewModel.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
+		E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectRelease.entitlements; sourceTree = "<group>"; };
+		E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectDebug.entitlements; sourceTree = "<group>"; };
 		E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Service_Level_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C31E9027967B2800ACE886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4C31E9227967B2800ACE886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */,
+				E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */,
 				E41ED01F279DBA5B00A2F0CE /* Auth_01 */,
 				E41ED020279DBA6E00A2F0CE /* Auth_02 */,
 				E458E331279EFB3E004C68AC /* Auth_03 */,
@@ -161,6 +168,14 @@
 			path = Auth_06;
 			sourceTree = "<group>";
 		};
+		E4ABC3C3279FD3B000CE3A99 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		E4C31E8427967B2800ACE886 = {
 			isa = PBXGroup;
 			children = (
@@ -180,8 +195,11 @@
 		E4C31E8F27967B2800ACE886 /* Service_Level_Project */ = {
 			isa = PBXGroup;
 			children = (
+				E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */,
+				E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */,
 				E4C31E9427967B2800ACE886 /* ViewController.swift */,
 				E41ED01C279DB7A000A2F0CE /* Auth */,
+				E4ABC3C3279FD3B000CE3A99 /* MyPage */,
 				E4C31EB62796D5CE00ACE886 /* CustomView */,
 				E4C31EB52796D59700ACE886 /* Base */,
 				E4C31E9927967B2900ACE886 /* Assets.xcassets */,
@@ -310,7 +328,9 @@
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
+				E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */,
 				E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */,
+				E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */,
 				E41ED02E279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift in Sources */,
 				E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */,
 				E458E335279EFC07004C68AC /* CreateNicknameViewModel.swift in Sources */,
@@ -464,6 +484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Service_Level_Project/Service_Level_ProjectDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
@@ -492,6 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Service_Level_Project/Service_Level_ProjectRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2EZ5QWFYX2;
