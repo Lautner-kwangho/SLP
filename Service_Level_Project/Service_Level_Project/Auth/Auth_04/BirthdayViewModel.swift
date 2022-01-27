@@ -19,8 +19,8 @@ class BirthdayViewModel {
     
     func savedBirthday(_ picker : UIDatePicker, _ year: InputText, _ month: InputText, _ day: InputText) {
         let birthday = UserDefaults.standard.string(forKey: "birthday")
-        guard let birthday = birthday else { return }
 
+        guard let birthday = birthday else { return }
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         formatter.timeStyle = .short
@@ -29,7 +29,7 @@ class BirthdayViewModel {
         let userBirthday = formatter.date(from: birthday)
         
         guard let userBirthday = userBirthday else { return }
-        let addHourDate = Calendar.current.date(byAdding: .hour, value: 21, to: userBirthday)
+        let addHourDate = Calendar.current.date(byAdding: .hour, value: 9, to: userBirthday)
         
         guard let addHourDate = addHourDate else { return }
         let date = Calendar.current.dateComponents([.year, .month, .day], from: addHourDate)
@@ -73,11 +73,27 @@ class BirthdayViewModel {
     func clickedButton(_ vc: UIViewController, _ button: UIButton) {
         button.rx.tap
             .bind(onNext: { _ in
-                let birthday = UserDefaults.standard.string(forKey: "birthday")
-                if birthday == nil {
-                    UserDefaults.standard.set(self.birthday, forKey: "birthday")
+                let limitDate = Calendar.current.date(byAdding: .year, value: -17, to: Date().addingTimeInterval(32400))!
+                let limitcompare = Calendar.current.dateComponents([.year, .month, .day], from: limitDate)
+
+                let formatter = DateFormatter()
+                formatter.dateStyle = .short
+                formatter.timeStyle = .short
+                formatter.locale = Locale(identifier: "ko-KR")
+                formatter.timeZone = .autoupdatingCurrent
+                let selfDate = formatter.date(from: self.birthday)!
+                let selfDateCompare = Calendar.current.dateComponents([.year, .month, .day], from: selfDate)
+
+                if limitcompare == selfDateCompare {
+                    vc.navigationController?.pushViewController(EmailViewController(), animated: true)
+                } else {
+                    DispatchQueue.global().async {
+                        UserDefaults.standard.set(self.birthday, forKey: "birthday")
+                        DispatchQueue.main.async {
+                            vc.navigationController?.pushViewController(EmailViewController(), animated: true)
+                        }
+                    }
                 }
-                vc.navigationController?.pushViewController(EmailViewController(), animated: true)
             })
             .disposed(by: disposeBag)
     }
