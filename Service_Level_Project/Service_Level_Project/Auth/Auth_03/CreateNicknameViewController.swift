@@ -42,6 +42,14 @@ class CreateNicknameViewController: AuthBaseViewController {
                 buttonCase.customLayout(self.customButton, .disable)
             }
         }
+        // 여기 수정한다 하면
+        // input output도 쓰기
+ 
+        customButton.rx.tap.asDriver()
+            .drive(onNext: { _ in
+                viewModel.
+            })
+            .disposed(by: disposeBag)
         viewModel.nextButtonClicked(self, customButton)
     }
     
