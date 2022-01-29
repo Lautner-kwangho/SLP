@@ -17,8 +17,8 @@ class CreateNicknameViewController: AuthBaseViewController {
     
     private lazy var input = CreateNicknameViewModel
         .Input(
-            inputNickname: nicknameTextField.textField.rx.text.orEmpty.asDriver(),
-            buttonTapEvent: customButton.rx.tap.asSignal()
+            inputNickname: nicknameTextField.textField.rx.text.orEmpty.asDriver()
+//            buttonTapEvent: customButton.rx.tap.asSignal()
         )
     private lazy var output = viewModel.transform(input: input)
     
@@ -56,32 +56,25 @@ class CreateNicknameViewController: AuthBaseViewController {
             }
         }).disposed(by: disposeBag)
         
-        output.nextButtonClicked
-            .drive(onNext: { status in
-            if status {
-                print("투루로 넘겨줌")
-//                self.output.outputNickname.drive(onNext: { text in
-//                    print("유저디폴투",text)
-//                })
-                self.view.makeToast("토스트 띄어줄거임", position: .center)
-            } else {
-                print("폴스로 넘겨줌")
-            }
-        }).disposed(by: disposeBag)
+        customButton.rx.tap
+            .bind { [weak self] _ in
+                guard let self = self else {return}
+                guard let text = self.nicknameTextField.textField.text else { return }
+                if text.count > 10 {
+                    self.view.makeToast("10자 이하로 입력해주세요", position: .center)
+                } else {
+                    UserDefaults.standard.set(text,forKey: "nickname")
+                    self.navigationController?.pushViewController(BirthdayViewController(), animated: true)
+            
+                }
+            }.disposed(by: disposeBag)
         
-        // button.rx.tap.map {
-//        weak self. selftextfield.text) .asDriver()
-//    }
-//        output.sendToastMessage.drive(onNext: { message in
-//            self.view.makeToast(message, position: .center)
+//        output.sendToastMessage.drive(onNext: { text in
+//            self.view.makeToast(text)
 //        }).disposed(by: disposeBag)
         
-        
-        
-//        UserDefaults.standard.set(text,forKey: "nickname")
-//        vc.navigationController?.pushViewController(BirthdayViewController(), animated: true)
-        
     }
+             
     
     override func configure() {
         firstLabel.text = viewModel.Title

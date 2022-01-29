@@ -5,8 +5,11 @@
 //  Created by 최광호 on 2022/01/25.
 //
 
-import UIKit
+import Foundation
+
 import RxSwift
+import RxCocoa
+import RxRelay
 
 class BirthdayViewModel {
     
