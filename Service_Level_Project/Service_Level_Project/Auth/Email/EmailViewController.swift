@@ -9,7 +9,7 @@ import UIKit
 
 class EmailViewController: AuthBaseViewController {
     
-    let emailTextField = InputText(type: .inative).then {
+    let emailTextField = InputText(type: .inactive).then {
         $0.textField.placeholder = "SeSAC@gmail.com"
         $0.textField.keyboardType = .emailAddress
     }

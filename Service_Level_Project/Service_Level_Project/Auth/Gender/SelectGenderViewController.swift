@@ -50,7 +50,7 @@ class SelectGenderViewController: AuthBaseViewController {
         secondLabel.text = viewModel.subTItle
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
         customButton.isEnabled = true
-        buttonCase.customLayout(customButton, .fill)
+        customButton.customLayout(.fill)
         maleButton.addTarget(self, action: #selector(maleButtonClicked), for: .touchUpInside)
         femaleButton.addTarget(self, action: #selector(femaleButtonClicked), for: .touchUpInside)
         

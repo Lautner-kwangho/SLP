@@ -25,7 +25,7 @@ class AuthPhoneMessageViewModel {
     let secondText = "(최대 소모 20초)"
     let buttonTitle = "인증하고 시작하기"
     
-    func setmessageField(_ vc: UIViewController, _ view: InputText,_ resendButton: UIButton, _ authButton: UIButton) {
+    func setmessageField(_ vc: UIViewController, _ view: InputText,_ resendButton: ButtonConfiguration, _ authButton: ButtonConfiguration) {
         view.textField.rx.text
             .orEmpty
             .distinctUntilChanged()
@@ -33,10 +33,10 @@ class AuthPhoneMessageViewModel {
                 self.messageText.onNext(value)
                 if value.count == 6 {
                     authButton.isEnabled = true
-                    buttonCase.customLayout(authButton, .fill)
+                    authButton.customLayout(.fill)
                 } else {
                     authButton.isEnabled = false
-                    buttonCase.customLayout(authButton, .disable)
+                    authButton.customLayout(.disable)
                 }
             }
             .disposed(by: disposeBag)
@@ -47,14 +47,14 @@ class AuthPhoneMessageViewModel {
             .subscribe(onNext: { text in
                 if text == "00:00" {
                     authButton.isEnabled = false
-                    buttonCase.customLayout(authButton, .disable)
+                    authButton.customLayout(.disable)
                 }
             })
             .disposed(by: disposeBag)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             resendButton.isEnabled = true
-            buttonCase.customLayout(resendButton, .fill)
+            resendButton.customLayout(.fill)
         }
         
         resendButton.rx.tap

@@ -61,11 +61,11 @@ class BirthdayViewModel {
             .disposed(by: disposeBag)
     }
     
-    func setButtonUI(_ button: UIButton) {
+    func setButtonUI(_ button: ButtonConfiguration) {
         self.selectDate
             .bind { date in
                 button.isEnabled = true
-                buttonCase.customLayout(button, .fill)
+                button.customLayout(.fill)
             }
             .disposed(by: disposeBag)
     }

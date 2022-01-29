@@ -8,7 +8,7 @@
 import UIKit
 
 class AuthPhoneMessageViewController: AuthBaseViewController {
-    let messageField = InputText(type: .inative).then {
+    let messageField = InputText(type: .inactive).then {
         $0.textField.placeholder = "인증번호 입력"
         $0.textField.keyboardType = .phonePad
     }

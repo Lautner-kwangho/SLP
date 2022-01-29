@@ -17,15 +17,15 @@ class EmailViewModel {
     
     let disposeBag = DisposeBag()
     
-    func savedEmail(_ textField: InputText, _ button: UIButton) {
+    func savedEmail(_ textField: InputText, _ button: ButtonConfiguration) {
         let email = UserDefaults.standard.string(forKey: "email")
         guard let email = email else { return }
         
         textField.textField.text = email
         button.isEnabled = true
-        buttonCase.customLayout(button, .fill)
+        button.customLayout(.fill)
     }
-    func setTextField(_ textField: InputText, _ button: UIButton) {
+    func setTextField(_ textField: InputText, _ button: ButtonConfiguration) {
         textField.textField.rx.text
             .orEmpty
             .distinctUntilChanged()
@@ -46,14 +46,14 @@ class EmailViewModel {
                     if emailTest {
                         textField.statusText.onNext(.success)
                         button.isEnabled = true
-                        buttonCase.customLayout(button, .fill)
+                        button.customLayout(.fill)
                     } else {
                         textField.statusText.onNext(.error)
                         button.isEnabled = false
-                        buttonCase.customLayout(button, .disable)
+                        button.customLayout(.disable)
                     }
                 } else {
-                    textField.statusText.onNext(.inative)
+                    textField.statusText.onNext(.inactive)
                 }
             }
             .disposed(by: disposeBag)

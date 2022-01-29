@@ -34,7 +34,7 @@ class ViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(50)
         }
         
-        let testArray: [inputTextCase] = [.focus, .error, .active, .disable, .inative, .success]
+        let testArray: [inputTextCase] = [.focus, .error, .active, .disable, .inactive, .success]
         
         inputText.textField.rx.text
             .orEmpty.map(textFieldIsEmpty)
@@ -83,7 +83,7 @@ class ViewController: BaseViewController {
     @objc func clicked() {
         // 후... 하루 다 썼네
         let random: [buttonCase] = [.outline, .cancel, .fill , .disable]
-        buttonCase.customLayout(button2, random.randomElement()!)
+        button2.customLayout(random.randomElement()!)
         print("눌렀습니다")
     }
 

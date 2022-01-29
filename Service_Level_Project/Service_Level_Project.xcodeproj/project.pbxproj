@@ -24,6 +24,7 @@
 		E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E33E279F2053004C68AC /* EmailViewModel.swift */; };
 		E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E341279F2518004C68AC /* SelectGenderViewController.swift */; };
 		E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E343279F253E004C68AC /* SelectGenderViewModel.swift */; };
+		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
@@ -59,6 +60,7 @@
 		E458E33E279F2053004C68AC /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		E458E341279F2518004C68AC /* SelectGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewController.swift; sourceTree = "<group>"; };
 		E458E343279F253E004C68AC /* SelectGenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewModel.swift; sourceTree = "<group>"; };
+		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -106,10 +108,10 @@
 				E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */,
 				E41ED01F279DBA5B00A2F0CE /* Auth_01 */,
 				E41ED020279DBA6E00A2F0CE /* Auth_02 */,
-				E458E331279EFB3E004C68AC /* Auth_03 */,
-				E458E336279F0D7C004C68AC /* Auth_04 */,
-				E458E33B279F1FED004C68AC /* Auth_05 */,
-				E458E340279F24B9004C68AC /* Auth_06 */,
+				E458E331279EFB3E004C68AC /* Nickname */,
+				E458E336279F0D7C004C68AC /* Birthday */,
+				E458E33B279F1FED004C68AC /* Email */,
+				E458E340279F24B9004C68AC /* Gender */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -132,40 +134,82 @@
 			path = Auth_02;
 			sourceTree = "<group>";
 		};
-		E458E331279EFB3E004C68AC /* Auth_03 */ = {
+		E458E331279EFB3E004C68AC /* Nickname */ = {
 			isa = PBXGroup;
 			children = (
 				E458E332279EFBAF004C68AC /* CreateNicknameViewController.swift */,
 				E458E334279EFC07004C68AC /* CreateNicknameViewModel.swift */,
 			);
-			path = Auth_03;
+			path = Nickname;
 			sourceTree = "<group>";
 		};
-		E458E336279F0D7C004C68AC /* Auth_04 */ = {
+		E458E336279F0D7C004C68AC /* Birthday */ = {
 			isa = PBXGroup;
 			children = (
 				E458E337279F0DC2004C68AC /* BirthdayViewController.swift */,
 				E458E339279F0DF8004C68AC /* BirthdayViewModel.swift */,
 			);
-			path = Auth_04;
+			path = Birthday;
 			sourceTree = "<group>";
 		};
-		E458E33B279F1FED004C68AC /* Auth_05 */ = {
+		E458E33B279F1FED004C68AC /* Email */ = {
 			isa = PBXGroup;
 			children = (
 				E458E33C279F2016004C68AC /* EmailViewController.swift */,
 				E458E33E279F2053004C68AC /* EmailViewModel.swift */,
 			);
-			path = Auth_05;
+			path = Email;
 			sourceTree = "<group>";
 		};
-		E458E340279F24B9004C68AC /* Auth_06 */ = {
+		E458E340279F24B9004C68AC /* Gender */ = {
 			isa = PBXGroup;
 			children = (
 				E458E341279F2518004C68AC /* SelectGenderViewController.swift */,
 				E458E343279F253E004C68AC /* SelectGenderViewModel.swift */,
 			);
-			path = Auth_06;
+			path = Gender;
+			sourceTree = "<group>";
+		};
+		E46AF3FF27A3A738009F381C /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		E46AF40027A3A746009F381C /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				E4C31EB72796D60A00ACE886 /* Custom+InputText.swift */,
+				E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		E46AF40327A3A92D009F381C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E46AF40427A3A935009F381C /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E46AF40527A3A941009F381C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
+				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		E4ABC3C3279FD3B000CE3A99 /* MyPage */ = {
@@ -215,9 +259,9 @@
 		E4C31EB52796D59700ACE886 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */,
-				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
-				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
+				E46AF40327A3A92D009F381C /* View */,
+				E46AF40427A3A935009F381C /* Protocol */,
+				E46AF40527A3A941009F381C /* Extension */,
 				E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */,
 			);
 			path = Base;
@@ -226,9 +270,8 @@
 		E4C31EB62796D5CE00ACE886 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */,
-				E4C31EB72796D60A00ACE886 /* Custom+InputText.swift */,
-				E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */,
+				E46AF3FF27A3A738009F381C /* Button */,
+				E46AF40027A3A746009F381C /* TextField */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -325,6 +368,7 @@
 				E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
+				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,

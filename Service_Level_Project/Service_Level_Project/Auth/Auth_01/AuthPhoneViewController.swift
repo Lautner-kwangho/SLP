@@ -10,7 +10,7 @@ import RxSwift
 
 class AuthPhoneViewController: AuthBaseViewController {
 
-    var inputPhoneNumber = InputText(type: .inative).then {
+    var inputPhoneNumber = InputText(type: .inactive).then {
         $0.textField.placeholder = "휴대폰 번호(-없이 숫자만 입력)"
         $0.textField.keyboardType = .phonePad
     }

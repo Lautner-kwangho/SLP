@@ -17,7 +17,7 @@ class AuthPhoneViewModel {
     let inputText = InputText()
     let titleName = "새싹 서비스 이용을 위해\n휴대폰 번호를 입력해주세요"
     
-    func setInputTextPhoneNumber(_ view: InputText, _ button: UIButton) {
+    func setInputTextPhoneNumber(_ view: InputText, _ button: ButtonConfiguration) {
         
         view.textField.rx.text
             .orEmpty
@@ -31,11 +31,11 @@ class AuthPhoneViewModel {
             if validText == "맞음" {
                 view.statusText.onNext(.success)
                 button.isEnabled = true
-                buttonCase.customLayout(button, .fill)
+                button.customLayout(.fill)
             } else if validText == "안맞음" {
                 view.statusText.onNext(.error)
                 button.isEnabled = false
-                buttonCase.customLayout(button, .disable)
+                button.customLayout(.disable)
             }
         }.disposed(by: disposeBag)
         

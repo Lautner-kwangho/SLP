@@ -12,7 +12,7 @@ import SnapKit
 import Then
 
 enum inputTextCase {
-    case inative
+    case inactive
     case focus
     case active
     case disable
@@ -37,7 +37,7 @@ class InputText: UIView {
     }
     
     var validText = BehaviorSubject<Bool>(value: false)
-    var statusText = BehaviorSubject<inputTextCase>(value: .inative)
+    var statusText = BehaviorSubject<inputTextCase>(value: .inactive)
     
     let disposeBag = DisposeBag()
     
@@ -78,7 +78,7 @@ class InputText: UIView {
 
     func textFieldStatus(_ status: inputTextCase) {
         switch status {
-        case .inative:
+        case .inactive:
             viewStyle(viewColor: .white, lineColor: .gray3, fieldColor: .gray7, subLabel: nil, subHidden: true)
         case .focus:
             viewStyle(viewColor: .white, lineColor: .black, fieldColor: .black, subLabel: nil, subHidden: true)
