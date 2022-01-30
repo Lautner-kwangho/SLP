@@ -4,21 +4,43 @@
 //
 //  Created by 최광호 on 2022/01/25.
 //
-
+import UIKit
+// 여기한번 정리하기
 import Foundation
 
 import RxSwift
 import RxCocoa
 import RxRelay
 
-class BirthdayViewModel {
+final class BirthdayViewModel: baseViewModel {
     
+    //MARK: Input, Output
+    struct Input {
+        let pickviewDate: ControlProperty<Date>
+//        let inputNickname: Driver<String>
+    }
+    
+    struct Output {
+//        let outputNickname: Driver<String>
+//        let nicknameUIStatus: Driver<Bool>
+    }
+    
+    var disposeBag = DisposeBag()
+    
+    //MARK: Transform(input:)
+    func transform(input: Input) -> Output {
+         
+        return Output()
+    }
+    
+    //MARK: 기본 텍스트 입력
     let Title = "생년월일을 알려주세요"
     let customButtonTitle = "다음"
     var birthday = ""
     
+    
+    // 밑에 레거시 코드
     let selectDate = BehaviorSubject<Date>(value: Date())
-    let disposeBag = DisposeBag()
     
     func savedBirthday(_ picker : UIDatePicker, _ year: InputText, _ month: InputText, _ day: InputText) {
         let birthday = UserDefaults.standard.string(forKey: "birthday")

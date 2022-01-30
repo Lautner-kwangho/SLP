@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class EmailViewController: AuthBaseViewController {
     
@@ -13,23 +14,68 @@ class EmailViewController: AuthBaseViewController {
         $0.textField.placeholder = "SeSAC@gmail.com"
         $0.textField.keyboardType = .emailAddress
     }
-    let viewModel = EmailViewModel()
+    
+    private lazy var input = EmailViewModel
+        .Input(
+            emailTextField: emailTextField.textField.rx.text.orEmpty.asDriver(),
+            userDefaultsIsSave: UserDefaults.standard.string(forKey: "email")
+        )
+    private lazy var output = viewModel.transform(input: input)
+    
+    var viewModel = EmailViewModel()
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.savedEmail(emailTextField, customButton)
+        output.savedEmailNotEmpty
+            .distinctUntilChanged()
+            .asSignal()
+            .emit(onNext: { [weak self] text in
+                guard let self = self else {return}
+                self.emailTextField.textField.text = text
+                self.emailTextField.statusText.onNext(.inactive)
+                self.customButton.isEnabled = true
+                self.customButton.customLayout(.fill)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func bind() {
+        
+        output.configurationCheckStatus
+            .drive(onNext: { [weak self] status in
+                guard let self = self else {return}
+                if status {
+                    self.emailTextField.statusText.onNext(.success)
+                    self.customButton.isEnabled = status
+                    self.customButton.customLayout(.fill)
+                } else {
+                    self.emailTextField.statusText.onNext(.error)
+                    self.customButton.isEnabled = status
+                    self.customButton.customLayout(.disable)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        customButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                UserDefaults.standard.set(self.viewModel.email, forKey: "email")
+                self.navigationController?.pushViewController(SelectGenderViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     override func configure() {
         firstLabel.text = viewModel.Title
         secondLabel.text = viewModel.subTItle
         customButton.setTitle(viewModel.customButtonTitle, for: .normal)
-        viewModel.setTextField(emailTextField, customButton)
-        viewModel.clickedEmailButton(self, customButton)
     }
     
     override func setConstraints() {

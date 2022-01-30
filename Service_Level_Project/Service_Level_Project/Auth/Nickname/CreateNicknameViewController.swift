@@ -40,7 +40,6 @@ class CreateNicknameViewController: AuthBaseViewController {
     private func bind() {
         // test
         output.outputNickname.drive(onNext: { [weak self] text in
-            print(text)
         }).disposed(by: disposeBag)
         
         output.nicknameUIStatus.drive(onNext: { [weak self] stauts in

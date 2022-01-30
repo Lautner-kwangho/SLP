@@ -5,31 +5,36 @@
 //  Created by 최광호 on 2022/01/25.
 //
 
-import UIKit
-import RxSwift
+import Foundation
 
-class EmailViewModel {
+import RxSwift
+import RxCocoa
+import RxRelay
+
+class EmailViewModel: baseViewModel {
     
-    let Title = "이메일을 입력해주세요"
-    let subTItle = "휴대폰 번호 변경 시 인증을 위해 사용해요"
-    let customButtonTitle = "다음"
-    var email = ""
-    
-    let disposeBag = DisposeBag()
-    
-    func savedEmail(_ textField: InputText, _ button: ButtonConfiguration) {
-        let email = UserDefaults.standard.string(forKey: "email")
-        guard let email = email else { return }
-        
-        textField.textField.text = email
-        button.isEnabled = true
-        button.customLayout(.fill)
+    //MARK: Inputm Output
+    struct Input {
+        let emailTextField: Driver<String>
+        let userDefaultsIsSave: String?
     }
-    func setTextField(_ textField: InputText, _ button: ButtonConfiguration) {
-        textField.textField.rx.text
-            .orEmpty
+    
+    struct Output {
+        let configurationCheckStatus: Driver<Bool>
+        let savedEmailNotEmpty: Signal<String>
+    }
+    
+    private let configurationCheckStatus = BehaviorRelay<Bool>(value: false)
+    private let savedEmailNotEmpty = BehaviorRelay<String>(value: "")
+    
+    var disposeBag = DisposeBag()
+    
+    //MARK: Transform(input:)
+    func transform(input: Input) -> Output {
+        
+        input.emailTextField
             .distinctUntilChanged()
-            .bind { text in
+            .drive(onNext: { text in
                 self.email = text
                 /*
                  let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}" 이렇게 사용하면 맨뒤에 co만 되어도 맞다고 나옴 그래서 안됨
@@ -43,32 +48,23 @@ class EmailViewModel {
                     let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2}[A-Za-z]{1}$"
                     let predicate = NSPredicate(format: "SELF MATCHES %@", pattern)
                     let emailTest = predicate.evaluate(with: self.email)
-                    if emailTest {
-                        textField.statusText.onNext(.success)
-                        button.isEnabled = true
-                        button.customLayout(.fill)
-                    } else {
-                        textField.statusText.onNext(.error)
-                        button.isEnabled = false
-                        button.customLayout(.disable)
-                    }
-                } else {
-                    textField.statusText.onNext(.inactive)
+                    self.configurationCheckStatus.accept(emailTest)
                 }
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    func clickedEmailButton(_ vc: UIViewController,_ button: UIButton) {
-        button.rx.tap
-            .asDriver()
-            .drive(onNext: { _ in
-                let email = UserDefaults.standard.string(forKey: "email")
-                if email == nil {
-                    UserDefaults.standard.set(self.email, forKey: "email")
-                }
-                vc.navigationController?.pushViewController(SelectGenderViewController(), animated: true)
             })
             .disposed(by: disposeBag)
+    
+        if let text = input.userDefaultsIsSave {
+            self.savedEmailNotEmpty.accept(text)
+            self.email = text
+        }
+        
+        return Output(configurationCheckStatus: configurationCheckStatus.asDriver(), savedEmailNotEmpty: savedEmailNotEmpty.asSignal(onErrorJustReturn: ""))
     }
+    
+    //MARK: 기본 텍스트 입력
+    let Title = "이메일을 입력해주세요"
+    let subTItle = "휴대폰 번호 변경 시 인증을 위해 사용해요"
+    let customButtonTitle = "다음"
+    var email = ""
+    
 }

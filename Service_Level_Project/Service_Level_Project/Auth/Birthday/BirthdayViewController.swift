@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BirthdayViewController: AuthBaseViewController {
     
@@ -71,15 +72,27 @@ class BirthdayViewController: AuthBaseViewController {
         $0.font = Font.title2_R16()
     }
     
-    let viewModel = BirthdayViewModel()
+    private lazy var input = BirthdayViewModel
+        .Input(
+            pickviewDate: self.selectDate.rx.date
+        )
+    private lazy var output = viewModel.transform(input: input)
+    
+    private let viewModel = BirthdayViewModel()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.savedBirthday(selectDate ,yearTextField, monthTextField, dayTextField)
+    }
+    
+    private func bind() {
+        
     }
     
     override func configure() {
