@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+        window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
 //        AuthPhoneViewController
 //        AuthPhoneMessageViewController
 //        CreateNicknameViewController

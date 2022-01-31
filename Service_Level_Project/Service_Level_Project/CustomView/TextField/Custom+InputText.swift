@@ -11,7 +11,7 @@ import RxSwift
 import SnapKit
 import Then
 
-enum inputTextCase {
+enum InputTextCase {
     case inactive
     case focus
     case active
@@ -37,7 +37,7 @@ class InputText: UIView {
     }
     
     var validText = BehaviorSubject<Bool>(value: false)
-    var statusText = BehaviorSubject<inputTextCase>(value: .inactive)
+    var statusText = BehaviorSubject<InputTextCase>(value: .inactive)
     
     let disposeBag = DisposeBag()
     
@@ -45,7 +45,7 @@ class InputText: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(type: inputTextCase) {
+    convenience init(type: InputTextCase) {
         self.init()
         
         setConstraints()
@@ -55,7 +55,7 @@ class InputText: UIView {
         textInputEditAction(type: type)
     }
     
-    func textInputEditAction(type: inputTextCase) {
+    func textInputEditAction(type: InputTextCase) {
         
 //        self.textField.rx.text.asDriver()
 //            .distinctUntilChanged()
@@ -76,7 +76,7 @@ class InputText: UIView {
             .disposed(by: disposeBag)
     }
 
-    func textFieldStatus(_ status: inputTextCase) {
+    func textFieldStatus(_ status: InputTextCase) {
         switch status {
         case .inactive:
             viewStyle(viewColor: .white, lineColor: .gray3, fieldColor: .gray7, subLabel: nil, subHidden: true)

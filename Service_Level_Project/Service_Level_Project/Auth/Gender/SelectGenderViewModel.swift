@@ -25,6 +25,7 @@ class SelectGenderViewModel {
         button.rx.tap
             .asDriver()
             .drive(onNext: { _ in
+                
                 if self.maleClicked, self.femaleClicked {
                     self.chooseGender.onNext(2)
                     vc.view.makeToast("두가지 성별을 동시에 선택할 수 없습니다", duration: 1, position: .center, title: "", style: self.toastStyle, completion: nil)
@@ -51,6 +52,23 @@ class SelectGenderViewModel {
             print("성별 부적합")
         } else {
             print("다음 단계 진행")
+            let testUD: [String] = [
+                UserDefaultsManager.idToken,
+                UserDefaultsManager.fcmToken,
+                UserDefaultsManager.phoneNumber,
+                UserDefaultsManager.nickname,
+                UserDefaultsManager.birthday,
+                UserDefaultsManager.email
+            ]
+            testUD.forEach {
+                print(" Print \($0) : ",UserDefaults.standard.string(forKey: $0))
+            }
+//            static let idToken = "idToken"
+//            static let fcmToken = "fcmToken"
+//            static let phoneNumber = "PhoneNumber"
+//            static let nickname = "nickname"
+//            static let birthday = "birthday"
+//            static let email = "email"
         }
     }
 }

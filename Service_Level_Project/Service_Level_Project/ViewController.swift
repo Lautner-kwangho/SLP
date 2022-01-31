@@ -34,7 +34,7 @@ class ViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(50)
         }
         
-        let testArray: [inputTextCase] = [.focus, .error, .active, .disable, .inactive, .success]
+        let testArray: [InputTextCase] = [.focus, .error, .active, .disable, .inactive, .success]
         
         inputText.textField.rx.text
             .orEmpty.map(textFieldIsEmpty)
@@ -61,7 +61,7 @@ class ViewController: BaseViewController {
             $0.centerX.leading.trailing.equalTo(inputText)
         }
         
-        let testAreaArray: [textAreaCase] = [.active, .activeIcon]
+        let testAreaArray: [TextAreaCase] = [.active, .activeIcon]
         
         view.addSubview(textArea2)
         textArea2.snp.makeConstraints {
@@ -82,7 +82,7 @@ class ViewController: BaseViewController {
     
     @objc func clicked() {
         // 후... 하루 다 썼네
-        let random: [buttonCase] = [.outline, .cancel, .fill , .disable]
+        let random: [ButtonCase] = [.outline, .cancel, .fill , .disable]
         button2.customLayout(random.randomElement()!)
         print("눌렀습니다")
     }

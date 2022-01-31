@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-enum buttonType {
+enum CustomButtonType {
     // icon 있으면 true, 없으면 false
-    case h48(type: buttonCase, icon: Bool?)
-    case h40(type: buttonCase, icon: Bool?)
-    case h32(type: buttonCase, icon: Bool)
+    case h48(type: ButtonCase, icon: Bool?)
+    case h40(type: ButtonCase, icon: Bool?)
+    case h32(type: ButtonCase, icon: Bool)
 }
 
-enum buttonCase: CaseIterable {
+enum ButtonCase: CaseIterable {
     case inactive
     case fill
     case outline
@@ -29,7 +29,7 @@ class ButtonConfiguration: UIButton {
         super.init(frame: frame)
     }
     
-    convenience init(type: buttonCase) {
+    convenience init(type: ButtonCase) {
         self.init()
         
         self.layer.cornerRadius = 8
@@ -67,7 +67,7 @@ class ButtonConfiguration: UIButton {
         }
     }
     
-    convenience init(customType: buttonType) {
+    convenience init(customType: CustomButtonType) {
         
         switch customType {
         case let .h48(type, _):
@@ -110,7 +110,7 @@ class ButtonConfiguration: UIButton {
         
     }
     
-    func customLayout(_ type: buttonCase) {
+    func customLayout(_ type: ButtonCase) {
         switch type {
         case .inactive:
             self.setTitle(self.currentTitle, for: .normal)

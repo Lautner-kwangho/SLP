@@ -99,7 +99,7 @@ class AuthPhoneMessageViewModel {
         button.rx.tap.asDriver()
             .drive(onNext: { _ in
                 guard let idToken = self.idToken else { return }
-
+                
                 let credential = PhoneAuthProvider.provider().credential(
                     withVerificationID: idToken,
                     verificationCode: number
@@ -118,15 +118,16 @@ class AuthPhoneMessageViewModel {
                     // User is Signed in
                     guard let authResult = authResult else {return}
                     print("성공했음", authResult.user.uid)
-                    print(idToken)
+                    print("id 토큰 프린트 : ", idToken)
                     dump(authResult.user.refreshToken)
                     
                     let currentUser = Auth.auth().currentUser
                     currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                        guard let error = error else {return}
-                        
+                        guard let error = error else {return print("에러난거네 :", error) }
+                        print(error)
                         // 맞다면 저장해줘야할 듯!
-                        print(idToken)
+                        print("아니면 여기도 프린트 되어야지 ")
+                        print("나 내 id 맞다고.. : ", idToken)
                         
                     }
                     

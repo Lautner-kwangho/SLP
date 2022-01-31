@@ -11,7 +11,7 @@ import RxSwift
 import SnapKit
 import Then
 
-enum textAreaCase {
+enum TextAreaCase {
     case active
     case activeIcon
 }
@@ -37,13 +37,13 @@ class TextArea: UIView {
         super.init(frame: frame)
     }
     
-    convenience init(type: textAreaCase) {
+    convenience init(type: TextAreaCase) {
         self.init()
         setConstraints()
         customAction(type: type)
     }
     
-    func customAction(type: textAreaCase) {
+    func customAction(type: TextAreaCase) {
         self.textField.rx.text.asDriver()
             .distinctUntilChanged()
             .map(textFieldValid)

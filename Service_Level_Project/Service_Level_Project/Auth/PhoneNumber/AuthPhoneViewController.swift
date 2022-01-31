@@ -28,7 +28,7 @@ class AuthPhoneViewController: AuthBaseViewController {
         
         viewModel.phoneText.bind { value in
             if self.inputPhoneNumber.textField.isEditing {
-                let type = value.count > 0 ? inputTextCase.focus : inputTextCase.active
+                let type = value.count > 0 ? InputTextCase.focus : InputTextCase.active
                 self.inputPhoneNumber.statusText.onNext(type)
             }
         }.disposed(by: disposBag)

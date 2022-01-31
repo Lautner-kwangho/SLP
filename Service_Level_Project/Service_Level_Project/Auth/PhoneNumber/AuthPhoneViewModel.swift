@@ -73,7 +73,9 @@ class AuthPhoneViewModel {
                         // 이렇게 두개 뜨는데 애초에 번호를 잘못 넣을 수 없으니까 처리 안해줘도 되지 않을까 싶은데
                         // User interaction is still ongoing, another view cannot be presented.
                         //The interaction was cancelled by the user
-                        // print("사용자 에러", error.localizedDescription)
+                        print("사용자 에러", error)
+                        let authError = error as NSError
+                        vc.view.makeToast(AuthError.authCheckError(authError.code), position: .center)
                         return
                     }
                     UserDefaults.standard.removeObject(forKey: "idToken")

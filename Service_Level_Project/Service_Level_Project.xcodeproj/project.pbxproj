@@ -25,6 +25,7 @@
 		E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E341279F2518004C68AC /* SelectGenderViewController.swift */; };
 		E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E343279F253E004C68AC /* SelectGenderViewModel.swift */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
+		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
@@ -61,6 +62,7 @@
 		E458E341279F2518004C68AC /* SelectGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewController.swift; sourceTree = "<group>"; };
 		E458E343279F253E004C68AC /* SelectGenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewModel.swift; sourceTree = "<group>"; };
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
+		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -106,8 +108,8 @@
 			children = (
 				E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */,
 				E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */,
-				E41ED01F279DBA5B00A2F0CE /* Auth_01 */,
-				E41ED020279DBA6E00A2F0CE /* Auth_02 */,
+				E41ED01F279DBA5B00A2F0CE /* PhoneNumber */,
+				E41ED020279DBA6E00A2F0CE /* ValidNumber */,
 				E458E331279EFB3E004C68AC /* Nickname */,
 				E458E336279F0D7C004C68AC /* Birthday */,
 				E458E33B279F1FED004C68AC /* Email */,
@@ -116,22 +118,22 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		E41ED01F279DBA5B00A2F0CE /* Auth_01 */ = {
+		E41ED01F279DBA5B00A2F0CE /* PhoneNumber */ = {
 			isa = PBXGroup;
 			children = (
 				E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */,
 				E41ED01D279DBA5700A2F0CE /* AuthPhoneViewModel.swift */,
 			);
-			path = Auth_01;
+			path = PhoneNumber;
 			sourceTree = "<group>";
 		};
-		E41ED020279DBA6E00A2F0CE /* Auth_02 */ = {
+		E41ED020279DBA6E00A2F0CE /* ValidNumber */ = {
 			isa = PBXGroup;
 			children = (
 				E41ED01A279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift */,
 				E41ED02D279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift */,
 			);
-			path = Auth_02;
+			path = ValidNumber;
 			sourceTree = "<group>";
 		};
 		E458E331279EFB3E004C68AC /* Nickname */ = {
@@ -263,6 +265,7 @@
 				E46AF40427A3A935009F381C /* Protocol */,
 				E46AF40527A3A941009F381C /* Extension */,
 				E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */,
+				E46AF40827A84C47009F381C /* UserDefaultsManager.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
+				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
 				E458E333279EFBAF004C68AC /* CreateNicknameViewController.swift in Sources */,
 				E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */,
 				E458E33D279F2016004C68AC /* EmailViewController.swift in Sources */,
