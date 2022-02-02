@@ -121,17 +121,24 @@ class AuthPhoneMessageViewModel {
                     print("id 토큰 프린트 : ", idToken)
                     dump(authResult.user.refreshToken)
                     
-                    let currentUser = Auth.auth().currentUser
-                    currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                        guard let error = error else {return print("에러난거네 :", error) }
-                        print(error)
-                        // 맞다면 저장해줘야할 듯!
-                        print("아니면 여기도 프린트 되어야지 ")
-                        print("나 내 id 맞다고.. : ", idToken)
-                        
-                    }
-                    
                     DispatchQueue.main.async {
+                    
+                        let currentUser = Auth.auth().currentUser
+                        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+//                            guard let error = error else {
+//                                let authError = error as! NSError
+//                                return print("에러난거네 :",authError.debugDescription)
+//
+////                                return print("에러난거네 :", error.debugDescription)
+//                            }
+                            // 아오 안되겠다 그냥 여기까지 하고 마이 페이지 해야지
+                            print(error)
+                            // 맞다면 저장해줘야할 듯!
+                            print("아니면 여기도 프린트 되어야지 ")
+                            print("나 내 id 맞다고.. : ", idToken)
+                        }
+                    
+                    
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
                         windowScene.windows.first?.makeKeyAndVisible()
