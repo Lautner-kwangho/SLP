@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
 //        BirthdayViewController
 //        EmailViewController
 //        SelectGenderViewController
+//        MyInfoViewController
         window?.makeKeyAndVisible()
         
         // Use Firebase library to configure APIs

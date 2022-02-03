@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class EmailViewModel: baseViewModel {
+class EmailViewModel: BaseViewModel {
     
     //MARK: Inputm Output
     struct Input {

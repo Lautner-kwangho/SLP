@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-protocol baseViewModel {
+protocol BaseViewModel {
     associatedtype Input
     associatedtype Output
     

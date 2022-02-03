@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-final class CreateNicknameViewModel: baseViewModel {
+final class CreateNicknameViewModel: BaseViewModel {
     
     //MARK: Input, Output
     struct Input {

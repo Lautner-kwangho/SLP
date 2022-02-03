@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-final class BirthdayViewModel: baseViewModel {
+final class BirthdayViewModel: BaseViewModel {
     
     //MARK: Input, Output
     struct Input {

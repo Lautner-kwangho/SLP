@@ -24,6 +24,10 @@
 		E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E33E279F2053004C68AC /* EmailViewModel.swift */; };
 		E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E341279F2518004C68AC /* SelectGenderViewController.swift */; };
 		E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E458E343279F253E004C68AC /* SelectGenderViewModel.swift */; };
+		E459C3D127AA9E870084FE0C /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D027AA9E870084FE0C /* MyInfoViewController.swift */; };
+		E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */; };
+		E459C3D927AAB77D0084FE0C /* MyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */; };
+		E459C3DB27AAB8010084FE0C /* ReusableName+Ptotocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3DA27AAB8010084FE0C /* ReusableName+Ptotocol.swift */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
@@ -61,6 +65,10 @@
 		E458E33E279F2053004C68AC /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		E458E341279F2518004C68AC /* SelectGenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewController.swift; sourceTree = "<group>"; };
 		E458E343279F253E004C68AC /* SelectGenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGenderViewModel.swift; sourceTree = "<group>"; };
+		E459C3D027AA9E870084FE0C /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
+		E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoCell.swift; sourceTree = "<group>"; };
+		E459C3DA27AAB8010084FE0C /* ReusableName+Ptotocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReusableName+Ptotocol.swift"; sourceTree = "<group>"; };
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +180,24 @@
 			path = Gender;
 			sourceTree = "<group>";
 		};
+		E459C3D227AA9E8B0084FE0C /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E459C3D027AA9E870084FE0C /* MyInfoViewController.swift */,
+				E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */,
+				E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		E459C3D327AA9E9E0084FE0C /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		E46AF3FF27A3A738009F381C /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */,
+				E459C3DA27AAB8010084FE0C /* ReusableName+Ptotocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -214,12 +241,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		E4ABC3C3279FD3B000CE3A99 /* MyPage */ = {
+		E4ABC3C3279FD3B000CE3A99 /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
-				E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */,
+				E459C3D227AA9E8B0084FE0C /* MyInfo */,
+				E459C3D327AA9E9E0084FE0C /* MyPage */,
 			);
-			path = MyPage;
+			path = MyInfo;
 			sourceTree = "<group>";
 		};
 		E4C31E8427967B2800ACE886 = {
@@ -245,7 +273,7 @@
 				E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */,
 				E4C31E9427967B2800ACE886 /* ViewController.swift */,
 				E41ED01C279DB7A000A2F0CE /* Auth */,
-				E4ABC3C3279FD3B000CE3A99 /* MyPage */,
+				E4ABC3C3279FD3B000CE3A99 /* MyInfo */,
 				E4C31EB62796D5CE00ACE886 /* CustomView */,
 				E4C31EB52796D59700ACE886 /* Base */,
 				E4C31E9927967B2900ACE886 /* Assets.xcassets */,
@@ -377,10 +405,14 @@
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
 				E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */,
 				E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */,
+				E459C3D127AA9E870084FE0C /* MyInfoViewController.swift in Sources */,
 				E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */,
+				E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */,
+				E459C3D927AAB77D0084FE0C /* MyInfoCell.swift in Sources */,
 				E41ED02E279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift in Sources */,
 				E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */,
 				E458E335279EFC07004C68AC /* CreateNicknameViewModel.swift in Sources */,
+				E459C3DB27AAB8010084FE0C /* ReusableName+Ptotocol.swift in Sources */,
 				E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */,
 				E41ED01B279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift in Sources */,
 				E458E33A279F0DF8004C68AC /* BirthdayViewModel.swift in Sources */,

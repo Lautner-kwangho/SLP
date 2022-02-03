@@ -62,7 +62,8 @@ class AuthPhoneViewModel {
     }
     
     func clickedButton(_ vc: UIViewController) {
-        phoneText.subscribe { text in
+        phoneText.distinctUntilChanged()
+            .subscribe { text in
             let phoneNumber = "+82" + text
             Auth.auth().languageCode = "ko-KR"
             
