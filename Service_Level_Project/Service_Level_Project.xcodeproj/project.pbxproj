@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418161427ABA54100CB693A /* SeSacURLNetwork.swift */; };
+		E418161827ABA58500CB693A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E418161727ABA58500CB693A /* Alamofire */; };
 		E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */; };
 		E41ED01B279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED01A279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift */; };
 		E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED01D279DBA5700A2F0CE /* AuthPhoneViewModel.swift */; };
@@ -33,6 +35,10 @@
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
+		E4B986A827AC26A2007C824B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4B986A727AC26A2007C824B /* RealmSwift */; };
+		E4B986AB27AC26E9007C824B /* LoginRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AA27AC26E9007C824B /* LoginRealm.swift */; };
+		E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */; };
+		E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */; };
 		E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9027967B2800ACE886 /* AppDelegate.swift */; };
 		E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9227967B2800ACE886 /* SceneDelegate.swift */; };
 		E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9427967B2800ACE886 /* ViewController.swift */; };
@@ -52,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E418161427ABA54100CB693A /* SeSacURLNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacURLNetwork.swift; sourceTree = "<group>"; };
 		E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneViewController.swift; sourceTree = "<group>"; };
 		E41ED01A279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneMessageViewController.swift; sourceTree = "<group>"; };
 		E41ED01D279DBA5700A2F0CE /* AuthPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneViewModel.swift; sourceTree = "<group>"; };
@@ -76,6 +83,9 @@
 		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectRelease.entitlements; sourceTree = "<group>"; };
 		E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectDebug.entitlements; sourceTree = "<group>"; };
+		E4B986AA27AC26E9007C824B /* LoginRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRealm.swift; sourceTree = "<group>"; };
+		E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacLoginModel.swift; sourceTree = "<group>"; };
+		E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoHeaderView.swift; sourceTree = "<group>"; };
 		E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Service_Level_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C31E9027967B2800ACE886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4C31E9227967B2800ACE886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E418161827ABA58500CB693A /* Alamofire in Frameworks */,
 				E41ED02A279DD77B00A2F0CE /* Toast in Frameworks */,
 				E4C31EB22796D44B00ACE886 /* RxCocoa in Frameworks */,
 				E41ED025279DD5F200A2F0CE /* FirebaseAuth in Frameworks */,
@@ -104,6 +115,7 @@
 				E4C31EAC2796D42700ACE886 /* Then in Frameworks */,
 				E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */,
 				E41ED023279DD5F200A2F0CE /* FirebaseAnalytics in Frameworks */,
+				E4B986A827AC26A2007C824B /* RealmSwift in Frameworks */,
 				E4C31EAF2796D43300ACE886 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E418161327ABA50000CB693A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */,
+				E418161427ABA54100CB693A /* SeSacURLNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		E41ED01C279DB7A000A2F0CE /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +206,7 @@
 			children = (
 				E459C3D027AA9E870084FE0C /* MyInfoViewController.swift */,
 				E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */,
+				E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */,
 				E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */,
 			);
 			path = MyInfo;
@@ -250,6 +272,22 @@
 			path = MyInfo;
 			sourceTree = "<group>";
 		};
+		E4B986A927AC26DA007C824B /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				E4B986AA27AC26E9007C824B /* LoginRealm.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		E4B986AC27AC326B007C824B /* NetworkModel */ = {
+			isa = PBXGroup;
+			children = (
+				E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */,
+			);
+			path = NetworkModel;
+			sourceTree = "<group>";
+		};
 		E4C31E8427967B2800ACE886 = {
 			isa = PBXGroup;
 			children = (
@@ -289,10 +327,12 @@
 		E4C31EB52796D59700ACE886 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E4B986A927AC26DA007C824B /* Realm */,
 				E46AF40327A3A92D009F381C /* View */,
 				E46AF40427A3A935009F381C /* Protocol */,
 				E46AF40527A3A941009F381C /* Extension */,
-				E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */,
+				E418161327ABA50000CB693A /* Network */,
+				E4B986AC27AC326B007C824B /* NetworkModel */,
 				E46AF40827A84C47009F381C /* UserDefaultsManager.swift */,
 			);
 			path = Base;
@@ -332,6 +372,8 @@
 				E41ED024279DD5F200A2F0CE /* FirebaseAuth */,
 				E41ED026279DD5F200A2F0CE /* FirebaseMessaging */,
 				E41ED029279DD77B00A2F0CE /* Toast */,
+				E418161727ABA58500CB693A /* Alamofire */,
+				E4B986A727AC26A2007C824B /* RealmSwift */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -367,6 +409,8 @@
 				E4C31EB02796D44B00ACE886 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				E41ED021279DD5F100A2F0CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E4B986A627AC26A2007C824B /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -396,11 +440,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */,
+				E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */,
 				E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
+				E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
 				E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */,
@@ -423,6 +469,8 @@
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
+				E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */,
+				E4B986AB27AC26E9007C824B /* LoginRealm.swift in Sources */,
 				E458E333279EFBAF004C68AC /* CreateNicknameViewController.swift in Sources */,
 				E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */,
 				E458E33D279F2016004C68AC /* EmailViewController.swift in Sources */,
@@ -641,6 +689,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		E41ED021279DD5F100A2F0CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -655,6 +711,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
+			};
+		};
+		E4B986A627AC26A2007C824B /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.0;
 			};
 		};
 		E4C31EAA2796D42700ACE886 /* XCRemoteSwiftPackageReference "Then" */ = {
@@ -684,6 +748,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E418161727ABA58500CB693A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		E41ED022279DD5F200A2F0CE /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E41ED021279DD5F100A2F0CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -703,6 +772,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		E4B986A727AC26A2007C824B /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4B986A627AC26A2007C824B /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 		E4C31EAB2796D42700ACE886 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;

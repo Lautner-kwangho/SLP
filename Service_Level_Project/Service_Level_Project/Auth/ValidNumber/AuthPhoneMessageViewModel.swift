@@ -16,8 +16,8 @@ class AuthPhoneMessageViewModel {
     
     let disposeBag = DisposeBag()
     
-    let idToken = UserDefaults.standard.string(forKey: "idToken")
-    let phoneNumber = UserDefaults.standard.string(forKey: "PhoneNumber")
+    let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.idToken)
+    let phoneNumber = UserDefaults.standard.string(forKey: UserDefaultsManager.phoneNumber)
     
     var count = 60
     
@@ -73,8 +73,8 @@ class AuthPhoneMessageViewModel {
                             return
                         }
                         guard let verificationID = verificationID else { return }
-                        UserDefaults.standard.removeObject(forKey: "idToken")
-                        UserDefaults.standard.set(verificationID, forKey: "idToken")
+                        UserDefaults.standard.removeObject(forKey: UserDefaultsManager.idToken)
+                        UserDefaults.standard.set(verificationID, forKey: UserDefaultsManager.idToken)
                         self.count = 60
                         self.countSecond(vc)
                         vc.view.makeToast("재전송했습니다")
@@ -125,23 +125,22 @@ class AuthPhoneMessageViewModel {
                     
                         let currentUser = Auth.auth().currentUser
                         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                            // 내가 이상하게 생각하고 있는지 모르겠는데 guard let 써서 내려가면 에러 없는 경우에 내려가야 정상일텐데 이건 nil로 들어가서 바로 중지네;
 //                            guard let error = error else {
 //                                let authError = error as! NSError
 //                                return print("에러난거네 :",authError.debugDescription)
-//
-////                                return print("에러난거네 :", error.debugDescription)
 //                            }
-                            // 아오 안되겠다 그냥 여기까지 하고 마이 페이지 해야지
-                            print(error)
-                            // 맞다면 저장해줘야할 듯!
-                            print("아니면 여기도 프린트 되어야지 ")
-                            print("나 내 id 맞다고.. : ", idToken)
+                            guard let idToken = idToken else { return }
+                            UserDefaults.standard.set(idToken, forKey: UserDefaultsManager.authIdToken)
                         }
                     
-                    
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
                         windowScene.windows.first?.makeKeyAndVisible()
+                        SeSacURLNetwork.shared.loginMember { data in
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
+                        } failErrror: { error in
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+                        }
                     }
                 }
             })

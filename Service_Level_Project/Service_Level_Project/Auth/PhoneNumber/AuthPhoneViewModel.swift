@@ -79,11 +79,12 @@ class AuthPhoneViewModel {
                         vc.view.makeToast(AuthError.authCheckError(authError.code), position: .center)
                         return
                     }
-                    UserDefaults.standard.removeObject(forKey: "idToken")
-                    UserDefaults.standard.removeObject(forKey: "PhoneNumber")
+                    UserDefaults.standard.removeObject(forKey: UserDefaultsManager.idToken)
+                    UserDefaults.standard.removeObject(forKey: UserDefaultsManager.phoneNumber)
                     guard let verificationID = verificationID else { return }
-                    UserDefaults.standard.set(verificationID, forKey: "idToken")
-                    UserDefaults.standard.set(phoneNumber, forKey: "PhoneNumber")
+                    UserDefaults.standard.set(verificationID, forKey: UserDefaultsManager.idToken)
+                    let filterPhoneNumber = phoneNumber.replacingOccurrences(of: "-", with: "")
+                    UserDefaults.standard.set(filterPhoneNumber, forKey: UserDefaultsManager.phoneNumber)
                     if verificationID != "" {
                         DispatchQueue.main.async {
                             vc.navigationController?.pushViewController(AuthPhoneMessageViewController(), animated: true)

@@ -12,6 +12,7 @@ class MyInfoViewController: BaseViewController {
     
     let myInfoTableView = UITableView(frame: .zero, style: .plain).then {
         $0.register(MyInfoCell.self, forCellReuseIdentifier: MyInfoCell.reuseIdentifier)
+        $0.register(MyInfoHeaderView.self, forHeaderFooterViewReuseIdentifier: MyInfoHeaderView.reuseIdentifier)
     }
     
     private lazy var input = MyInfoViewModel
@@ -28,11 +29,17 @@ class MyInfoViewController: BaseViewController {
     
     private func bind() {
         viewModel.list
-            .asDriver(onErrorJustReturn: [MyInfoData(image: "에러", title: "에러")])
+            .asDriver(onErrorJustReturn: [])
             .drive(myInfoTableView.rx.items(cellIdentifier: MyInfoCell.reuseIdentifier, cellType: MyInfoCell.self)) { (row, element, cell) in
                 cell.cellTitle.text = "\(element.title)"
+                cell.cellImage.image = UIImage(named: "\(element.image)")
             }
             .disposed(by: disposeBag)
+//        myInfoTableView.tableHeaderView = MyInfoHeaderView()
+//        myInfoTableView.headerView(forSection: 0)
+        
+//        myInfoTableView.sectionHeaderHeight = 100
+        myInfoTableView.rowHeight = viewModel.tableCellHeight
     }
     
     override func setConstraints() {
@@ -49,22 +56,3 @@ class MyInfoViewController: BaseViewController {
     }
 }
 
-
-//extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 20
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyInfoCell.reuseIdentifier, for: indexPath) as? MyInfoCell else {
-//            return UITableViewCell()
-//        }
-//
-//        return cell
-//    }
-//}

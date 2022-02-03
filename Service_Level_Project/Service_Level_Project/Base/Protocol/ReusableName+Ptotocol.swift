@@ -11,10 +11,16 @@ protocol ReusableName {
     static var reuseIdentifier: String { get }
 }
 
-extension UITableViewCell: ReusableName {
-    
+//extension UITableViewCell: ReusableName {
+//    
+//    static var reuseIdentifier: String {
+//        return String(describing: self)
+//    }
+//    
+//}
+
+extension UIView: ReusableName {
     static var reuseIdentifier: String {
         return String(describing: self)
     }
-    
 }

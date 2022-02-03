@@ -43,7 +43,7 @@ final class BirthdayViewModel: BaseViewModel {
     let selectDate = BehaviorSubject<Date>(value: Date())
     
     func savedBirthday(_ picker : UIDatePicker, _ year: InputText, _ month: InputText, _ day: InputText) {
-        let birthday = UserDefaults.standard.string(forKey: "birthday")
+        let birthday = UserDefaults.standard.string(forKey: UserDefaultsManager.birthday)
 
         guard let birthday = birthday else { return }
         let formatter = DateFormatter()
@@ -113,7 +113,7 @@ final class BirthdayViewModel: BaseViewModel {
                     vc.navigationController?.pushViewController(EmailViewController(), animated: true)
                 } else {
                     DispatchQueue.global().async {
-                        UserDefaults.standard.set(self.birthday, forKey: "birthday")
+                        UserDefaults.standard.set(self.birthday, forKey: UserDefaultsManager.birthday)
                         DispatchQueue.main.async {
                             vc.navigationController?.pushViewController(EmailViewController(), animated: true)
                         }

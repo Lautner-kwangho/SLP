@@ -32,7 +32,7 @@ class CreateNicknameViewController: AuthBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let nickname = UserDefaults.standard.string(forKey: "nickname")
+        let nickname = UserDefaults.standard.string(forKey: UserDefaultsManager.nickname)
         guard let nickname = nickname else { return }
         nicknameTextField.textField.text = nickname
     }
@@ -62,7 +62,7 @@ class CreateNicknameViewController: AuthBaseViewController {
                 if text.count > 10 {
                     self.view.makeToast("10자 이하로 입력해주세요", position: .center)
                 } else {
-                    UserDefaults.standard.set(text,forKey: "nickname")
+                    UserDefaults.standard.set(text,forKey: UserDefaultsManager.nickname)
                     self.navigationController?.pushViewController(BirthdayViewController(), animated: true)
             
                 }

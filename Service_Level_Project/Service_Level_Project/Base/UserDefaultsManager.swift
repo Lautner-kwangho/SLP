@@ -9,9 +9,11 @@ import Foundation
 
 class UserDefaultsManager {
     static let idToken = "idToken"
+    static let authIdToken = "authIdToken"
     static let fcmToken = "fcmToken"
     static let phoneNumber = "PhoneNumber"
     static let nickname = "nickname"
     static let birthday = "birthday"
     static let email = "email"
+    static let gender = "gender"
 }

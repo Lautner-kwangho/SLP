@@ -22,16 +22,10 @@ final class CreateNicknameViewModel: BaseViewModel {
     struct Output {
         let outputNickname: Driver<String>
         let nicknameUIStatus: Driver<Bool>
-//        let nextButtonClicked: Driver<Bool>
-//        let sendToastMessage: Driver<String>
     }
     
     private let userNickname = BehaviorRelay<String>(value: "")
     private let nicknameStatus = BehaviorRelay<Bool>(value: false)
-    
-    
-//    private let nextButtonClicked = BehaviorRelay<Bool>(value: false)
-//    private let sendToastMessage = PublishRelay<String>()
     
     var disposeBag = DisposeBag()
     
@@ -47,20 +41,10 @@ final class CreateNicknameViewModel: BaseViewModel {
             // UI 상태
             let status = text.count > 0 ? true : false
             self.nicknameStatus.accept(status)
-            
-            
-            
-//            if status {
-//                self.sendToastMessage.accept("다시 입력해주세요")
-//            } else {
-//                self.sendToastMessage.accept("")
-//            }
         }).disposed(by: disposeBag)
         
         // 금지 닉네임: 바람의나라, 미묘한도사, 고래밥
-        
-
-        
+    
         return Output(
             outputNickname: userNickname.asDriver(),
             nicknameUIStatus: nicknameStatus.asDriver()

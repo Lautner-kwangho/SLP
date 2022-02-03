@@ -18,7 +18,7 @@ class EmailViewController: AuthBaseViewController {
     private lazy var input = EmailViewModel
         .Input(
             emailTextField: emailTextField.textField.rx.text.orEmpty.asDriver(),
-            userDefaultsIsSave: UserDefaults.standard.string(forKey: "email")
+            userDefaultsIsSave: UserDefaults.standard.string(forKey: UserDefaultsManager.email)
         )
     private lazy var output = viewModel.transform(input: input)
     
@@ -66,7 +66,7 @@ class EmailViewController: AuthBaseViewController {
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                UserDefaults.standard.set(self.viewModel.email, forKey: "email")
+                UserDefaults.standard.set(self.viewModel.email, forKey: UserDefaultsManager.email)
                 self.navigationController?.pushViewController(SelectGenderViewController(), animated: true)
             })
             .disposed(by: disposeBag)

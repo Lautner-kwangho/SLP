@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 import Toast
 
 class SelectGenderViewModel {
@@ -16,7 +17,10 @@ class SelectGenderViewModel {
     
     var maleClicked = false
     var femaleClicked = false
-    var chooseGender = BehaviorSubject<Int>(value: 0)
+    var chooseGender = 0
+    
+    var localRealm = try! Realm()
+    var loginTasks: Results<LoginRealm>!
     
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
@@ -27,48 +31,58 @@ class SelectGenderViewModel {
             .drive(onNext: { _ in
                 
                 if self.maleClicked, self.femaleClicked {
-                    self.chooseGender.onNext(2)
+                    self.chooseGender = 2
                     vc.view.makeToast("두가지 성별을 동시에 선택할 수 없습니다", duration: 1, position: .center, title: "", style: self.toastStyle, completion: nil)
                 } else if self.maleClicked {
-                    self.chooseGender.onNext(0)
+                    self.chooseGender = 0
                 } else if self.femaleClicked {
-                    self.chooseGender.onNext(1)
+                    self.chooseGender = 1
                 } else {
-                    self.chooseGender.onNext(-1)
+                    self.chooseGender = -1
                 }
+                UserDefaults.standard.set(self.chooseGender, forKey: UserDefaultsManager.gender)
                 self.authRegisterLogic()
             })
             .disposed(by: disposeBag)
     }
     
     func authRegisterLogic() {
-        var genderCode = 2
-        chooseGender
-            .distinctUntilChanged()
-            .bind { code in
-                genderCode = code
-            }.disposed(by: disposeBag)
-        if genderCode == 2 {
-            print("성별 부적합")
+        if chooseGender == 2 {
+            // 성별 부적합
         } else {
-            print("다음 단계 진행")
-            let testUD: [String] = [
-                UserDefaultsManager.idToken,
-                UserDefaultsManager.fcmToken,
-                UserDefaultsManager.phoneNumber,
-                UserDefaultsManager.nickname,
-                UserDefaultsManager.birthday,
-                UserDefaultsManager.email
-            ]
-            testUD.forEach {
-                print(" Print \($0) : ",UserDefaults.standard.string(forKey: $0))
+            // 다음 단계 진행
+            SeSacURLNetwork.shared.registMember { data in
+                SeSacURLNetwork.shared.loginMember { data in
+                    print(data)
+                    
+                    DispatchQueue.main.async {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                    // 이건 일단 보류
+                    self.loginTasks = self.localRealm.objects(LoginRealm.self)
+                } failErrror: { error in
+                    print(error)
+                }
+            } failErrror: { error in
+                guard let error = error else { return }
+                DispatchQueue.main.async {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+                    if error == "201" {
+                        windowScene.windows.first?.rootViewController!.view.makeToast("닉네임을 다시 입력해주세요", position: .center)
+                    } else if error == "202" {
+                        windowScene.windows.first?.rootViewController!.view.makeToast("이미 가입한 유저입니다", position: .center)
+                    } else if error == "401"{
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: SelectGenderViewController())
+                    } else {
+                        windowScene.windows.first?.rootViewController?.view.makeToast(error)
+                    }
+                    windowScene.windows.first?.makeKeyAndVisible()
+                }
+                
             }
-//            static let idToken = "idToken"
-//            static let fcmToken = "fcmToken"
-//            static let phoneNumber = "PhoneNumber"
-//            static let nickname = "nickname"
-//            static let birthday = "birthday"
-//            static let email = "email"
         }
     }
 }

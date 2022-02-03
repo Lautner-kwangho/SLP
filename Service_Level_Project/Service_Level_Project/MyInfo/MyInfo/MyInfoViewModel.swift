@@ -17,7 +17,7 @@ struct MyInfoData {
 }
 
 final class MyInfoViewModel: BaseViewModel {
-    
+    // 추가 기능이 생긴다면 ?? 그래서 만들어서 냅둠
     //MARK: Input, Output
     struct Input {
         
@@ -36,6 +36,7 @@ final class MyInfoViewModel: BaseViewModel {
     ]
     
     let title = "내정보"
+    let tableCellHeight = 75.0
     lazy var list = BehaviorRelay<[MyInfoData]>(value: data)
     
     var disposeBag = DisposeBag()
