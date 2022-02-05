@@ -14,7 +14,7 @@ enum Font {
     case title3_M
     case title4_R
     case title5_M
-    case title5_R
+    case title6_R
     case body1_M
     case body2_R
     case body3_R
@@ -35,7 +35,7 @@ enum Font {
             return .regular
         case .title5_M:
             return .medium
-        case .title5_R:
+        case .title6_R:
             return .regular
         case .body1_M:
             return .medium
@@ -72,7 +72,7 @@ enum Font {
         return Font.title5_M.ofSize(size: 12)
     }
     static func title6_R12() -> UIFont {
-        return Font.title5_R.ofSize(size: 12)
+        return Font.title6_R.ofSize(size: 12)
     }
     static func body1_M16() -> UIFont {
         return Font.body1_M.ofSize(size: 16)
@@ -99,7 +99,7 @@ extension UILabel {
         // 피그마에서 준 값은 진짜 맞는지 가 궁금함 (디자이너랑 확인하면 맞는지 아닌지 알 수 있을텐데 바로 확인 못 시키니까 아쉽)
         case .display1_R, .title1_M, .title2_R, .title3_M, .title4_R, .caption_R:
             lineHeight = 1.08
-        case .title5_M, .title5_R:
+        case .title5_M, .title6_R:
             lineHeight = 1.01
         case .body1_M, .body2_R:
             lineHeight = 1.25

@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import RealmSwift
 import Toast
 
 class SelectGenderViewModel {
@@ -18,9 +17,6 @@ class SelectGenderViewModel {
     var maleClicked = false
     var femaleClicked = false
     var chooseGender = 0
-    
-    var localRealm = try! Realm()
-    var loginTasks: Results<LoginRealm>!
     
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
@@ -60,8 +56,6 @@ class SelectGenderViewModel {
                         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
-                    // 이건 일단 보류
-                    self.loginTasks = self.localRealm.objects(LoginRealm.self)
                 } failErrror: { error in
                     print(error)
                 }

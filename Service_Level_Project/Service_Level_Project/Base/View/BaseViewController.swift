@@ -9,7 +9,6 @@ import UIKit
 import Firebase
 import RxCocoa
 import RxSwift
-import RealmSwift
 import SnapKit
 import Then
 import Toast

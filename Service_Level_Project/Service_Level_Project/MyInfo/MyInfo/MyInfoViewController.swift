@@ -35,12 +35,9 @@ class MyInfoViewController: BaseViewController {
                 cell.cellImage.image = UIImage(named: "\(element.image)")
             }
             .disposed(by: disposeBag)
-
-//        myInfoTableView.headerView(forSection: 0)
         
-        myInfoTableView.sectionHeaderHeight = 100
-        myInfoTableView.tableHeaderView = MyInfoHeaderView()
         myInfoTableView.rowHeight = viewModel.tableCellHeight
+        myInfoTableView.delegate = self
     }
     
     override func setConstraints() {
@@ -57,3 +54,25 @@ class MyInfoViewController: BaseViewController {
     }
 }
 
+extension MyInfoViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: MyInfoHeaderView.reuseIdentifier) as? MyInfoHeaderView else {
+            return UITableViewHeaderFooterView() }
+
+        let tapGesture = UITapGestureRecognizer()
+        headerCell.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.navigationController?.pushViewController(MyPageViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        return headerCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 96
+    }
+}

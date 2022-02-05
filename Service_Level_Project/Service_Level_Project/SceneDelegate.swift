@@ -30,7 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         window?.windowScene = windowScene
         
         // 임시로 작업하려고 옮겨 놓음
-        window?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
+        window?.rootViewController = UINavigationController(rootViewController: MyPageViewController())
+        // 여기에 작업
+        
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
         
 //        if idToken == nil {

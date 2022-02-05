@@ -32,7 +32,7 @@ final class MyInfoViewModel: BaseViewModel {
         MyInfoData(image: "question", title: "자주 묻는 질문"),
         MyInfoData(image: "personalQuestion", title: "1:1 문의"),
         MyInfoData(image: "alertSetting", title: "알림 설정"),
-        MyInfoData(image: "permit", title: "이용 약관")
+        MyInfoData(image: "permit", title: "이용약관")
     ]
     
     let title = "내정보"
