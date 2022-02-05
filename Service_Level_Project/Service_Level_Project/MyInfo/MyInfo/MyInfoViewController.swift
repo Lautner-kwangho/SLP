@@ -35,10 +35,11 @@ class MyInfoViewController: BaseViewController {
                 cell.cellImage.image = UIImage(named: "\(element.image)")
             }
             .disposed(by: disposeBag)
-//        myInfoTableView.tableHeaderView = MyInfoHeaderView()
+
 //        myInfoTableView.headerView(forSection: 0)
         
-//        myInfoTableView.sectionHeaderHeight = 100
+        myInfoTableView.sectionHeaderHeight = 100
+        myInfoTableView.tableHeaderView = MyInfoHeaderView()
         myInfoTableView.rowHeight = viewModel.tableCellHeight
     }
     

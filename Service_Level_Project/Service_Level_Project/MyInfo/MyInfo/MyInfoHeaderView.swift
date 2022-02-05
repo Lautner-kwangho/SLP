@@ -13,6 +13,7 @@ class MyInfoHeaderView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         backgroundColor = .brown
     }
+    
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
 //        backgroundColor = .brown
@@ -21,6 +22,5 @@ class MyInfoHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }
