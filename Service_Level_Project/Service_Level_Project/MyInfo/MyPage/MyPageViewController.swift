@@ -9,7 +9,9 @@ import UIKit
 
 class MyPageViewController: BaseViewController {
     
-    let pageScrollView = UIScrollView()
+    let pageScrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+    }
     
     //MARK: 이미지
     let userBackgroudImage = UIImageView().then {
@@ -50,17 +52,18 @@ class MyPageViewController: BaseViewController {
         view.addSubview(pageScrollView)
         pageScrollView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         pageScrollView.addSubview(userBackgroudImage)
-        pageScrollView.addSubview(userFace)
+        userBackgroudImage.addSubview(userFace)
         pageScrollView.addSubview(headerView)
         pageScrollView.addSubview(userTableView)
         
         userBackgroudImage.snp.makeConstraints {
             $0.top.equalTo(pageScrollView)
-            $0.leading.trailing.equalTo(view).inset(16)
+            $0.leading.trailing.equalTo(pageScrollView)
+            $0.centerX.equalTo(pageScrollView)
         }
         userFace.snp.makeConstraints {
             $0.bottom.equalTo(userBackgroudImage)
@@ -68,23 +71,20 @@ class MyPageViewController: BaseViewController {
         }
         headerView.snp.makeConstraints {
             $0.top.equalTo(userBackgroudImage.snp.bottom)
-            $0.leading.trailing.equalTo(view).inset(16)
+            $0.leading.trailing.equalTo(pageScrollView)
+            $0.centerX.equalTo(pageScrollView)
         }
         
         userTableView.snp.makeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(24)
-            $0.leading.trailing.equalTo(view).inset(16)
-            $0.height.equalTo(360)
-            $0.bottom.equalTo(pageScrollView.snp.bottom)
+            $0.top.equalTo(headerView.snp.bottom).offset(10)
+            $0.leading.trailing.equalTo(pageScrollView)
+            $0.height.equalTo(350)
+            $0.bottom.equalTo(pageScrollView)
         }
     }
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.tableData.count
@@ -101,6 +101,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 4 {
+            print("클릭했음")
+        }
+    }
     
 }

@@ -24,6 +24,19 @@ class MyPageTableViewCell: UITableViewCell {
         $0.font = Font.title3_M14()
     }
     
+    let slider = MultiSlider().then {
+        $0.minimumValue = 18
+        $0.maximumValue = 65
+        $0.value = [18, 65]
+        $0.orientation = .horizontal
+        $0.outerTrackColor = SacColor.color(.gray2)
+        $0.tintColor = SacColor.color(.green)
+        $0.trackWidth = 4
+        $0.hasRoundTrackEnds = true
+        $0.showsThumbImageShadow = false
+        $0.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+    }
+    
     let title = UILabel().then {
         let lineHeight = $0.setLineHeight(font: .title4_R)
         $0.attributedText = lineHeight
@@ -41,74 +54,84 @@ class MyPageTableViewCell: UITableViewCell {
             let femaleButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
                 $0.setTitle("여자", for: .normal)
             }
-            self.addSubview(maleButton)
-            self.addSubview(femaleButton)
+            self.contentView.addSubview(maleButton)
+            self.contentView.addSubview(femaleButton)
             femaleButton.snp.makeConstraints { make in
-                make.trailing.equalTo(self).inset(16)
-                make.centerY.equalTo(self)
+                make.top.equalTo(self.contentView)
+                make.bottom.equalTo(self.contentView)
+                make.trailing.equalTo(self.contentView).inset(16)
                 make.width.equalTo(56)
             }
             maleButton.snp.makeConstraints { make in
                 make.trailing.equalTo(femaleButton.snp.leading).offset(-8)
-                make.centerY.equalTo(self)
-                make.width.equalTo(56)
+                make.centerY.equalTo(femaleButton)
+                make.width.equalTo(femaleButton)
             }
         } else if indexPath.row == 1 {
+            
             let hobbyTextField = InputText(type: .inactive).then {
                 $0.textField.placeholder = "취미를 입력해주세요"
             }
-            self.addSubview(hobbyTextField)
+            self.contentView.addSubview(hobbyTextField)
             hobbyTextField.snp.makeConstraints { make in
+                make.top.bottom.equalTo(self.contentView).inset(13)
                 make.width.equalTo(self.frame.size.width / 2)
-                make.trailing.equalTo(self).inset(16)
-                make.centerY.equalTo(self).offset(10)
+                make.trailing.equalTo(self.contentView).inset(16)
+                make.centerY.equalTo(self.contentView).offset(10)
             }
+            
         } else if indexPath.row == 2 {
+            
             let searchSwitch = UISwitch()
-            self.addSubview(searchSwitch)
+            self.contentView.addSubview(searchSwitch)
             searchSwitch.snp.makeConstraints { make in
-                make.trailing.equalTo(self).inset(16)
-                make.centerY.equalTo(self)
+                make.top.equalTo(self.contentView).inset(10)
+                make.bottom.equalTo(self.contentView).inset(10)
+                make.trailing.equalTo(self.contentView).inset(16)
+                make.centerY.equalTo(self.contentView)
             }
+            
         } else if indexPath.row == 3 {
-
-            self.addSubview(ageLevel)
+            self.contentView.addSubview(ageLevel)
             ageLevel.snp.makeConstraints { make in
-                make.trailing.equalTo(self).inset(16)
-                make.centerY.equalTo(self)
+                make.top.equalTo(self.contentView).inset(16)
+                make.trailing.equalTo(self.contentView).inset(16)
+            }
+            
+            self.title.snp.remakeConstraints {
+                $0.leading.equalTo(self).inset(16)
+                $0.top.equalTo(self).inset(13)
             }
 
-        } else if indexPath.row == 4 {
-            // 연령대 라이브러리
-            let slider = MultiSlider().then {
-                $0.minimumValue = 18
-                $0.maximumValue = 65
-                $0.value = [18, 65]
-                $0.orientation = .horizontal
-                $0.outerTrackColor = SacColor.color(.gray2)
-                $0.tintColor = SacColor.color(.green)
-                $0.trackWidth = 4
-                $0.thumbImage?.withTintColor(.cyan)
-                $0.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+            let testView = UIView().then {
+                $0.backgroundColor = .clear
             }
-            self.addSubview(slider)
+            self.contentView.addSubview(testView)
+            testView.snp.makeConstraints { make in
+                make.top.equalTo(ageLevel.snp.bottom)
+                make.trailing.equalTo(self.contentView)
+                make.height.equalTo(60)
+                make.leading.trailing.equalTo(self.contentView)
+                make.bottom.equalTo(self.contentView.snp.bottom)
+            }
+            testView.addSubview(slider)
             slider.snp.makeConstraints { make in
-                make.leading.trailing.equalTo(self).inset(16)
-                make.centerY.equalTo(self)
-                make.height.equalTo(50)
+                make.center.equalTo(testView)
+                make.leading.trailing.equalTo(testView).inset(16)
             }
+            
+            Observable.combineLatest(self.startAge, self.lastAge)
+                .asDriver(onErrorJustReturn: (0, 60))
+                .drive(onNext: { start, last in
+                    self.ageLevel.text = "\(start) - \(last)"
+                })
+                .disposed(by: disposeBag)
         }
     }
     
     @objc func sliderChanged(slider: MultiSlider) {
-        print("thumb \(slider.draggedThumbIndex) moved")
-        print("now thumbs are at \(slider.value)")
         self.startAge.accept(Int(floor(slider.value[0])))
         self.lastAge.accept(Int(floor(slider.value[1])))
-    }
-    
-    override func prepareForReuse() {
-        disposeBag = DisposeBag()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -118,16 +141,8 @@ class MyPageTableViewCell: UITableViewCell {
         title.snp.makeConstraints {
             $0.centerY.equalTo(self)
             $0.leading.equalTo(self).inset(16)
+            $0.top.equalTo(self).inset(13)
         }
-        
-        Observable.combineLatest(self.startAge, self.lastAge)
-            .debug("AGE")
-            .asDriver(onErrorJustReturn: (0, 60))
-            .drive(onNext: { start, last in
-                self.ageLevel.text = "\(start) - \(last)"
-                print(start)
-            })
-            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {

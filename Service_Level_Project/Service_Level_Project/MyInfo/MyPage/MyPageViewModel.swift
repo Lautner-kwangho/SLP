@@ -18,7 +18,6 @@ final class MyPageViewModel {
         MyPageData(title: "자주하는 취미"),
         MyPageData(title: "내 번호 검색 허용"),
         MyPageData(title: "상대방 연령대"),
-        MyPageData(title: ""),
         MyPageData(title: "회원탈퇴")
     ]
     
