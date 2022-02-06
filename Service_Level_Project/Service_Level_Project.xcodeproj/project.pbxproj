@@ -33,6 +33,7 @@
 		E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */; };
 		E459C3D927AAB77D0084FE0C /* MyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */; };
 		E459C3DB27AAB8010084FE0C /* ReusableName+Ptotocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3DA27AAB8010084FE0C /* ReusableName+Ptotocol.swift */; };
+		E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = E461BFEE27AFFEFF00840173 /* MultiSlider */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
@@ -121,6 +122,7 @@
 				E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */,
 				E41ED023279DD5F200A2F0CE /* FirebaseAnalytics in Frameworks */,
 				E4C31EAF2796D43300ACE886 /* SnapKit in Frameworks */,
+				E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +382,7 @@
 				E41ED026279DD5F200A2F0CE /* FirebaseMessaging */,
 				E41ED029279DD77B00A2F0CE /* Toast */,
 				E418161727ABA58500CB693A /* Alamofire */,
+				E461BFEE27AFFEFF00840173 /* MultiSlider */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -416,6 +419,7 @@
 				E41ED021279DD5F100A2F0CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -721,6 +725,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yonat/MultiSlider";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		E4C31EAA2796D42700ACE886 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
@@ -772,6 +784,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		E461BFEE27AFFEFF00840173 /* MultiSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */;
+			productName = MultiSlider;
 		};
 		E4C31EAB2796D42700ACE886 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -27,7 +27,8 @@ class MyPageViewController: BaseViewController {
     //MARK: 테이블 뷰
     let userTableView = UITableView(frame: .zero, style: .plain).then {
         $0.register(MyPageTableViewCell.self, forCellReuseIdentifier: MyPageTableViewCell.reuseIdentifier)
-        $0.backgroundColor = .cyan
+        $0.isScrollEnabled = false
+        $0.separatorColor = .clear
     }
     
     let viewModel = MyPageViewModel()
@@ -73,13 +74,17 @@ class MyPageViewController: BaseViewController {
         userTableView.snp.makeConstraints {
             $0.top.equalTo(headerView.snp.bottom).offset(24)
             $0.leading.trailing.equalTo(view).inset(16)
-            $0.height.equalTo(500)
+            $0.height.equalTo(360)
             $0.bottom.equalTo(pageScrollView.snp.bottom)
         }
     }
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.tableData.count
@@ -91,8 +96,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         cell.title.text = "\(viewModel.tableData[indexPath.row].title)"
+        cell.selectionStyle = .none
+        cell.cellConfigure(indexPath)
         
         return cell
     }
 
+    
 }
