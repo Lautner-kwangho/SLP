@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ButtonCollection: UIView {
     
@@ -48,10 +49,41 @@ class ButtonCollection: UIView {
         $0.distribution = .fillEqually
         $0.spacing = 8
     }
+    var disposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
+        
+    }
+    
+    convenience init(isEnable touch: Bool) {
+        self.init()
+        setConstraints()
+        bind(touch)
+    }
+    
+    func bind(_ isEnable: Bool) {
+        if isEnable {
+            [firstLeftButton, firstRightButton, middleLeftButton, middleRightButton, lastLeftButton, lastRightButton].forEach { btn in
+                btn.rx.tap
+                    .asDriver()
+                    .scan(false) { state, _ in
+                        !state
+                    }
+                    .startWith(false)
+                    .distinctUntilChanged()
+                    .drive(onNext: { [weak self] status in
+                        guard let self = self else { return }
+                        if status {
+                            btn.customLayout(.fill)
+                        } else {
+                            btn.customLayout(.inactive)
+                        }
+                    })
+                    .disposed(by: disposeBag)
+            }
+        }
     }
     
     func setConstraints() {
@@ -74,17 +106,17 @@ class ButtonCollection: UIView {
         lastStackView.addArrangedSubview(lastLeftButton)
         lastStackView.addArrangedSubview(lastRightButton)
         
-        firstStackView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(self)
-        }
-        
-        middleStackView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(self)
-        }
-        
-        lastStackView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(self)
-        }
+//        firstStackView.snp.makeConstraints {
+//            $0.leading.trailing.equalTo(mainStackView)
+//        }
+//
+//        middleStackView.snp.makeConstraints {
+//            $0.leading.trailing.equalTo(mainStackView)
+//        }
+//
+//        lastStackView.snp.makeConstraints {
+//            $0.leading.trailing.equalTo(mainStackView)
+//        }
     }
     
     required init?(coder: NSCoder) {

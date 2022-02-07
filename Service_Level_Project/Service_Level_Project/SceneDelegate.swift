@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import IQKeyboardManagerSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
 
@@ -30,21 +31,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         window?.windowScene = windowScene
         
         // 임시로 작업하려고 옮겨 놓음
-        window?.rootViewController = UINavigationController(rootViewController: MyPageViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: MyPageViewController())
         // 여기에 작업
         
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
         
-//        if idToken == nil {
-//            window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
-//        } else {
-//            SeSacURLNetwork.shared.loginMember { data in
-//                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
-//            } failErrror: { error in
-//                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
-//            }
-//        }
+        if idToken == nil {
+            window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
+        } else {
+            SeSacURLNetwork.shared.loginMember { data in
+                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
+            } failErrror: { error in
+                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+            }
+        }
         window?.makeKeyAndVisible()
+        
+        //Keyboard
+        IQKeyboardManager.shared.enable = true
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()

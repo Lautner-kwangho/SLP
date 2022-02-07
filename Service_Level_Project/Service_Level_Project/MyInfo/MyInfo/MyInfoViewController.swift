@@ -38,8 +38,10 @@ class MyInfoViewController: BaseViewController {
         
         myInfoTableView.rowHeight = viewModel.tableCellHeight
         myInfoTableView.delegate = self
+        
+        print("내 id 토큰 :",UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken))
     }
-    
+
     override func setConstraints() {
         view.addSubview(myInfoTableView)
         myInfoTableView.snp.makeConstraints {
@@ -58,7 +60,8 @@ extension MyInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerCell = tableView.dequeueReusableHeaderFooterView(withIdentifier: MyInfoHeaderView.reuseIdentifier) as? MyInfoHeaderView else {
             return UITableViewHeaderFooterView() }
-
+        headerCell.myprofileName.text = output.userNickName
+        
         let tapGesture = UITapGestureRecognizer()
         headerCell.addGestureRecognizer(tapGesture)
         tapGesture.rx.event

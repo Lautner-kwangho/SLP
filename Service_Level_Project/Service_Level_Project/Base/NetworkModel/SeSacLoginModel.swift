@@ -9,32 +9,31 @@ import Foundation
 
 struct SeSacLoginModel: Codable {
     
-    let _id: String
-    let __v: Int
-    let uid: String
-    let phoneNumber: String
-    let email: String
-    let FCMtoken: String
-    let nick: String
-    let birth: String
-    let gender: Int
-    let hobby: String
-    let comment: [String]
-    let reputation: [Int]
-    let sesac: Int
-    let sesacCollection: [Int]
-    let background: Int
-    let backgroundCollection: [Int]
-    let purchaseToken: [String]
-    let transactionId: [String]
-    let reviewedBefore: [String]
-    let reportedNum: Int
-    let reportedUser: [String]
-    let dodgepenalty: Int
-    let dodgeNum: Int
-    let ageMin: Int
-    let ageMax: Int
-    let searchable: Int
-    let createdAt: String
-    
+    var _id: String = ""
+    var __v: Int = 0
+    var uid: String = ""
+    var phoneNumber: String = ""
+    var email: String = ""
+    var FCMtoken: String = ""
+    var nick: String = ""
+    var birth: String = ""
+    var gender: Int = 0
+    var hobby: String = ""
+    var comment: [String] = []
+    var reputation: [Int] = []
+    var sesac: Int = 0
+    var sesacCollection: [Int] = []
+    var background: Int = 0
+    var backgroundCollection: [Int] = []
+    var purchaseToken: [String] = []
+    var transactionId: [String] = []
+    var reviewedBefore: [String] = []
+    var reportedNum: Int = 0
+    var reportedUser: [String] = []
+    var dodgepenalty: Int = 0
+    var dodgeNum: Int = 0
+    var ageMin: Int = 0
+    var ageMax: Int = 0
+    var searchable: Int = 0
+    var createdAt: String = ""
 }

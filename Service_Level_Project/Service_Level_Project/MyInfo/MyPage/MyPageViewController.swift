@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class MyPageViewController: BaseViewController {
     
@@ -33,11 +34,24 @@ class MyPageViewController: BaseViewController {
         $0.separatorColor = .clear
     }
     
-    let viewModel = MyPageViewModel()
+    private lazy var input = MyPageViewModel
+        .Input()
+    private lazy var output = viewModel.transform(input: input)
+    
+    private let viewModel = MyPageViewModel()
+    private let disposeBag = DisposeBag()
     
     //MARK: override 부분
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
+    }
+    
+    func bind() {
+        headerView.userNickname.text = output.userData.nick
+        headerView.hobby.isHidden = true
+        headerView.hobbyStackView.isHidden = true
+        
     }
     
     override func configure() {
@@ -97,6 +111,31 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
 
         cell.title.text = "\(viewModel.tableData[indexPath.row].title)"
         cell.selectionStyle = .none
+        
+        //MARK: TableView Data 입력..
+        //다음에는 ScrollView나 TableView중에 하나만 해야겠다..
+        let gender = CheckDataModel.gender(output.userData.gender).genderSwitch
+        if gender == "남자" {
+            MyPageViewModel.maleSwitch = true
+            cell.maleButton.customLayout(.fill)
+        } else if gender == "여자" {
+            MyPageViewModel.femaleSwitch = true
+            cell.femaleButton.customLayout(.inactive)
+        }
+        
+        let hobby = output.userData.hobby.count > 0 ? output.userData.hobby : nil
+        cell.hobbyTextField.textField.text = hobby
+    
+        if let searchable = CheckDataModel.searchable(output.userData.searchable).searchable {
+            cell.searchSwitch.isOn = searchable
+            MyPageViewModel.searchSwitch = searchable
+        }
+        
+        cell.slider.value = [CGFloat(output.userData.ageMin), CGFloat(output.userData.ageMax)]
+        cell.startAge.accept(output.userData.ageMin)
+        cell.lastAge.accept(output.userData.ageMax)
+        
+        
         cell.cellConfigure(indexPath)
         
         return cell
@@ -104,7 +143,18 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 4 {
-            print("클릭했음")
+            let alertPage = SeSacAlert("정말 탈퇴하시겠습니까?", "탈퇴하시면 새싹 프렌즈를 이용할실 수 없어요 ㅜㅜ\noh nooooooo") {
+                SeSacURLNetwork.shared.withdraw()
+                self.dismiss(animated: true) {
+                    DispatchQueue.main.async {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                }
+            }
+            alertPage.modalPresentationStyle = .overFullScreen
+            self.present(alertPage, animated: true, completion: nil)
         }
     }
     

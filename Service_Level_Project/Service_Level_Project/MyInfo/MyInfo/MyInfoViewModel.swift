@@ -24,7 +24,7 @@ final class MyInfoViewModel: BaseViewModel {
     }
     
     struct Output {
-        
+        let userNickName: String
     }
     //MARK: 기본 텍스트 입력
     var data = [
@@ -37,6 +37,9 @@ final class MyInfoViewModel: BaseViewModel {
     
     let title = "내정보"
     let tableCellHeight = 75.0
+    var userName = "김새싹"
+    
+    static var myData = BehaviorRelay<SeSacLoginModel>(value: SeSacLoginModel())
     lazy var list = BehaviorRelay<[MyInfoData]>(value: data)
     
     var disposeBag = DisposeBag()
@@ -44,7 +47,13 @@ final class MyInfoViewModel: BaseViewModel {
     //MARK: Transform(input:)
     func transform(input: Input) -> Output {
         
-        return Output()
+        MyInfoViewModel.myData.asDriver()
+            .drive(onNext: { [weak self] model in
+                self?.userName = model.nick
+            })
+            .disposed(by: disposeBag)
+        
+        return Output(userNickName: userName)
     }
 
 }

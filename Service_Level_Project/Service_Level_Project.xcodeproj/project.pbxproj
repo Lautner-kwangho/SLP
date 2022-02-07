@@ -39,6 +39,9 @@
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
+		E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001527B0EF1100D8572C /* Custom+Alert.swift */; };
+		E4AF001927B1787D00D8572C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001827B1787D00D8572C /* DataModel.swift */; };
+		E4AF001C27B1859400D8572C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */; };
 		E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */; };
 		E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */; };
 		E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986B227AEEDBA007C824B /* Button+Collection+(3x2).swift */; };
@@ -89,6 +92,8 @@
 		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectRelease.entitlements; sourceTree = "<group>"; };
 		E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectDebug.entitlements; sourceTree = "<group>"; };
+		E4AF001527B0EF1100D8572C /* Custom+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+Alert.swift"; sourceTree = "<group>"; };
+		E4AF001827B1787D00D8572C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacLoginModel.swift; sourceTree = "<group>"; };
 		E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoHeaderView.swift; sourceTree = "<group>"; };
 		E4B986B227AEEDBA007C824B /* Button+Collection+(3x2).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Collection+(3x2).swift"; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 				E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */,
 				E41ED023279DD5F200A2F0CE /* FirebaseAnalytics in Frameworks */,
 				E4C31EAF2796D43300ACE886 /* SnapKit in Frameworks */,
+				E4AF001C27B1859400D8572C /* IQKeyboardManagerSwift in Frameworks */,
 				E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +295,22 @@
 			path = MyInfo;
 			sourceTree = "<group>";
 		};
+		E4AF001227B0EA2C00D8572C /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF001527B0EF1100D8572C /* Custom+Alert.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		E4AF001727B1786F00D8572C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF001827B1787D00D8572C /* DataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E4B986AC27AC326B007C824B /* NetworkModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +358,7 @@
 		E4C31EB52796D59700ACE886 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E4AF001727B1786F00D8572C /* Model */,
 				E46AF40327A3A92D009F381C /* View */,
 				E46AF40427A3A935009F381C /* Protocol */,
 				E46AF40527A3A941009F381C /* Extension */,
@@ -349,6 +372,7 @@
 		E4C31EB62796D5CE00ACE886 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				E4AF001227B0EA2C00D8572C /* Alert */,
 				E45256AA27AF068400AF4130 /* View */,
 				E46AF3FF27A3A738009F381C /* Button */,
 				E46AF40027A3A746009F381C /* TextField */,
@@ -383,6 +407,7 @@
 				E41ED029279DD77B00A2F0CE /* Toast */,
 				E418161727ABA58500CB693A /* Alamofire */,
 				E461BFEE27AFFEFF00840173 /* MultiSlider */,
+				E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -420,6 +445,7 @@
 				E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */,
+				E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -451,7 +477,9 @@
 				E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */,
 				E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */,
 				E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */,
+				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
+				E4AF001927B1787D00D8572C /* DataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
@@ -733,6 +761,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
 		E4C31EAA2796D42700ACE886 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
@@ -789,6 +825,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */;
 			productName = MultiSlider;
+		};
+		E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		E4C31EAB2796D42700ACE886 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;

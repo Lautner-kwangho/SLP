@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Firebase
+import RxSwift
 
 class SeSacURLNetwork {
     
@@ -16,6 +17,7 @@ class SeSacURLNetwork {
     let formatter = DateFormatter()
     let birthday = UserDefaults.standard.string(forKey: UserDefaultsManager.birthday)!
     
+    // 1차 작업
     func registMember(successData: @escaping (AFDataResponse<Data>?) -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.regist.url
 
@@ -65,31 +67,54 @@ class SeSacURLNetwork {
         }
     }
     
+    // 1차 작업
     func loginMember(successData: @escaping (SeSacLoginModel?) -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.regist.url
         let header: HTTPHeaders = [
             "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
             "Content-Type" : "application/x-www-form-urlencoded"
         ]
-        let dataRequest = AF.request(URL, method: .get, headers: header).validate(statusCode: 200...200)
+        let dataRequest = AF.request(URL, method: .get, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200)
         
         dataRequest.responseData { response in
             switch response.result {
-            case let .success(value):
+            case .success:
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SeSacLoginModel.self, from: data)
-                print("디버그 :",json.debugDescription)
+                guard let json = json else {return}
                 
+                DispatchQueue.global().sync {
+                    MyInfoViewModel.myData.accept(json)
+                    print("메인", json)
+                }
+        
                 successData(json)
             case let .failure(error):
                 guard let errorCode = error.responseCode else { return }
                 let status = self.checkError(errorCode)
-                if errorCode == 401 {
-                    dataRequest.responseData { response in
-                    }
-                }
+                
                 failErrror(status)
+            }
+        }
+    }
+    // 2차 작업 : 3차요청에서는 조금 더 반복된 내용 줄여서 사용하면 될 거 같은데
+    func withdraw() {
+        let URL = Point.withdraw.url
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        let withdrawRequest = AF.request(URL, method: .post, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200)
+            
+            withdrawRequest.responseData { response in
+            switch response.result {
+            case .success(_):
+                guard let data = response.value else { return }
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                let status = self.checkError(errorCode)
+                print(status)
             }
         }
     }

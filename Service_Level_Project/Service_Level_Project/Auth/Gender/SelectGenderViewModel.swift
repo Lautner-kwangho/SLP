@@ -49,7 +49,7 @@ class SelectGenderViewModel {
             // 다음 단계 진행
             SeSacURLNetwork.shared.registMember { data in
                 SeSacURLNetwork.shared.loginMember { data in
-                    print(data)
+                    guard let data = data else { return }
                     
                     DispatchQueue.main.async {
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }

@@ -15,6 +15,19 @@ class MyPageTableViewCell: UITableViewCell {
     var lastAge = BehaviorRelay(value: 65)
     var disposeBag = DisposeBag()
     
+    let maleButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
+        $0.setTitle("남자", for: .normal)
+    }
+    let femaleButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
+        $0.setTitle("여자", for: .normal)
+    }
+    
+    let hobbyTextField = InputText(type: .inactive).then {
+        $0.textField.placeholder = "취미를 입력해주세요"
+    }
+    
+    let searchSwitch = UISwitch()
+    
     let ageLevel = UILabel().then {
         let lineHeight = $0.setLineHeight(font: .title3_M)
         $0.attributedText = lineHeight
@@ -27,7 +40,6 @@ class MyPageTableViewCell: UITableViewCell {
     let slider = MultiSlider().then {
         $0.minimumValue = 18
         $0.maximumValue = 65
-        $0.value = [18, 65]
         $0.orientation = .horizontal
         $0.outerTrackColor = SacColor.color(.gray2)
         $0.tintColor = SacColor.color(.green)
@@ -48,32 +60,48 @@ class MyPageTableViewCell: UITableViewCell {
     
     func cellConfigure(_ indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let maleButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
-                $0.setTitle("남자", for: .normal)
-            }
-            let femaleButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
-                $0.setTitle("여자", for: .normal)
-            }
-            self.contentView.addSubview(maleButton)
-            self.contentView.addSubview(femaleButton)
-            femaleButton.snp.makeConstraints { make in
+            
+            self.contentView.addSubview(self.maleButton)
+            self.contentView.addSubview(self.femaleButton)
+            
+            self.maleButton.rx.tap
+                .asDriver()
+                .drive(onNext: { status in
+                    MyPageViewModel.maleSwitch = !MyPageViewModel.maleSwitch
+                    if MyPageViewModel.maleSwitch {
+                        self.maleButton.customLayout(.fill)
+                    } else {
+                        self.maleButton.customLayout(.inactive)
+                    }
+                })
+                .disposed(by: disposeBag)
+            
+            self.femaleButton.rx.tap
+                .asDriver()
+                .drive(onNext: { status in
+                    MyPageViewModel.femaleSwitch = !MyPageViewModel.femaleSwitch
+                    if MyPageViewModel.femaleSwitch {
+                        self.femaleButton.customLayout(.fill)
+                    } else {
+                        self.femaleButton.customLayout(.inactive)
+                    }
+                })
+                .disposed(by: disposeBag)
+            
+            self.femaleButton.snp.makeConstraints { make in
                 make.top.equalTo(self.contentView)
                 make.bottom.equalTo(self.contentView)
                 make.trailing.equalTo(self.contentView).inset(16)
                 make.width.equalTo(56)
             }
-            maleButton.snp.makeConstraints { make in
+            self.maleButton.snp.makeConstraints { make in
                 make.trailing.equalTo(femaleButton.snp.leading).offset(-8)
                 make.centerY.equalTo(femaleButton)
                 make.width.equalTo(femaleButton)
             }
         } else if indexPath.row == 1 {
-            
-            let hobbyTextField = InputText(type: .inactive).then {
-                $0.textField.placeholder = "취미를 입력해주세요"
-            }
-            self.contentView.addSubview(hobbyTextField)
-            hobbyTextField.snp.makeConstraints { make in
+            self.contentView.addSubview(self.hobbyTextField)
+            self.hobbyTextField.snp.makeConstraints { make in
                 make.top.bottom.equalTo(self.contentView).inset(13)
                 make.width.equalTo(self.frame.size.width / 2)
                 make.trailing.equalTo(self.contentView).inset(16)
@@ -81,10 +109,17 @@ class MyPageTableViewCell: UITableViewCell {
             }
             
         } else if indexPath.row == 2 {
+            self.contentView.addSubview(self.searchSwitch)
             
-            let searchSwitch = UISwitch()
-            self.contentView.addSubview(searchSwitch)
-            searchSwitch.snp.makeConstraints { make in
+            self.searchSwitch.rx.controlEvent(.valueChanged)
+                .asDriver()
+                .drive(onNext: { _ in
+                    MyPageViewModel.searchSwitch = !MyPageViewModel.searchSwitch
+                    self.searchSwitch.isOn = MyPageViewModel.searchSwitch
+                })
+                .disposed(by: disposeBag)
+            
+            self.searchSwitch.snp.makeConstraints { make in
                 make.top.equalTo(self.contentView).inset(10)
                 make.bottom.equalTo(self.contentView).inset(10)
                 make.trailing.equalTo(self.contentView).inset(16)
@@ -105,6 +140,7 @@ class MyPageTableViewCell: UITableViewCell {
 
             let testView = UIView().then {
                 $0.backgroundColor = .clear
+                $0.layer.masksToBounds = true
             }
             self.contentView.addSubview(testView)
             testView.snp.makeConstraints { make in

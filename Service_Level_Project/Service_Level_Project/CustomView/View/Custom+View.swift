@@ -51,7 +51,7 @@ class DimensionHeaderView: UIView {
         $0.textAlignment = .left
         $0.font = Font.title6_R12()
     }
-    let userTitleButton = ButtonCollection()
+    let userTitleButton = ButtonCollection(isEnable: false)
     
     // 하고 싶은 취미
     let hobby = UILabel().then {
@@ -104,7 +104,7 @@ class DimensionHeaderView: UIView {
         // 큰 틀 스택뷰
         addSubview(dimensionStackView)
         dimensionStackView.snp.makeConstraints {
-            $0.edges.equalTo(self)
+            $0.edges.equalTo(self.safeAreaLayoutGuide)
         }
         
         dimensionStackView.addArrangedSubview(userNickname)
