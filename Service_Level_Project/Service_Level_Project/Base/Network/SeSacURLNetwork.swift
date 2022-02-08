@@ -145,6 +145,52 @@ class SeSacURLNetwork {
             }
     }
     
+    // 3차 작업
+    static func callNetwork(url: URL, parameter: Parameters?, method: HTTPMethod, handler: @escaping (AFDataResponse<Data>) -> Void) {
+        let URL = url
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        let parameter: Parameters? = parameter
+        AF.request(URL, method: method, parameters: parameter, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData(completionHandler: handler)
+    }
+    
+    // 애는 두개로 나눠야 함
+    // 취미 친구 찾기 <-> 중단
+    static func friendsRequestOrStop(method: HTTPMethod) {
+        let URL = Point.mapRequestFriends.url
+//        let parameter = []
+        
+        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: method) { response in
+            switch response.result {
+            case .success:
+                print("성공", response.response?.statusCode)
+            case let .failure(error):
+                print("실패", error)
+            }
+        }
+        
+    }
+    // 취미 함께할 친구 검색
+    static func friendsWithMe() {
+        let URL = Point.mapFindFriends.url
+        // 현재 위치 잡기
+        let parameter = [
+            "region": 1274830692,
+            "lat": 37.482733667903865,
+            "long": 126.92983890550006
+        ]
+        SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
+            switch response.result {
+            case .success:
+                // SeSacSearchFreindsModel 통해서 데이터 뽑아오면 됨
+                print("성공", response.response?.statusCode)
+            case let .failure(error):
+                print("실패", error)
+            }
+        }
+    }
     
     
     private func checkError(_ errorCode: Int) -> String{

@@ -46,6 +46,13 @@ class MyPageViewController: BaseViewController {
         super.viewDidLoad()
         bind()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SeSacURLNetwork.shared.loginMember { model in
+        } failErrror: { error in
+        }
+
+    }
     
     func bind() {
         viewModel.updateUsetInfomation()

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A74EA053F09FC36BF7242FC9 /* Pods_Service_Level_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAEE8C186765E3FBF26E24FA /* Pods_Service_Level_Project.framework */; };
 		E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418161427ABA54100CB693A /* SeSacURLNetwork.swift */; };
 		E418161827ABA58500CB693A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E418161727ABA58500CB693A /* Alamofire */; };
 		E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */; };
@@ -18,6 +19,9 @@
 		E41ED02A279DD77B00A2F0CE /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = E41ED029279DD77B00A2F0CE /* Toast */; };
 		E41ED02C279DD8E400A2F0CE /* SeSacURLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */; };
 		E41ED02E279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED02D279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift */; };
+		E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */; };
+		E4335D7C27B2CAD400245879 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4335D7B27B2CAD400245879 /* MapViewModel.swift */; };
+		E4335D7F27B2DC9000245879 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4335D7E27B2DC9000245879 /* SnapKit */; };
 		E45256AC27AF069C00AF4130 /* Custom+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45256AB27AF069C00AF4130 /* Custom+View.swift */; };
 		E45256AE27AF175300AF4130 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45256AD27AF175300AF4130 /* MyPageTableViewCell.swift */; };
 		E45256B027AF1A2300AF4130 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45256AF27AF1A2300AF4130 /* MyPageViewModel.swift */; };
@@ -40,7 +44,7 @@
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
 		E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001527B0EF1100D8572C /* Custom+Alert.swift */; };
-		E4AF001927B1787D00D8572C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001827B1787D00D8572C /* DataModel.swift */; };
+		E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001827B1787D00D8572C /* CheckDataModel.swift */; };
 		E4AF001C27B1859400D8572C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */; };
 		E4AF001E27B23E0000D8572C /* BaseTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001D27B23E0000D8572C /* BaseTabBarViewController.swift */; };
 		E4AF002227B2723200D8572C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF002127B2723200D8572C /* MapViewController.swift */; };
@@ -56,7 +60,6 @@
 		E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */; };
 		E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */; };
 		E4C31EAC2796D42700ACE886 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EAB2796D42700ACE886 /* Then */; };
-		E4C31EAF2796D43300ACE886 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EAE2796D43300ACE886 /* SnapKit */; };
 		E4C31EB22796D44B00ACE886 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EB12796D44B00ACE886 /* RxCocoa */; };
 		E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4C31EB32796D44B00ACE886 /* RxSwift */; };
 		E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EB72796D60A00ACE886 /* Custom+InputText.swift */; };
@@ -67,12 +70,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28CD9C90B15321C9F6115728 /* Pods-Service_Level_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.release.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.release.xcconfig"; sourceTree = "<group>"; };
+		56D43E2BE139B0F66CB58993 /* Pods-Service_Level_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.debug.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.debug.xcconfig"; sourceTree = "<group>"; };
+		CAEE8C186765E3FBF26E24FA /* Pods_Service_Level_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Service_Level_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E418161427ABA54100CB693A /* SeSacURLNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacURLNetwork.swift; sourceTree = "<group>"; };
 		E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneViewController.swift; sourceTree = "<group>"; };
 		E41ED01A279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneMessageViewController.swift; sourceTree = "<group>"; };
 		E41ED01D279DBA5700A2F0CE /* AuthPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneViewModel.swift; sourceTree = "<group>"; };
 		E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacURLManager.swift; sourceTree = "<group>"; };
 		E41ED02D279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneMessageViewModel.swift; sourceTree = "<group>"; };
+		E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacSearchFreindsModel.swift; sourceTree = "<group>"; };
+		E4335D7B27B2CAD400245879 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		E45256AB27AF069C00AF4130 /* Custom+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+View.swift"; sourceTree = "<group>"; };
 		E45256AD27AF175300AF4130 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		E45256AF27AF1A2300AF4130 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
@@ -96,7 +104,7 @@
 		E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectRelease.entitlements; sourceTree = "<group>"; };
 		E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectDebug.entitlements; sourceTree = "<group>"; };
 		E4AF001527B0EF1100D8572C /* Custom+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+Alert.swift"; sourceTree = "<group>"; };
-		E4AF001827B1787D00D8572C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E4AF001827B1787D00D8572C /* CheckDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDataModel.swift; sourceTree = "<group>"; };
 		E4AF001D27B23E0000D8572C /* BaseTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarViewController.swift; sourceTree = "<group>"; };
 		E4AF002127B2723200D8572C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E4AF002327B2727400D8572C /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -132,15 +140,33 @@
 				E4C31EAC2796D42700ACE886 /* Then in Frameworks */,
 				E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */,
 				E41ED023279DD5F200A2F0CE /* FirebaseAnalytics in Frameworks */,
-				E4C31EAF2796D43300ACE886 /* SnapKit in Frameworks */,
 				E4AF001C27B1859400D8572C /* IQKeyboardManagerSwift in Frameworks */,
+				E4335D7F27B2DC9000245879 /* SnapKit in Frameworks */,
 				E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */,
+				A74EA053F09FC36BF7242FC9 /* Pods_Service_Level_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		93368FBEEACBD86DF8D90FD3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				56D43E2BE139B0F66CB58993 /* Pods-Service_Level_Project.debug.xcconfig */,
+				28CD9C90B15321C9F6115728 /* Pods-Service_Level_Project.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B0FF2160C033CF4B52B11369 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAEE8C186765E3FBF26E24FA /* Pods_Service_Level_Project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E418161327ABA50000CB693A /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,7 +339,7 @@
 		E4AF001727B1786F00D8572C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF001827B1787D00D8572C /* DataModel.swift */,
+				E4AF001827B1787D00D8572C /* CheckDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				E4AF002127B2723200D8572C /* MapViewController.swift */,
+				E4335D7B27B2CAD400245879 /* MapViewModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -338,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */,
+				E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */,
 			);
 			path = NetworkModel;
 			sourceTree = "<group>";
@@ -347,6 +375,8 @@
 			children = (
 				E4C31E8F27967B2800ACE886 /* Service_Level_Project */,
 				E4C31E8E27967B2800ACE886 /* Products */,
+				93368FBEEACBD86DF8D90FD3 /* Pods */,
+				B0FF2160C033CF4B52B11369 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -412,9 +442,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4C31EA127967B2900ACE886 /* Build configuration list for PBXNativeTarget "Service_Level_Project" */;
 			buildPhases = (
+				3D167F2CA28897020E6A1E38 /* [CP] Check Pods Manifest.lock */,
 				E4C31E8927967B2800ACE886 /* Sources */,
 				E4C31E8A27967B2800ACE886 /* Frameworks */,
 				E4C31E8B27967B2800ACE886 /* Resources */,
+				8FC53B07C79EF2A33A116F9F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -423,7 +455,6 @@
 			name = Service_Level_Project;
 			packageProductDependencies = (
 				E4C31EAB2796D42700ACE886 /* Then */,
-				E4C31EAE2796D43300ACE886 /* SnapKit */,
 				E4C31EB12796D44B00ACE886 /* RxCocoa */,
 				E4C31EB32796D44B00ACE886 /* RxSwift */,
 				E41ED022279DD5F200A2F0CE /* FirebaseAnalytics */,
@@ -433,6 +464,7 @@
 				E418161727ABA58500CB693A /* Alamofire */,
 				E461BFEE27AFFEFF00840173 /* MultiSlider */,
 				E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */,
+				E4335D7E27B2DC9000245879 /* SnapKit */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -464,13 +496,13 @@
 			mainGroup = E4C31E8427967B2800ACE886;
 			packageReferences = (
 				E4C31EAA2796D42700ACE886 /* XCRemoteSwiftPackageReference "Then" */,
-				E4C31EAD2796D43300ACE886 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E4C31EB02796D44B00ACE886 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				E41ED021279DD5F100A2F0CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				E4335D7D27B2DC9000245879 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -494,6 +526,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3D167F2CA28897020E6A1E38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Service_Level_Project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8FC53B07C79EF2A33A116F9F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E4C31E8927967B2800ACE886 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -505,7 +579,7 @@
 				E4AF002427B2727400D8572C /* ShopViewController.swift in Sources */,
 				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
-				E4AF001927B1787D00D8572C /* DataModel.swift in Sources */,
+				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
@@ -525,6 +599,7 @@
 				E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */,
 				E458E335279EFC07004C68AC /* CreateNicknameViewModel.swift in Sources */,
 				E459C3DB27AAB8010084FE0C /* ReusableName+Ptotocol.swift in Sources */,
+				E4335D7C27B2CAD400245879 /* MapViewModel.swift in Sources */,
 				E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */,
 				E41ED01B279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift in Sources */,
 				E458E33A279F0DF8004C68AC /* BirthdayViewModel.swift in Sources */,
@@ -536,6 +611,7 @@
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
+				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
 				E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */,
 				E458E333279EFBAF004C68AC /* CreateNicknameViewController.swift in Sources */,
@@ -677,6 +753,7 @@
 		};
 		E4C31EA227967B2900ACE886 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56D43E2BE139B0F66CB58993 /* Pods-Service_Level_Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -706,6 +783,7 @@
 		};
 		E4C31EA327967B2900ACE886 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28CD9C90B15321C9F6115728 /* Pods-Service_Level_Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -781,6 +859,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E4335D7D27B2DC9000245879 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonat/MultiSlider";
@@ -803,14 +889,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
-			};
-		};
-		E4C31EAD2796D43300ACE886 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
 			};
 		};
 		E4C31EB02796D44B00ACE886 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
@@ -849,6 +927,11 @@
 			package = E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
 		};
+		E4335D7E27B2DC9000245879 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4335D7D27B2DC9000245879 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		E461BFEE27AFFEFF00840173 /* MultiSlider */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */;
@@ -863,11 +946,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4C31EAA2796D42700ACE886 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
-		};
-		E4C31EAE2796D43300ACE886 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E4C31EAD2796D43300ACE886 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
 		};
 		E4C31EB12796D44B00ACE886 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
