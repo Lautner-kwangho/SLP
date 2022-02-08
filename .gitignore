@@ -7,12 +7,15 @@ APIKEY.swift
 Constants.swift
 # Folder
 Private_Folder/
+# Pods
 Pods/
+Podfile.lock
 # FireBase
 GoogleService-Info.plist
 *.plist
 # SeSac Data
 SeSacURLManager.swift
+
 
 # DS_Store
 .DS_Store
