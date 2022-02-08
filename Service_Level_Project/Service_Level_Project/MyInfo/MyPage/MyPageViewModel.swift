@@ -15,6 +15,8 @@ struct MyPageData {
     var title: String
 }
 
+typealias updateData = (Int, Int, Int, Bool, Bool, String)
+
 final class MyPageViewModel: BaseViewModel {
     
     //MARK: Input, Output
@@ -34,9 +36,18 @@ final class MyPageViewModel: BaseViewModel {
         MyPageData(title: "회원탈퇴")
     ]
     var userData = SeSacLoginModel()
+    var update: updateData?
+    
     static var maleSwitch = false
     static var femaleSwitch = false
     static var searchSwitch = false
+    
+    static var saveSearchable = BehaviorRelay<Int>(value: 0)
+    static var saveAgeMin = BehaviorRelay<Int>(value: 18)
+    static var saveAgeMax = BehaviorRelay<Int>(value: 65)
+    static var maleGender = BehaviorRelay<Bool>(value: false)
+    static var femaleGender = BehaviorRelay<Bool>(value: false)
+    static var hobby = BehaviorRelay<String>(value: "")
     
     var disposeBag = DisposeBag()
     
@@ -50,6 +61,23 @@ final class MyPageViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         return Output(userData: userData)
+    }
+    
+    func updateUsetInfomation() {
+        let search = MyPageViewModel.saveSearchable
+        let ageMin = MyPageViewModel.saveAgeMin
+        let ageMax = MyPageViewModel.saveAgeMax
+        let male = MyPageViewModel.maleGender
+        let female = MyPageViewModel.femaleGender
+        let hobby = MyPageViewModel.hobby
+        
+        Observable.combineLatest(search, ageMin, ageMax, male, female, hobby)
+            .asDriver(onErrorJustReturn: (0, 18, 65, false, false, "String"))
+            .drive(onNext: { search, min, max, girl, men, hobby in
+                self.update = (search, min, max, girl, men, hobby)
+            })
+            .disposed(by: disposeBag)
+
     }
     
 }

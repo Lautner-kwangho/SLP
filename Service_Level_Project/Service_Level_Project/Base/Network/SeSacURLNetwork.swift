@@ -118,6 +118,34 @@ class SeSacURLNetwork {
             }
         }
     }
+    // 2차 작업
+    func updateMypage(search: Int, ageMin: Int, ageMax: Int, gender: Int, hobby: String) {
+        let URL = Point.updateMypage.url
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        
+        let parameter: Parameters = [
+            "searchable" : search,
+            "ageMin" : ageMin,
+            "ageMax" : ageMax,
+            "gender" : gender,
+            "hobby" : hobby
+        ]
+        
+        AF.request(URL, method: .post, parameters: parameter, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200)
+            .responseData { response in
+                switch response.result {
+                case .success:
+                    print("성공",response.response?.statusCode)
+                case let .failure(error):
+                    print("실패", error)
+                }
+            }
+    }
+    
+    
     
     private func checkError(_ errorCode: Int) -> String{
         switch errorCode {

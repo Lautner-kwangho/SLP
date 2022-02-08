@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
             window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
         } else {
             SeSacURLNetwork.shared.loginMember { data in
-                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
+                windowScene.windows.first?.rootViewController = BaseTabBarViewController()//MyInfoViewController
             } failErrror: { error in
                 windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
             }

@@ -42,6 +42,9 @@
 		E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001527B0EF1100D8572C /* Custom+Alert.swift */; };
 		E4AF001927B1787D00D8572C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001827B1787D00D8572C /* DataModel.swift */; };
 		E4AF001C27B1859400D8572C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */; };
+		E4AF001E27B23E0000D8572C /* BaseTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001D27B23E0000D8572C /* BaseTabBarViewController.swift */; };
+		E4AF002227B2723200D8572C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF002127B2723200D8572C /* MapViewController.swift */; };
+		E4AF002427B2727400D8572C /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF002327B2727400D8572C /* ShopViewController.swift */; };
 		E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */; };
 		E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */; };
 		E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986B227AEEDBA007C824B /* Button+Collection+(3x2).swift */; };
@@ -94,6 +97,9 @@
 		E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectDebug.entitlements; sourceTree = "<group>"; };
 		E4AF001527B0EF1100D8572C /* Custom+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+Alert.swift"; sourceTree = "<group>"; };
 		E4AF001827B1787D00D8572C /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E4AF001D27B23E0000D8572C /* BaseTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarViewController.swift; sourceTree = "<group>"; };
+		E4AF002127B2723200D8572C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E4AF002327B2727400D8572C /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacLoginModel.swift; sourceTree = "<group>"; };
 		E4B986AF27AC6811007C824B /* MyInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoHeaderView.swift; sourceTree = "<group>"; };
 		E4B986B227AEEDBA007C824B /* Button+Collection+(3x2).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Collection+(3x2).swift"; sourceTree = "<group>"; };
@@ -264,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				E4C31EA82796CD8D00ACE886 /* BaseViewController.swift */,
+				E4AF001D27B23E0000D8572C /* BaseTabBarViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -311,6 +318,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E4AF001F27B2720200D8572C /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF002127B2723200D8572C /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		E4AF002027B2721D00D8572C /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF002327B2727400D8572C /* ShopViewController.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		E4B986AC27AC326B007C824B /* NetworkModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +366,8 @@
 				E4C31E9427967B2800ACE886 /* ViewController.swift */,
 				E41ED01C279DB7A000A2F0CE /* Auth */,
 				E4ABC3C3279FD3B000CE3A99 /* MyInfo */,
+				E4AF001F27B2720200D8572C /* Map */,
+				E4AF002027B2721D00D8572C /* Shop */,
 				E4C31EB62796D5CE00ACE886 /* CustomView */,
 				E4C31EB52796D59700ACE886 /* Base */,
 				E4C31E9927967B2900ACE886 /* Assets.xcassets */,
@@ -477,6 +502,7 @@
 				E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */,
 				E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */,
 				E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */,
+				E4AF002427B2727400D8572C /* ShopViewController.swift in Sources */,
 				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4AF001927B1787D00D8572C /* DataModel.swift in Sources */,
@@ -487,6 +513,7 @@
 				E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
+				E4AF002227B2723200D8572C /* MapViewController.swift in Sources */,
 				E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */,
 				E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */,
 				E459C3D127AA9E870084FE0C /* MyInfoViewController.swift in Sources */,
@@ -503,6 +530,7 @@
 				E458E33A279F0DF8004C68AC /* BirthdayViewModel.swift in Sources */,
 				E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */,
 				E45256AE27AF175300AF4130 /* MyPageTableViewCell.swift in Sources */,
+				E4AF001E27B23E0000D8572C /* BaseTabBarViewController.swift in Sources */,
 				E41ED02C279DD8E400A2F0CE /* SeSacURLManager.swift in Sources */,
 				E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */,
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,

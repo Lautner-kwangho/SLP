@@ -48,10 +48,10 @@ class MyPageViewController: BaseViewController {
     }
     
     func bind() {
+        viewModel.updateUsetInfomation()
         headerView.userNickname.text = output.userData.nick
         headerView.hobby.isHidden = true
         headerView.hobbyStackView.isHidden = true
-        
     }
     
     override func configure() {
@@ -60,6 +60,35 @@ class MyPageViewController: BaseViewController {
         userTableView.delegate = self
         userTableView.dataSource = self
         userTableView.rowHeight = UITableView.automaticDimension
+        
+        title = "정보 관리"
+        self.navigationController?.navigationBar.tintColor = .black
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(clickedSaveButton))
+        self.navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    @objc func clickedSaveButton() {
+        // 이건 아닌거 같은데...
+        switch viewModel.update {
+        case let .some((search, min, max, male, female, hobby)):
+            if male && female {
+                let alertPage = SeSacAlert("성별 오류", "성별이 올바르지 않습니다") {
+                    self.dismiss(animated: true)
+                }
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
+            } else if male {
+                SeSacURLNetwork.shared.updateMypage(search: search, ageMin: min, ageMax: max, gender: 0, hobby: hobby)
+                self.navigationController?.popViewController(animated: true)
+            } else if female {
+                SeSacURLNetwork.shared.updateMypage(search: search, ageMin: min, ageMax: max, gender: 1, hobby: hobby)
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                SeSacURLNetwork.shared.updateMypage(search: search, ageMin: min, ageMax: max, gender: -1, hobby: hobby)
+                self.navigationController?.popViewController(animated: true)
+            }
+        default: break
+        }
     }
     
     override func setConstraints() {
@@ -75,7 +104,7 @@ class MyPageViewController: BaseViewController {
         pageScrollView.addSubview(userTableView)
         
         userBackgroudImage.snp.makeConstraints {
-            $0.top.equalTo(pageScrollView)
+            $0.top.equalTo(pageScrollView).inset(16)
             $0.leading.trailing.equalTo(pageScrollView)
             $0.centerX.equalTo(pageScrollView)
         }
@@ -117,10 +146,12 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         let gender = CheckDataModel.gender(output.userData.gender).genderSwitch
         if gender == "남자" {
             MyPageViewModel.maleSwitch = true
+            MyPageViewModel.maleGender.accept(true)
             cell.maleButton.customLayout(.fill)
         } else if gender == "여자" {
             MyPageViewModel.femaleSwitch = true
-            cell.femaleButton.customLayout(.inactive)
+            MyPageViewModel.femaleGender.accept(true)
+            cell.femaleButton.customLayout(.fill)
         }
         
         let hobby = output.userData.hobby.count > 0 ? output.userData.hobby : nil
@@ -134,7 +165,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.slider.value = [CGFloat(output.userData.ageMin), CGFloat(output.userData.ageMax)]
         cell.startAge.accept(output.userData.ageMin)
         cell.lastAge.accept(output.userData.ageMax)
-        
         
         cell.cellConfigure(indexPath)
         

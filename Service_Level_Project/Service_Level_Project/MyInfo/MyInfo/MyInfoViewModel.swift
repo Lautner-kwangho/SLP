@@ -35,7 +35,6 @@ final class MyInfoViewModel: BaseViewModel {
         MyInfoData(image: "permit", title: "이용약관")
     ]
     
-    let title = "내정보"
     let tableCellHeight = 75.0
     var userName = "김새싹"
     

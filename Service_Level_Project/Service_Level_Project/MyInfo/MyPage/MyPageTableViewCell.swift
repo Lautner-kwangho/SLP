@@ -11,9 +11,13 @@ import RxRelay
 import MultiSlider
 
 class MyPageTableViewCell: UITableViewCell {
+    
     var startAge = BehaviorRelay(value: 18)
     var lastAge = BehaviorRelay(value: 65)
-    var disposeBag = DisposeBag()
+    
+    private let viewModel = MyPageViewModel()
+    private let disposeBag = DisposeBag()
+    
     
     let maleButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
         $0.setTitle("남자", for: .normal)
@@ -68,6 +72,7 @@ class MyPageTableViewCell: UITableViewCell {
                 .asDriver()
                 .drive(onNext: { status in
                     MyPageViewModel.maleSwitch = !MyPageViewModel.maleSwitch
+                    MyPageViewModel.maleGender.accept(MyPageViewModel.maleSwitch)
                     if MyPageViewModel.maleSwitch {
                         self.maleButton.customLayout(.fill)
                     } else {
@@ -80,6 +85,7 @@ class MyPageTableViewCell: UITableViewCell {
                 .asDriver()
                 .drive(onNext: { status in
                     MyPageViewModel.femaleSwitch = !MyPageViewModel.femaleSwitch
+                    MyPageViewModel.femaleGender.accept(MyPageViewModel.femaleSwitch)
                     if MyPageViewModel.femaleSwitch {
                         self.femaleButton.customLayout(.fill)
                     } else {
@@ -101,6 +107,12 @@ class MyPageTableViewCell: UITableViewCell {
             }
         } else if indexPath.row == 1 {
             self.contentView.addSubview(self.hobbyTextField)
+            self.hobbyTextField.textField.rx.text
+                .asDriver().drive(onNext: { text in
+                    guard let text = text else {return}
+                    MyPageViewModel.hobby.accept(text)
+                })
+                .disposed(by: disposeBag)
             self.hobbyTextField.snp.makeConstraints { make in
                 make.top.bottom.equalTo(self.contentView).inset(13)
                 make.width.equalTo(self.frame.size.width / 2)
@@ -116,6 +128,8 @@ class MyPageTableViewCell: UITableViewCell {
                 .drive(onNext: { _ in
                     MyPageViewModel.searchSwitch = !MyPageViewModel.searchSwitch
                     self.searchSwitch.isOn = MyPageViewModel.searchSwitch
+                    let search = MyPageViewModel.searchSwitch ? 1 : 0
+                    MyPageViewModel.saveSearchable.accept(search)
                 })
                 .disposed(by: disposeBag)
             
@@ -160,6 +174,8 @@ class MyPageTableViewCell: UITableViewCell {
                 .asDriver(onErrorJustReturn: (0, 60))
                 .drive(onNext: { start, last in
                     self.ageLevel.text = "\(start) - \(last)"
+                    MyPageViewModel.saveAgeMin.accept(start)
+                    MyPageViewModel.saveAgeMax.accept(last)
                 })
                 .disposed(by: disposeBag)
         }

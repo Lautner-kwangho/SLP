@@ -52,7 +52,6 @@ class MyInfoViewController: BaseViewController {
     
     override func configure() {
         view.backgroundColor = SacColor.color(.white)
-        title = viewModel.title
     }
 }
 
