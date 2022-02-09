@@ -53,12 +53,39 @@ final class MapViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mapAuthorizationStatus()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.stopUpdatingLocation()
+    }
+    
     override func configure() {
         view.backgroundColor = .blue
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-
+    }
+    
+    func mapAuthorizationStatus() {
+        let status = locationManager.authorizationStatus as! CLAuthorizationStatus
+        if status.rawValue == 2 {
+            locationManager.requestWhenInUseAuthorization()
+            let alertPage = SeSacAlert("위치 권한 오류", "권한 미허용 시\n기타 서비스 및 새싹 친구 찾기를 진행하실 수 없습니다.") {
+                self.dismiss(animated: true)
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+            }
+            alertPage.cancelButton.isHidden = true
+            alertPage.modalPresentationStyle = .overFullScreen
+            self.present(alertPage, animated: true, completion: nil)
+        } else if status.rawValue == 4 {
+            // 허용이라 패스
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     override func setConstraints() {
@@ -95,7 +122,17 @@ final class MapViewController: BaseViewController {
 
 
 extension MapViewController: CLLocationManagerDelegate {
-    // iOS 15 기준으로 하고 나중에 시간되면 분기 처리
+    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        print("Map: ",#function)
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Map: ",#function)
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Map: ",#function)
+    }
+    
+    // iOS 15 기준으로 하고 나중에 시간되면 분기 처리(얼럿 뜰 때 나옴)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkUserLocationServiceAuthorization()
     }
@@ -107,15 +144,11 @@ extension MapViewController: CLLocationManagerDelegate {
         
         let authorizationStatus: CLAuthorizationStatus
         authorizationStatus = locationManager.authorizationStatus
-        
         checkMyPlace(authorizationStatus)
-        print("여기는 언제 나오는 거냐;")
+        
         if CLLocationManager.locationServicesEnabled() {
-            print("위치 서비스 on 상태")
             locationManager.startUpdatingLocation()
-            print("위치 서비스 : ", locationManager.location?.coordinate)
         } else {
-            print("위치 서비스 off 상태")
             let alertPage = SeSacAlert("위치 권한 오류", "권한 미허용 시 기타 서비스 및 새싹 친구 찾기를 진행하실 수 없습니다.") {
                 self.dismiss(animated: true)
             }
@@ -128,21 +161,14 @@ extension MapViewController: CLLocationManagerDelegate {
     // 요청 Alert확인 시 액션
     func checkMyPlace(_ authorizationStatus: CLAuthorizationStatus) {
         switch authorizationStatus {
-        case .notDetermined:
+        case .authorizedAlways, .authorizedWhenInUse :
             locationManager.startUpdatingLocation()
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            print("접근 ㄴㄴ 사람들")
         case .denied:
-            print("거부되어 있음")
-        case .authorizedAlways:
-            locationManager.startUpdatingLocation()
-        case .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
-        case .authorized:
-            print("default")
+            locationManager.requestWhenInUseAuthorization()
+        case .notDetermined, .restricted :
+            locationManager.requestWhenInUseAuthorization()
         @unknown default:
-            print("default")
+            print("Map: unknown default")
         }
     }
 }

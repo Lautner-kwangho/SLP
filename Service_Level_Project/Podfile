@@ -8,4 +8,10 @@ target 'Service_Level_Project' do
   # Pods for Service_Level_Project
   pod 'NMapsMap', '~> 3.14.0'
 
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings['VALID_ARCHS'] = 'arm64, arm64e, x86_64'
+  end
+end
+
 end

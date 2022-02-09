@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A74EA053F09FC36BF7242FC9 /* Pods_Service_Level_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAEE8C186765E3FBF26E24FA /* Pods_Service_Level_Project.framework */; };
 		E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418161427ABA54100CB693A /* SeSacURLNetwork.swift */; };
 		E418161827ABA58500CB693A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E418161727ABA58500CB693A /* Alamofire */; };
 		E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */; };
@@ -21,7 +20,6 @@
 		E41ED02E279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED02D279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift */; };
 		E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */; };
 		E4335D7C27B2CAD400245879 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4335D7B27B2CAD400245879 /* MapViewModel.swift */; };
-		E4335D7F27B2DC9000245879 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4335D7E27B2DC9000245879 /* SnapKit */; };
 		E45256AC27AF069C00AF4130 /* Custom+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45256AB27AF069C00AF4130 /* Custom+View.swift */; };
 		E45256AE27AF175300AF4130 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45256AD27AF175300AF4130 /* MyPageTableViewCell.swift */; };
 		E45256B027AF1A2300AF4130 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45256AF27AF1A2300AF4130 /* MyPageViewModel.swift */; };
@@ -67,12 +65,12 @@
 		E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */; };
 		E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */; };
 		E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */; };
+		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		28CD9C90B15321C9F6115728 /* Pods-Service_Level_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.release.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.release.xcconfig"; sourceTree = "<group>"; };
 		56D43E2BE139B0F66CB58993 /* Pods-Service_Level_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.debug.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.debug.xcconfig"; sourceTree = "<group>"; };
-		CAEE8C186765E3FBF26E24FA /* Pods_Service_Level_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Service_Level_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E418161427ABA54100CB693A /* SeSacURLNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacURLNetwork.swift; sourceTree = "<group>"; };
 		E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneViewController.swift; sourceTree = "<group>"; };
 		E41ED01A279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneMessageViewController.swift; sourceTree = "<group>"; };
@@ -141,9 +139,8 @@
 				E4C31EB42796D44B00ACE886 /* RxSwift in Frameworks */,
 				E41ED023279DD5F200A2F0CE /* FirebaseAnalytics in Frameworks */,
 				E4AF001C27B1859400D8572C /* IQKeyboardManagerSwift in Frameworks */,
-				E4335D7F27B2DC9000245879 /* SnapKit in Frameworks */,
+				E4F2135A27B30655004FE47D /* SnapKit in Frameworks */,
 				E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */,
-				A74EA053F09FC36BF7242FC9 /* Pods_Service_Level_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +159,6 @@
 		B0FF2160C033CF4B52B11369 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CAEE8C186765E3FBF26E24FA /* Pods_Service_Level_Project.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -464,7 +460,7 @@
 				E418161727ABA58500CB693A /* Alamofire */,
 				E461BFEE27AFFEFF00840173 /* MultiSlider */,
 				E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */,
-				E4335D7E27B2DC9000245879 /* SnapKit */,
+				E4F2135927B30655004FE47D /* SnapKit */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -502,7 +498,7 @@
 				E418161627ABA58400CB693A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				E4335D7D27B2DC9000245879 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E4F2135827B30655004FE47D /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -672,6 +668,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -693,6 +690,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -733,6 +731,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -747,7 +746,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -777,7 +776,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -807,7 +806,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -859,14 +858,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		E4335D7D27B2DC9000245879 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonat/MultiSlider";
@@ -899,6 +890,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		E4F2135827B30655004FE47D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -927,11 +926,6 @@
 			package = E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
 		};
-		E4335D7E27B2DC9000245879 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E4335D7D27B2DC9000245879 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
 		E461BFEE27AFFEFF00840173 /* MultiSlider */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */;
@@ -956,6 +950,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4C31EB02796D44B00ACE886 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		E4F2135927B30655004FE47D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4F2135827B30655004FE47D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
