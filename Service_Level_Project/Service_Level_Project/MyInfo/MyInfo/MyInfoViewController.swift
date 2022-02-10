@@ -38,8 +38,6 @@ class MyInfoViewController: BaseViewController {
         
         myInfoTableView.rowHeight = viewModel.tableCellHeight
         myInfoTableView.delegate = self
-        
-        print("내 id 토큰 :",UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken))
     }
 
     override func setConstraints() {

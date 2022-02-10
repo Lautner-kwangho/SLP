@@ -51,7 +51,12 @@ class MyPageViewController: BaseViewController {
         SeSacURLNetwork.shared.loginMember { model in
         } failErrror: { error in
         }
-
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     func bind() {
@@ -101,8 +106,9 @@ class MyPageViewController: BaseViewController {
     override func setConstraints() {
         view.addSubview(pageScrollView)
         pageScrollView.snp.makeConstraints {
-            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.bottom.equalTo(view).inset(20)
         }
         
         pageScrollView.addSubview(userBackgroudImage)

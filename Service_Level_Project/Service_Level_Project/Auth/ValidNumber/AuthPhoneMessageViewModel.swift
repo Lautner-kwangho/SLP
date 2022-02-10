@@ -128,8 +128,6 @@ class AuthPhoneMessageViewModel {
                             // 내가 이상하게 생각하고 있는지 모르겠는데 guard let 써서 내려가면 에러 없는 경우에 내려가야 정상일텐데 이건 nil로 들어가서 바로 중지네;
 //                            guard let error = error else {
 //                                let authError = error as! NSError
-//                                return print("에러난거네 :",authError.debugDescription)
-//                            }
                             guard let idToken = idToken else { return }
                             UserDefaults.standard.set(idToken, forKey: UserDefaultsManager.authIdToken)
                         }

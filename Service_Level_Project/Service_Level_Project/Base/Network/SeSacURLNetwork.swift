@@ -172,20 +172,23 @@ class SeSacURLNetwork {
         }
         
     }
-    // 취미 함께할 친구 검색
-    static func friendsWithMe() {
+    // 취미 함께할 친구 검색 (메인 맵 페이지)
+    static func friendsWithMe(region: Int, latitude: Double, longitude: Double) {
         let URL = Point.mapFindFriends.url
         // 현재 위치 잡기
         let parameter = [
-            "region": 1274830692,
-            "lat": 37.482733667903865,
-            "long": 126.92983890550006
+            "region": "\(region)",
+            "lat": "\(latitude)",
+            "long": "\(longitude)"
         ]
         SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
             switch response.result {
-            case .success:
-                // SeSacSearchFreindsModel 통해서 데이터 뽑아오면 됨
-                print("성공", response.response?.statusCode)
+            case .success(let success):
+                guard let data = response.value else { return }
+                let decoder = JSONDecoder()
+                let json = try? decoder.decode(SeSacSearchFreindsModel.self, from: data)
+                guard let json = json else {return}
+                MapViewModel.myData.accept(json)
             case let .failure(error):
                 print("실패", error)
             }

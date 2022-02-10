@@ -115,7 +115,7 @@ class ButtonConfiguration: UIButton {
         case .inactive:
             self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.black), for: .normal)
-            self.backgroundColor = .clear
+            self.backgroundColor = SacColor.color(.white)
             self.layer.borderWidth = 1
             self.layer.borderColor = SacColor.color(.gray4).cgColor
         case .fill:
@@ -126,7 +126,7 @@ class ButtonConfiguration: UIButton {
         case .outline:
             self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.green), for: .normal)
-            self.backgroundColor = .clear
+            self.backgroundColor = SacColor.color(.white)
             self.layer.borderWidth = 1
             self.layer.borderColor = SacColor.color(.green).cgColor
         case .cancel:

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B92D27B4334600831D50 /* MapViewController+Function.swift */; };
+		E415B93027B5396600831D50 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B92F27B5396600831D50 /* Image+Extension.swift */; };
+		E415B93327B56BDB00831D50 /* HobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B93227B56BDB00831D50 /* HobbyViewController.swift */; };
+		E415B93527B56D1A00831D50 /* HobbyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B93427B56D1A00831D50 /* HobbyViewModel.swift */; };
+		E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B93627B57C5E00831D50 /* HobbyCollectionCell.swift */; };
+		E415B93927B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B93827B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift */; };
 		E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E418161427ABA54100CB693A /* SeSacURLNetwork.swift */; };
 		E418161827ABA58500CB693A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E418161727ABA58500CB693A /* Alamofire */; };
 		E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */; };
@@ -71,6 +77,12 @@
 /* Begin PBXFileReference section */
 		28CD9C90B15321C9F6115728 /* Pods-Service_Level_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.release.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.release.xcconfig"; sourceTree = "<group>"; };
 		56D43E2BE139B0F66CB58993 /* Pods-Service_Level_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.debug.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.debug.xcconfig"; sourceTree = "<group>"; };
+		E415B92D27B4334600831D50 /* MapViewController+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+Function.swift"; sourceTree = "<group>"; };
+		E415B92F27B5396600831D50 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
+		E415B93227B56BDB00831D50 /* HobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewController.swift; sourceTree = "<group>"; };
+		E415B93427B56D1A00831D50 /* HobbyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewModel.swift; sourceTree = "<group>"; };
+		E415B93627B57C5E00831D50 /* HobbyCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionCell.swift; sourceTree = "<group>"; };
+		E415B93827B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeftAlignFlowLayout.swift; sourceTree = "<group>"; };
 		E418161427ABA54100CB693A /* SeSacURLNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacURLNetwork.swift; sourceTree = "<group>"; };
 		E41ED018279DA56600A2F0CE /* AuthPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneViewController.swift; sourceTree = "<group>"; };
 		E41ED01A279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPhoneMessageViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +173,17 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E415B93127B56B0300831D50 /* Hobby */ = {
+			isa = PBXGroup;
+			children = (
+				E415B93227B56BDB00831D50 /* HobbyViewController.swift */,
+				E415B93427B56D1A00831D50 /* HobbyViewModel.swift */,
+				E415B93627B57C5E00831D50 /* HobbyCollectionCell.swift */,
+				E415B93827B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift */,
+			);
+			path = Hobby;
 			sourceTree = "<group>";
 		};
 		E418161327ABA50000CB693A /* Network */ = {
@@ -311,6 +334,7 @@
 			children = (
 				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
 				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
+				E415B92F27B5396600831D50 /* Image+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -345,6 +369,8 @@
 			children = (
 				E4AF002127B2723200D8572C /* MapViewController.swift */,
 				E4335D7B27B2CAD400245879 /* MapViewModel.swift */,
+				E415B92D27B4334600831D50 /* MapViewController+Function.swift */,
+				E415B93127B56B0300831D50 /* Hobby */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -577,8 +603,10 @@
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
+				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
+				E415B93927B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
 				E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
@@ -590,6 +618,7 @@
 				E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */,
 				E45256B027AF1A2300AF4130 /* MyPageViewModel.swift in Sources */,
 				E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */,
+				E415B93527B56D1A00831D50 /* HobbyViewModel.swift in Sources */,
 				E459C3D927AAB77D0084FE0C /* MyInfoCell.swift in Sources */,
 				E41ED02E279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift in Sources */,
 				E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */,
@@ -599,6 +628,7 @@
 				E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */,
 				E41ED01B279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift in Sources */,
 				E458E33A279F0DF8004C68AC /* BirthdayViewModel.swift in Sources */,
+				E415B93027B5396600831D50 /* Image+Extension.swift in Sources */,
 				E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */,
 				E45256AE27AF175300AF4130 /* MyPageTableViewCell.swift in Sources */,
 				E4AF001E27B23E0000D8572C /* BaseTabBarViewController.swift in Sources */,
@@ -606,7 +636,9 @@
 				E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */,
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
+				E415B93327B56BDB00831D50 /* HobbyViewController.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
+				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
 				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
 				E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */,

@@ -8,11 +8,16 @@
 import UIKit
 import CoreLocation
 import NMapsMap
+import RxSwift
 
 final class MapViewController: BaseViewController {
     
     let mapView = NMFMapView(frame: .zero).then {
         $0.positionMode = .direction
+    }
+    let mapMiddleMarker = UIImageView().then {
+        $0.image = UIImage(named: "map_marker")
+        $0.isHidden = true
     }
     
     let genderStackView = UIStackView().then {
@@ -47,10 +52,19 @@ final class MapViewController: BaseViewController {
         $0.setImage(UIImage(named: "friendsSearch"), for: .normal)
     }
     
+    private lazy var input = MapViewModel.Input(mapView: mapView)
+    lazy var output = viewModel.transform(input: input)
+    
+    let viewModel = MapViewModel()
+    private let disposeBag = DisposeBag()
+    
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
+        
+        print("내 id 토큰 :",UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,26 +77,96 @@ final class MapViewController: BaseViewController {
         locationManager.stopUpdatingLocation()
     }
     
-    override func configure() {
-        view.backgroundColor = .blue
+    func bind() {
+        allSelectButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.allSelectButton.customLayout(.fill)
+                self.maleSelectButton.customLayout(.inactive)
+                self.femaleSelectButton.customLayout(.inactive)
+                self.viewModel.genderFilterNumber = 2
+                self.viewModel.insertMarkerFriendsInMap(map: self.mapView)
+            })
+            .disposed(by: disposeBag)
         
+        maleSelectButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.allSelectButton.customLayout(.inactive)
+                self.maleSelectButton.customLayout(.fill)
+                self.femaleSelectButton.customLayout(.inactive)
+                self.viewModel.genderFilterNumber = 0
+                self.viewModel.insertMarkerFriendsInMap(map: self.mapView)
+            })
+            .disposed(by: disposeBag)
+        
+        femaleSelectButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.allSelectButton.customLayout(.inactive)
+                self.maleSelectButton.customLayout(.inactive)
+                self.femaleSelectButton.customLayout(.fill)
+                self.viewModel.genderFilterNumber = 1
+                self.viewModel.insertMarkerFriendsInMap(map: self.mapView)
+            })
+            .disposed(by: disposeBag)
+        
+        myPlaceButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.mapMiddleMarker.isHidden = true
+                self.viewModel.currentCameraMoveToUser(map: self.mapView)
+                self.viewModel.makeCircleInMap(overlay: self.mapView.locationOverlay)
+            })
+            .disposed(by: disposeBag)
+        
+        matchButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.navigationController?.pushViewController(HobbyViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        output.placeData.asDriver()
+            .drive(onNext: { [weak self] model in
+                guard let self = self else { return }
+                print("DB", model.fromQueueDB)
+//                print("DBResquest", model.fromQueueDBRequested)
+//                print("Recommend", model.fromRecommend)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.insertMarkerFriendsInMap(map: self.mapView)
+    }
+    
+    override func configure() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        
+        mapView.addCameraDelegate(delegate: self)
     }
     
     func mapAuthorizationStatus() {
         let status = locationManager.authorizationStatus as! CLAuthorizationStatus
         if status.rawValue == 2 {
             locationManager.requestWhenInUseAuthorization()
-            let alertPage = SeSacAlert("위치 권한 오류", "권한 미허용 시\n기타 서비스 및 새싹 친구 찾기를 진행하실 수 없습니다.") {
+            let alertPage = SeSacAlert("위치 권한 오류", "권한 미허용 시\n기타 서비스 및 새싹 친구 찾기를 진행하실 수 없습니다. 이동하시겠습니까?") {
                 self.dismiss(animated: true)
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
             }
-            alertPage.cancelButton.isHidden = true
             alertPage.modalPresentationStyle = .overFullScreen
             self.present(alertPage, animated: true, completion: nil)
+            viewModel.currentCameraMoveToUser(map: mapView)
+            viewModel.makeMarkerUserInMap(map: mapView)
         } else if status.rawValue == 4 {
             // 허용이라 패스
+            viewModel.currentCameraMoveToUser(map: mapView)
+            viewModel.makeMarkerUserInMap(map: mapView)
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
@@ -90,6 +174,7 @@ final class MapViewController: BaseViewController {
     
     override func setConstraints() {
         view.addSubview(mapView)
+        view.addSubview(mapMiddleMarker)
         view.addSubview(genderStackView)
         genderStackView.addArrangedSubview(allSelectButton)
         genderStackView.addArrangedSubview(maleSelectButton)
@@ -100,6 +185,10 @@ final class MapViewController: BaseViewController {
         mapView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        mapMiddleMarker.snp.makeConstraints { make in
+            make.center.equalTo(mapView)
         }
         
         genderStackView.snp.makeConstraints { make in
