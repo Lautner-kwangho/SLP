@@ -45,6 +45,9 @@
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
 		E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */; };
+		E49CE6FA27B645B5005F65AB /* HobbyCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CE6F927B645B5005F65AB /* HobbyCollectionViewHeader.swift */; };
+		E49CE6FD27B67782005F65AB /* HobbyViewController+Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CE6FC27B67782005F65AB /* HobbyViewController+Collection+Extension.swift */; };
+		E49CE70127B67B69005F65AB /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = E49CE70027B67B69005F65AB /* RxKeyboard */; };
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
 		E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001527B0EF1100D8572C /* Custom+Alert.swift */; };
@@ -109,6 +112,8 @@
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
+		E49CE6F927B645B5005F65AB /* HobbyCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewHeader.swift; sourceTree = "<group>"; };
+		E49CE6FC27B67782005F65AB /* HobbyViewController+Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HobbyViewController+Collection+Extension.swift"; sourceTree = "<group>"; };
 		E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectRelease.entitlements; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E418161827ABA58500CB693A /* Alamofire in Frameworks */,
+				E49CE70127B67B69005F65AB /* RxKeyboard in Frameworks */,
 				E41ED02A279DD77B00A2F0CE /* Toast in Frameworks */,
 				E4C31EB22796D44B00ACE886 /* RxCocoa in Frameworks */,
 				E41ED025279DD5F200A2F0CE /* FirebaseAuth in Frameworks */,
@@ -180,8 +186,8 @@
 			children = (
 				E415B93227B56BDB00831D50 /* HobbyViewController.swift */,
 				E415B93427B56D1A00831D50 /* HobbyViewModel.swift */,
-				E415B93627B57C5E00831D50 /* HobbyCollectionCell.swift */,
-				E415B93827B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift */,
+				E49CE6FE27B677B4005F65AB /* Collection */,
+				E49CE6FB27B6776A005F65AB /* Extension */,
 			);
 			path = Hobby;
 			sourceTree = "<group>";
@@ -339,6 +345,24 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E49CE6FB27B6776A005F65AB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E49CE6FC27B67782005F65AB /* HobbyViewController+Collection+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E49CE6FE27B677B4005F65AB /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				E415B93827B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift */,
+				E415B93627B57C5E00831D50 /* HobbyCollectionCell.swift */,
+				E49CE6F927B645B5005F65AB /* HobbyCollectionViewHeader.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		E4ABC3C3279FD3B000CE3A99 /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +511,7 @@
 				E461BFEE27AFFEFF00840173 /* MultiSlider */,
 				E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */,
 				E4F2135927B30655004FE47D /* SnapKit */,
+				E49CE70027B67B69005F65AB /* RxKeyboard */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -525,6 +550,7 @@
 				E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				E4F2135827B30655004FE47D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E49CE6FF27B67B69005F65AB /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -612,6 +638,7 @@
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
 				E4AF002227B2723200D8572C /* MapViewController.swift in Sources */,
+				E49CE6FD27B67782005F65AB /* HobbyViewController+Collection+Extension.swift in Sources */,
 				E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */,
 				E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */,
 				E459C3D127AA9E870084FE0C /* MyInfoViewController.swift in Sources */,
@@ -641,6 +668,7 @@
 				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
 				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
+				E49CE6FA27B645B5005F65AB /* HobbyCollectionViewHeader.swift in Sources */,
 				E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */,
 				E458E333279EFBAF004C68AC /* CreateNicknameViewController.swift in Sources */,
 				E45256AC27AF069C00AF4130 /* Custom+View.swift in Sources */,
@@ -898,6 +926,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E49CE6FF27B67B69005F65AB /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -962,6 +998,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */;
 			productName = MultiSlider;
+		};
+		E49CE70027B67B69005F65AB /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E49CE6FF27B67B69005F65AB /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 		E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
