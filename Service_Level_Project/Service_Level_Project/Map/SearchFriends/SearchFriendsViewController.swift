@@ -13,7 +13,7 @@ class SearchFriendsViewController: TabmanViewController {
     
     private var viewController = [AroundSeSacViewController(), RequestSeSacViewController()]
     
-    lazy var backButton = UIBarButtonItem(image: UIImage(systemName: "arrow"), style: .plain, target: self, action: #selector(backButtonClicked))
+    lazy var backButton = UIBarButtonItem(image: UIImage(named: "arrow"), style: .plain, target: self, action: #selector(backButtonClicked))
     
     lazy var stopButton = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopButtonClicked))
     
@@ -27,6 +27,7 @@ class SearchFriendsViewController: TabmanViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     private func navigationSetting() {
@@ -59,11 +60,32 @@ class SearchFriendsViewController: TabmanViewController {
     }
     
     @objc private func backButtonClicked(_ sender: Any) {
-        print("중단 안하고 맵으로 돌아와서 ")
+        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func stopButtonClicked(_ sender: Any) {
-        print("중단 큐 주고 난 뒤에 맵으로 돌아가야함")
+        SeSacURLNetwork.shared.friendsRequestStop {
+            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(1), forKey: UserDefaultsManager.mapButton)
+            DispatchQueue.main.async {
+                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
+                windowScene.windows.first?.makeKeyAndVisible()
+            }
+        } failErrror: { errorCode in
+            guard let code = errorCode else {return}
+            switch code {
+            case "201":
+                let alertPage = SeSacAlert("나갈거에요?", "엇..이미 매칭되어 있는 상태입니다") {
+                    self.dismiss(animated: true)
+                }
+                alertPage.cancelButton.isHidden = true
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
+            default:
+                break
+            }
+        }
     }
 }
 

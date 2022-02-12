@@ -73,6 +73,9 @@ class MyPageViewController: BaseViewController {
         userTableView.dataSource = self
         userTableView.rowHeight = UITableView.automaticDimension
         
+        userBackgroudImage.image = SeSacUserBackgroundImageManager.image(output.userData.background)
+        userFace.image = SeSacUserBackgroundImageManager.image(output.userData.sesac)
+        
         title = "정보 관리"
         self.navigationController?.navigationBar.tintColor = .black
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(clickedSaveButton))
@@ -174,6 +177,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.searchSwitch.isOn = searchable
             MyPageViewModel.searchSwitch = searchable
         }
+        
         
         cell.slider.value = [CGFloat(output.userData.ageMin), CGFloat(output.userData.ageMax)]
         cell.startAge.accept(output.userData.ageMin)

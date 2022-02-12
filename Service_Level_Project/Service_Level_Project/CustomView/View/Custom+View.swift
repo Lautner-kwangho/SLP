@@ -91,7 +91,6 @@ class DimensionHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setConstraints()
         
         self.layer.borderWidth = 1

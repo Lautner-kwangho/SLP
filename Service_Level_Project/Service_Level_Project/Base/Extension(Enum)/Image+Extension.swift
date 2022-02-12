@@ -38,3 +38,17 @@ enum SeSacUserBackgroundImageManager: Int, CaseIterable {
         return "\(Self(rawValue: number).value!)"
     }
 }
+
+enum SeSacMapButtonImageManager: Int, CaseIterable {
+    case friendsSearch
+    case friendsWait
+    case friendsMatch
+    
+    static func image(_ number: Int) -> UIImage {
+        return UIImage(named: "\(Self(rawValue: number).value!)")!
+    }
+    
+    static func imageName(_ number: Int) -> String {
+        return "\(Self(rawValue: number).value!)"
+    }
+}

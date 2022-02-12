@@ -21,4 +21,5 @@ class UserDefaultsManager {
     static let latitude = "latitude"
     static let longitude = "longitude"
     
+    static let mapButton = "mapButton"
 }

@@ -48,6 +48,8 @@
 		E459D3DD27B7E2E60075A17C /* AroundSeSacViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3DC27B7E2E60075A17C /* AroundSeSacViewModel.swift */; };
 		E459D3DF27B7E2FD0075A17C /* RequestSeSacViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3DE27B7E2FD0075A17C /* RequestSeSacViewModel.swift */; };
 		E459D3E227B7E4200075A17C /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E127B7E4200075A17C /* ReviewViewController.swift */; };
+		E459D3E427B7E5420075A17C /* TableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E327B7E5420075A17C /* TableBackgroundView.swift */; };
+		E459D3E627B82F5E0075A17C /* ReviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E527B82F5E0075A17C /* ReviewTableCell.swift */; };
 		E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = E461BFEE27AFFEFF00840173 /* MultiSlider */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
@@ -123,6 +125,8 @@
 		E459D3DC27B7E2E60075A17C /* AroundSeSacViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundSeSacViewModel.swift; sourceTree = "<group>"; };
 		E459D3DE27B7E2FD0075A17C /* RequestSeSacViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSeSacViewModel.swift; sourceTree = "<group>"; };
 		E459D3E127B7E4200075A17C /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		E459D3E327B7E5420075A17C /* TableBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBackgroundView.swift; sourceTree = "<group>"; };
+		E459D3E527B82F5E0075A17C /* ReviewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableCell.swift; sourceTree = "<group>"; };
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
@@ -355,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				E459D3E127B7E4200075A17C /* ReviewViewController.swift */,
+				E459D3E527B82F5E0075A17C /* ReviewTableCell.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -395,14 +400,14 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		E46AF40527A3A941009F381C /* Extension */ = {
+		E46AF40527A3A941009F381C /* Extension(Enum) */ = {
 			isa = PBXGroup;
 			children = (
 				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
 				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
 				E415B92F27B5396600831D50 /* Image+Extension.swift */,
 			);
-			path = Extension;
+			path = "Extension(Enum)";
 			sourceTree = "<group>";
 		};
 		E49CE6FB27B6776A005F65AB /* Extension */ = {
@@ -427,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				E49CE70327B6BFB7005F65AB /* SearchFriendsViewController.swift */,
+				E459D3E327B7E5420075A17C /* TableBackgroundView.swift */,
 				E459D3DB27B7E07A0075A17C /* Cell */,
 				E459D3D527B7A17E0075A17C /* Around */,
 				E459D3D627B7A1890075A17C /* Request */,
@@ -533,7 +539,7 @@
 				E4AF001727B1786F00D8572C /* Model */,
 				E46AF40327A3A92D009F381C /* View */,
 				E46AF40427A3A935009F381C /* Protocol */,
-				E46AF40527A3A941009F381C /* Extension */,
+				E46AF40527A3A941009F381C /* Extension(Enum) */,
 				E418161327ABA50000CB693A /* Network */,
 				E4B986AC27AC326B007C824B /* NetworkModel */,
 				E46AF40827A84C47009F381C /* UserDefaultsManager.swift */,
@@ -710,11 +716,13 @@
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
 				E415B93927B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
+				E459D3E427B7E5420075A17C /* TableBackgroundView.swift in Sources */,
 				E49CE70427B6BFB7005F65AB /* SearchFriendsViewController.swift in Sources */,
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
 				E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
+				E459D3E627B82F5E0075A17C /* ReviewTableCell.swift in Sources */,
 				E4AF002227B2723200D8572C /* MapViewController.swift in Sources */,
 				E49CE6FD27B67782005F65AB /* HobbyViewController+Collection+Extension.swift in Sources */,
 				E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */,

@@ -31,20 +31,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         window?.windowScene = windowScene
         
 //         임시로 작업하려고 옮겨 놓음
-        window?.rootViewController = UINavigationController(rootViewController: SearchFriendsViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: SearchFriendsViewController())
 //         여기에 작업
         
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
         
-//        if idToken == nil {
-//            window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
-//        } else {
-//            SeSacURLNetwork.shared.loginMember { data in
-//                windowScene.windows.first?.rootViewController = BaseTabBarViewController()//MyInfoViewController
-//            } failErrror: { error in
-//                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
-//            }
-//        }
+        if idToken == nil {
+            window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
+        } else {
+            SeSacURLNetwork.shared.loginMember { data in
+                windowScene.windows.first?.rootViewController = BaseTabBarViewController()//MyInfoViewController
+            } failErrror: { error in
+                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+            }
+        }
         window?.makeKeyAndVisible()
         
         //Keyboard

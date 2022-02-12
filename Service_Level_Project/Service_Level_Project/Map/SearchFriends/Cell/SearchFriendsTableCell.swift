@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RxRelay
+import RxSwift
 
 class SearchFriendsTableCell: UITableViewCell {
     // 아이고...
-    let test = ["wqe", "test223", "werwer", "wqe", "test223", "werwer"]
+    var addButtonTitle = BehaviorRelay<[String]>(value: [])
+    var disposeBag = DisposeBag()
     
     let customScrollview = UIScrollView().then {
         $0.showsHorizontalScrollIndicator = false
@@ -35,7 +38,10 @@ class SearchFriendsTableCell: UITableViewCell {
     }
     let aroundView = DimensionHeaderView().then {
         $0.hobbyListStackView.isHidden = false
-
+        $0.userReview.numberOfLines = 1
+    }
+    let moreReviewButton = UIButton().then {
+        $0.setImage(UIImage(named: "more_arrow"), for: .normal)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,6 +51,7 @@ class SearchFriendsTableCell: UITableViewCell {
         cellView.addSubview(aroundUserImage)
         cellView.addSubview(requestButton)
         cellView.addSubview(aroundView)
+        cellView.addSubview(moreReviewButton)
         
         cellView.snp.makeConstraints {
             $0.edges.equalTo(self).inset(16)
@@ -70,6 +77,11 @@ class SearchFriendsTableCell: UITableViewCell {
             $0.leading.trailing.equalTo(cellView)
         }
         
+        moreReviewButton.snp.makeConstraints {
+            $0.centerY.equalTo(aroundView.userReview)
+            $0.trailing.equalTo(aroundView.userReview).inset(10)
+        }
+        
         //MARK: hobby Scroll in customView(aroundView)
         // 다음에는 이렇게 안해야지...
         aroundView.hobbyListStackView.addArrangedSubview(customScrollview)
@@ -85,12 +97,17 @@ class SearchFriendsTableCell: UITableViewCell {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(customStackview).inset(5)
         }
-        
-        self.test.forEach { text in
-            customStackview.addArrangedSubview(ButtonConfiguration(customType: .h32(type: .inactive, icon: false)).then {
-                $0.setTitle("\(text)", for: .normal)
+        self.addButtonTitle.asDriver()
+            .distinctUntilChanged()
+            .drive(onNext: { array in
+                array.forEach { text in
+                    self.customStackview.addArrangedSubview(ButtonConfiguration(customType: .h32(type: .inactive, icon: false)).then {
+                        $0.setTitle("\(text)", for: .normal)
+                    })
+                }
             })
-        }
+            .disposed(by: disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {

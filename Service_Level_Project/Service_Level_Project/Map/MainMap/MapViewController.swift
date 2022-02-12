@@ -73,6 +73,11 @@ final class MapViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mapAuthorizationStatus()
+        self.navigationController?.navigationBar.backgroundColor = .clear
+        let mapIconName = UserDefaults.standard.string(forKey: UserDefaultsManager.mapButton)
+        if let mapIconName = mapIconName {
+            matchButton.setImage(UIImage(named: mapIconName), for: .normal)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -145,10 +150,10 @@ final class MapViewController: BaseViewController {
                 guard let self = self else { return }
                 self.recommendDB = []
                 self.aroundDB = []
-                print("==================새로고침=======================")
-                print("😇 DB : ", model.fromQueueDB)
+//                print("==================새로고침=======================")
+//                print("😇 DB : ", model.fromQueueDB)
 //                print("😇 DBResquest : ", model.fromQueueDBRequested)
-                print("😇 Recommend : ", model.fromRecommend)
+//                print("😇 Recommend : ", model.fromRecommend)
                 
                 model.fromQueueDB.forEach { data in
                     guard let data = data else {return}
@@ -213,7 +218,7 @@ final class MapViewController: BaseViewController {
         genderStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(16)
-            make.width.equalTo(view.frame.width / 11)
+            make.width.equalTo(view.frame.width / 9)
             make.height.equalTo(genderStackView.snp.width).multipliedBy(3)
         }
         myPlaceButton.snp.makeConstraints { make in

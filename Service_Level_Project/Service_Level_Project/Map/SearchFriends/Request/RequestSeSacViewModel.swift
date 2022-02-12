@@ -1,5 +1,5 @@
 //
-//  AroundSeSacViewModel.swift
+//  RequestSeSacViewModel.swift
 //  Service_Level_Project
 //
 //  Created by 최광호 on 2022/02/12.
@@ -11,29 +11,29 @@ import RxSwift
 import RxCocoa
 import RxRelay
 
-class AroundSeSacViewModel: BaseViewModel {
+class RequestSeSacViewModel: BaseViewModel {
     struct Input {
         
     }
     
     struct Output {
-        let fromData: Signal<[QueueData?]>
+        let fromRequestData: Signal<[QueueData?]>
     }
     
     static var myData = PublishRelay<SeSacSearchFreindsModel>()
-    var fromData = PublishRelay<[QueueData?]>()
+    var fromRequestData = PublishRelay<[QueueData?]>()
     var disposeBag = DisposeBag()
     
     func transform(input: Input) -> Output {
         
-        AroundSeSacViewModel.myData.asSignal()
+        RequestSeSacViewModel.myData.asSignal()
             .emit(onNext: { [weak self] model in
                 guard let self = self else {return }
-                self.fromData.accept(model.fromQueueDB)
+                self.fromRequestData.accept(model.fromQueueDBRequested)
             })
             .disposed(by: disposeBag)
         
-        return Output(fromData: self.fromData.asSignal())
+        return Output(fromRequestData: self.fromRequestData.asSignal())
     }
     
     func friendsList() {

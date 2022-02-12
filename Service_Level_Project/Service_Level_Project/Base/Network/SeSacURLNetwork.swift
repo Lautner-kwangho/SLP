@@ -190,19 +190,21 @@ class SeSacURLNetwork {
     }
 
     // 취미 친구 중단
-//    static func friendsRequestOrStop(method: HTTPMethod) {
-//        let URL = Point.mapRequestFriends.url
-////        let parameter = []
-//
-//        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: method) { response in
-//            switch response.result {
-//            case .success:
-//                print("성공", response.response?.statusCode)
-//            case let .failure(error):
-//                print("실패", error)
-//            }
-//        }
-//    }
+    func friendsRequestStop(successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
+        let URL = Point.mapRequestFriends.url
+
+        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .delete) { response in
+            switch response.result {
+            case .success:
+                successData()
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
     
     // 취미 함께할 친구 검색 (메인 맵 페이지)
     static func friendsWithMe(region: Int, latitude: Double, longitude: Double) {
@@ -221,6 +223,8 @@ class SeSacURLNetwork {
                 let json = try? decoder.decode(SeSacSearchFreindsModel.self, from: data)
                 guard let json = json else {return}
                 MapViewModel.myData.accept(json)
+                AroundSeSacViewModel.myData.accept(json)
+                RequestSeSacViewModel.myData.accept(json)
             case let .failure(error):
                 print("실패", error)
             }
