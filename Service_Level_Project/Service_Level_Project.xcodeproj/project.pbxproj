@@ -41,6 +41,13 @@
 		E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */; };
 		E459C3D927AAB77D0084FE0C /* MyInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */; };
 		E459C3DB27AAB8010084FE0C /* ReusableName+Ptotocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459C3DA27AAB8010084FE0C /* ReusableName+Ptotocol.swift */; };
+		E459D3D027B7A0510075A17C /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = E459D3CF27B7A0510075A17C /* Tabman */; };
+		E459D3D227B7A0DC0075A17C /* AroundSeSacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3D127B7A0DC0075A17C /* AroundSeSacViewController.swift */; };
+		E459D3D427B7A0E80075A17C /* RequestSeSacViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3D327B7A0E80075A17C /* RequestSeSacViewController.swift */; };
+		E459D3D827B7B41F0075A17C /* SearchFriendsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3D727B7B41F0075A17C /* SearchFriendsTableCell.swift */; };
+		E459D3DD27B7E2E60075A17C /* AroundSeSacViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3DC27B7E2E60075A17C /* AroundSeSacViewModel.swift */; };
+		E459D3DF27B7E2FD0075A17C /* RequestSeSacViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3DE27B7E2FD0075A17C /* RequestSeSacViewModel.swift */; };
+		E459D3E227B7E4200075A17C /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E127B7E4200075A17C /* ReviewViewController.swift */; };
 		E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = E461BFEE27AFFEFF00840173 /* MultiSlider */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
@@ -48,6 +55,7 @@
 		E49CE6FA27B645B5005F65AB /* HobbyCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CE6F927B645B5005F65AB /* HobbyCollectionViewHeader.swift */; };
 		E49CE6FD27B67782005F65AB /* HobbyViewController+Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CE6FC27B67782005F65AB /* HobbyViewController+Collection+Extension.swift */; };
 		E49CE70127B67B69005F65AB /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = E49CE70027B67B69005F65AB /* RxKeyboard */; };
+		E49CE70427B6BFB7005F65AB /* SearchFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49CE70327B6BFB7005F65AB /* SearchFriendsViewController.swift */; };
 		E4ABC3C5279FD3C600CE3A99 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */; };
 		E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */; };
 		E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AF001527B0EF1100D8572C /* Custom+Alert.swift */; };
@@ -109,11 +117,18 @@
 		E459C3D627AA9F110084FE0C /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		E459C3D827AAB77D0084FE0C /* MyInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoCell.swift; sourceTree = "<group>"; };
 		E459C3DA27AAB8010084FE0C /* ReusableName+Ptotocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReusableName+Ptotocol.swift"; sourceTree = "<group>"; };
+		E459D3D127B7A0DC0075A17C /* AroundSeSacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundSeSacViewController.swift; sourceTree = "<group>"; };
+		E459D3D327B7A0E80075A17C /* RequestSeSacViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSeSacViewController.swift; sourceTree = "<group>"; };
+		E459D3D727B7B41F0075A17C /* SearchFriendsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendsTableCell.swift; sourceTree = "<group>"; };
+		E459D3DC27B7E2E60075A17C /* AroundSeSacViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AroundSeSacViewModel.swift; sourceTree = "<group>"; };
+		E459D3DE27B7E2FD0075A17C /* RequestSeSacViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSeSacViewModel.swift; sourceTree = "<group>"; };
+		E459D3E127B7E4200075A17C /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
 		E49CE6F927B645B5005F65AB /* HobbyCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewHeader.swift; sourceTree = "<group>"; };
 		E49CE6FC27B67782005F65AB /* HobbyViewController+Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HobbyViewController+Collection+Extension.swift"; sourceTree = "<group>"; };
+		E49CE70327B6BFB7005F65AB /* SearchFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendsViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C4279FD3C600CE3A99 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E4ABC3C627A02AAC00CE3A99 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Service_Level_ProjectRelease.entitlements; sourceTree = "<group>"; };
@@ -147,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E459D3D027B7A0510075A17C /* Tabman in Frameworks */,
 				E418161827ABA58500CB693A /* Alamofire in Frameworks */,
 				E49CE70127B67B69005F65AB /* RxKeyboard in Frameworks */,
 				E41ED02A279DD77B00A2F0CE /* Toast in Frameworks */,
@@ -299,6 +315,50 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		E459D3CD27B79F830075A17C /* MainMap */ = {
+			isa = PBXGroup;
+			children = (
+				E4AF002127B2723200D8572C /* MapViewController.swift */,
+				E4335D7B27B2CAD400245879 /* MapViewModel.swift */,
+				E415B92D27B4334600831D50 /* MapViewController+Function.swift */,
+			);
+			path = MainMap;
+			sourceTree = "<group>";
+		};
+		E459D3D527B7A17E0075A17C /* Around */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3D127B7A0DC0075A17C /* AroundSeSacViewController.swift */,
+				E459D3DC27B7E2E60075A17C /* AroundSeSacViewModel.swift */,
+			);
+			path = Around;
+			sourceTree = "<group>";
+		};
+		E459D3D627B7A1890075A17C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3D327B7A0E80075A17C /* RequestSeSacViewController.swift */,
+				E459D3DE27B7E2FD0075A17C /* RequestSeSacViewModel.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		E459D3DB27B7E07A0075A17C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3D727B7B41F0075A17C /* SearchFriendsTableCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		E459D3E027B7E4020075A17C /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3E127B7E4200075A17C /* ReviewViewController.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 		E46AF3FF27A3A738009F381C /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +423,18 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
+		E49CE70227B6BF88005F65AB /* SearchFriends */ = {
+			isa = PBXGroup;
+			children = (
+				E49CE70327B6BFB7005F65AB /* SearchFriendsViewController.swift */,
+				E459D3DB27B7E07A0075A17C /* Cell */,
+				E459D3D527B7A17E0075A17C /* Around */,
+				E459D3D627B7A1890075A17C /* Request */,
+				E459D3E027B7E4020075A17C /* Review */,
+			);
+			path = SearchFriends;
+			sourceTree = "<group>";
+		};
 		E4ABC3C3279FD3B000CE3A99 /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,10 +463,9 @@
 		E4AF001F27B2720200D8572C /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF002127B2723200D8572C /* MapViewController.swift */,
-				E4335D7B27B2CAD400245879 /* MapViewModel.swift */,
-				E415B92D27B4334600831D50 /* MapViewController+Function.swift */,
+				E459D3CD27B79F830075A17C /* MainMap */,
 				E415B93127B56B0300831D50 /* Hobby */,
+				E49CE70227B6BF88005F65AB /* SearchFriends */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -512,6 +583,7 @@
 				E4AF001B27B1859400D8572C /* IQKeyboardManagerSwift */,
 				E4F2135927B30655004FE47D /* SnapKit */,
 				E49CE70027B67B69005F65AB /* RxKeyboard */,
+				E459D3CF27B7A0510075A17C /* Tabman */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -551,6 +623,7 @@
 				E4AF001A27B1859400D8572C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				E4F2135827B30655004FE47D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E49CE6FF27B67B69005F65AB /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				E459D3CE27B7A0510075A17C /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -622,9 +695,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */,
+				E459D3DD27B7E2E60075A17C /* AroundSeSacViewModel.swift in Sources */,
+				E459D3E227B7E4200075A17C /* ReviewViewController.swift in Sources */,
 				E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */,
 				E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */,
+				E459D3D827B7B41F0075A17C /* SearchFriendsTableCell.swift in Sources */,
 				E4AF002427B2727400D8572C /* ShopViewController.swift in Sources */,
+				E459D3D427B7A0E80075A17C /* RequestSeSacViewController.swift in Sources */,
 				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
@@ -633,6 +710,7 @@
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
 				E415B93927B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
+				E49CE70427B6BFB7005F65AB /* SearchFriendsViewController.swift in Sources */,
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
 				E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
@@ -643,6 +721,7 @@
 				E4C31EB82796D60A00ACE886 /* Custom+InputText.swift in Sources */,
 				E459C3D127AA9E870084FE0C /* MyInfoViewController.swift in Sources */,
 				E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */,
+				E459D3DF27B7E2FD0075A17C /* RequestSeSacViewModel.swift in Sources */,
 				E45256B027AF1A2300AF4130 /* MyPageViewModel.swift in Sources */,
 				E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */,
 				E415B93527B56D1A00831D50 /* HobbyViewModel.swift in Sources */,
@@ -663,6 +742,7 @@
 				E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */,
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
+				E459D3D227B7A0DC0075A17C /* AroundSeSacViewController.swift in Sources */,
 				E415B93327B56BDB00831D50 /* HobbyViewController.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
 				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
@@ -918,6 +998,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E459D3CE27B7A0510075A17C /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		E461BFED27AFFEFF00840173 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/yonat/MultiSlider";
@@ -993,6 +1081,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E41ED028279DD77A00A2F0CE /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		E459D3CF27B7A0510075A17C /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E459D3CE27B7A0510075A17C /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 		E461BFEE27AFFEFF00840173 /* MultiSlider */ = {
 			isa = XCSwiftPackageProductDependency;

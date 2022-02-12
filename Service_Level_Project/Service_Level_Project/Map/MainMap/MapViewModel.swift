@@ -30,7 +30,7 @@ class MapViewModel: BaseViewModel {
     private var markfilterSet = Set<NMFMarker>()
     
     var locationManager = CLLocationManager()
-    var genderFilterNumber = 0
+    var genderFilterNumber = 2
     
     var disposeBag = DisposeBag()
     

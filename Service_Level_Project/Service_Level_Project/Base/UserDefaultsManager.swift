@@ -16,4 +16,9 @@ class UserDefaultsManager {
     static let birthday = "birthday"
     static let email = "email"
     static let gender = "gender"
+
+    static let region = "region"
+    static let latitude = "latitude"
+    static let longitude = "longitude"
+    
 }

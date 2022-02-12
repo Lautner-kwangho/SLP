@@ -49,6 +49,9 @@ final class HobbyViewController: BaseViewController {
     let viewModel = HobbyViewModel()
     let disposeBag = DisposeBag()
     
+    var aroundHobby = [String]()
+    var recommendHobby = [String]()
+    
     //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +74,7 @@ final class HobbyViewController: BaseViewController {
         output.myHobbyList.asDriver()
             .drive(onNext: { [weak self] array in
                 guard let self = self else {return}
-                print("어레이 프린트: ",array)
                 self.hobbyCollectionView.reloadSections(IndexSet(1...1))
-                print(" 카운트 : ",array.count)
             })
             .disposed(by: disposeBag)
         
@@ -83,6 +84,63 @@ final class HobbyViewController: BaseViewController {
                 self.hobbyCollectionView.reloadSections(IndexSet(1...1))
             })
             .disposed(by: disposeBag)
+        
+        sasecSearchButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                self.findFriedsRequest()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func findFriedsRequest() {
+        let gender = UserDefaults.standard.integer(forKey: UserDefaultsManager.gender)
+        if gender == -1 {
+            let alertPage = SeSacAlert("성별 체크 필요", "내 성별이 설정되어 있지 않습니다") {
+                self.dismiss(animated: true)
+                DispatchQueue.main.async {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyPageViewController())
+                    windowScene.windows.first?.makeKeyAndVisible()
+                }
+            }
+            alertPage.cancelButton.isHidden = true
+            alertPage.modalPresentationStyle = .overFullScreen
+            self.present(alertPage, animated: true, completion: nil)
+        } else {
+            var hobbyList = [String]()
+            viewModel.sendMyHobbylist.forEach {
+                hobbyList.append($0)
+            }
+            SeSacURLNetwork.shared.friendsRequest(hf: hobbyList) {
+                self.navigationController?.pushViewController(SearchFriendsViewController(), animated: true)
+            } failErrror: { error in
+                guard let error = error else {return}
+                var toastMessage = ""
+                switch error {
+                case "201":
+                    toastMessage = "신고가 누적되어 이용하실 수 없습니다"
+                case "203":
+                    toastMessage = "약속 취소 패널티로, 1분동안 이용하실 수 없습니다"
+                case "204":
+                    toastMessage = "약속 취소 패널티로, 2분동안 이용하실 수 없습니다"
+                case "205":
+                    toastMessage = "연속으로 약속을 취소하셔서 3분동안 이용하실 수 없습니다"
+                case "500":
+                    toastMessage = "서버 에러입니다"
+                default:
+                    toastMessage = "잠시 후 재시도 해주시길 바랍니다"
+                }
+                // Toast 메시지
+                let alertPage = SeSacAlert("\(error) 에러", "\(toastMessage)") {
+                    self.dismiss(animated: true)
+                }
+                alertPage.cancelButton.isHidden = true
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
+            }
+        }
     }
     
     @objc func endEditing() {
@@ -110,7 +168,7 @@ final class HobbyViewController: BaseViewController {
     
     override func setConstraints() {
         self.navigationItem.titleView = searchBar
-        let backButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backPage))
+        let backButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow"), style: .plain, target: self, action: #selector(backPage))
         self.navigationItem.leftBarButtonItem = backButtonItem
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self

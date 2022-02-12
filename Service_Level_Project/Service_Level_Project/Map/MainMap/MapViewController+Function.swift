@@ -23,6 +23,10 @@ extension MapViewController: NMFMapViewCameraDelegate {
         
         let region = mapRegion(latitude: cameraPosition.target.lat, longitude: cameraPosition.target.lng)
         
+        UserDefaults.standard.set(Int(region)!, forKey: UserDefaultsManager.region)
+        UserDefaults.standard.set(cameraPosition.target.lat, forKey: UserDefaultsManager.latitude)
+        UserDefaults.standard.set(cameraPosition.target.lng, forKey: UserDefaultsManager.longitude)
+        
         // 움직일 때 네트워크 요청
         SeSacURLNetwork.friendsWithMe(region: Int(region)!, latitude: cameraPosition.target.lat, longitude: cameraPosition.target.lng)
     }

@@ -87,6 +87,7 @@ class SeSacURLNetwork {
                 DispatchQueue.global().sync {
                     MyInfoViewModel.myData.accept(json)
                     print("메인", json)
+                    UserDefaults.standard.set(json.gender, forKey: UserDefaultsManager.gender)
                 }
         
                 successData(json)
@@ -153,25 +154,56 @@ class SeSacURLNetwork {
             "Content-Type" : "application/x-www-form-urlencoded"
         ]
         let parameter: Parameters? = parameter
-        AF.request(URL, method: method, parameters: parameter, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData(completionHandler: handler)
+        AF.request(URL, method: method, parameters: parameter, headers: header, interceptor: checkSesacNetWork() ).validate(statusCode: 200...200).responseData(completionHandler: handler)
     }
     
-    // 애는 두개로 나눠야 함
-    // 취미 친구 찾기 <-> 중단
-    static func friendsRequestOrStop(method: HTTPMethod) {
-        let URL = Point.mapRequestFriends.url
-//        let parameter = []
+    // 취미 친구 찾기
+    func friendsRequest(hf: [String], successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
+        let typeFilter = UserDefaults.standard.integer(forKey: UserDefaultsManager.gender) == -1 ? -1 : 2
+        let hfFilter = hf.count > 0 ? hf : ["Anything"]
         
-        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: method) { response in
+        let URL = Point.mapRequestFriends.url
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        let parameter: Parameters = [
+          "type": typeFilter,
+          "region": UserDefaults.standard.integer(forKey: UserDefaultsManager.region),
+          "long": UserDefaults.standard.double(forKey: UserDefaultsManager.longitude),
+          "lat": UserDefaults.standard.double(forKey: UserDefaultsManager.latitude),
+          "hf": hfFilter
+        ]
+        
+        AF.request(URL, method: .post, parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets), headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData { response in
             switch response.result {
             case .success:
                 print("성공", response.response?.statusCode)
+                successData()
             case let .failure(error):
-                print("실패", error)
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
             }
         }
-        
     }
+
+    // 취미 친구 중단
+//    static func friendsRequestOrStop(method: HTTPMethod) {
+//        let URL = Point.mapRequestFriends.url
+////        let parameter = []
+//
+//        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: method) { response in
+//            switch response.result {
+//            case .success:
+//                print("성공", response.response?.statusCode)
+//            case let .failure(error):
+//                print("실패", error)
+//            }
+//        }
+//    }
+    
     // 취미 함께할 친구 검색 (메인 맵 페이지)
     static func friendsWithMe(region: Int, latitude: Double, longitude: Double) {
         let URL = Point.mapFindFriends.url
@@ -196,12 +228,20 @@ class SeSacURLNetwork {
     }
     
     
-    private func checkError(_ errorCode: Int) -> String{
+    private func checkError(_ errorCode: Int) -> String {
         switch errorCode {
         case 201:
             return "201"
         case 202:
             return "202"
+        case 203:
+            return "203"
+        case 204:
+            return "204"
+        case 205:
+            return "205"
+        case 206:
+            return "206"
         case 401:
             return updateToken()
         case 406:

@@ -31,7 +31,8 @@ extension HobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return letters.count
+            let number = self.recommendHobby.count + self.aroundHobby.count
+            return number
         } else {
             var number = 0
             output.myHobbyList.asDriver()
@@ -47,10 +48,12 @@ extension HobbyViewController: UICollectionViewDelegate, UICollectionViewDataSou
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HobbyCollectionCell.reuseIdentifier, for: indexPath) as? HobbyCollectionCell else { return UICollectionViewCell() }
         
         if indexPath.section == 0 {
-            let text = letters[indexPath.item]
+            let data = self.recommendHobby + self.aroundHobby
+            let text = data[indexPath.item]
+            
             cell.hobbyButton.setTitle("\(text)", for: .normal)
             cell.myhobbyButton.isHidden = true
-            if indexPath.item == 0 {
+            if indexPath.item < self.recommendHobby.count {
                 cell.aroundLayoutConfigure(indexPath)
             }
         } else {
@@ -91,8 +94,9 @@ extension HobbyViewController: UICollectionViewDelegateFlowLayout {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HobbyCollectionCell.reuseIdentifier, for: indexPath) as? HobbyCollectionCell else { return .zero }
         
         if indexPath.section == 0 {
-
-            let text = letters[indexPath.item]
+            let data = self.recommendHobby + self.aroundHobby
+            let text = data[indexPath.item]
+            
             cell.hobbyButton.setTitle("\(text)", for: .normal)
             cell.myhobbyButton.isHidden = true
             

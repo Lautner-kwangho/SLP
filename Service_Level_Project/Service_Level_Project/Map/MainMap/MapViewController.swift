@@ -58,6 +58,9 @@ final class MapViewController: BaseViewController {
     let viewModel = MapViewModel()
     private let disposeBag = DisposeBag()
     
+    var recommendDB = [String]()
+    var aroundDB = [String]()
+    
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -128,20 +131,36 @@ final class MapViewController: BaseViewController {
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                self.navigationController?.pushViewController(HobbyViewController(), animated: true)
+                let hobbyVC = HobbyViewController()
+                
+                hobbyVC.recommendHobby = self.recommendDB
+                hobbyVC.aroundHobby = self.aroundDB
+                
+                self.navigationController?.pushViewController(hobbyVC, animated: true)
             })
             .disposed(by: disposeBag)
         
         output.placeData.asDriver()
             .drive(onNext: { [weak self] model in
                 guard let self = self else { return }
-                print("DB", model.fromQueueDB)
-//                print("DBResquest", model.fromQueueDBRequested)
-//                print("Recommend", model.fromRecommend)
+                self.recommendDB = []
+                self.aroundDB = []
+                print("==================새로고침=======================")
+                print("😇 DB : ", model.fromQueueDB)
+//                print("😇 DBResquest : ", model.fromQueueDBRequested)
+                print("😇 Recommend : ", model.fromRecommend)
+                
+                model.fromQueueDB.forEach { data in
+                    guard let data = data else {return}
+                    data.hf.forEach { hobby in
+                        self.aroundDB.append(hobby)
+                    }
+                }
+                self.recommendDB = model.fromRecommend
             })
             .disposed(by: disposeBag)
         
-        viewModel.insertMarkerFriendsInMap(map: self.mapView)
+        viewModel.insertMarkerFriendsInMap(map: mapView)
     }
     
     override func configure() {

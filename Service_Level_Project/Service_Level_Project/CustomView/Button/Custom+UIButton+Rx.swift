@@ -42,28 +42,33 @@ class ButtonConfiguration: UIButton {
             self.backgroundColor = SacColor.color(.white)
             self.layer.borderWidth = 1
             self.layer.borderColor = SacColor.color(.gray4).cgColor
+            self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         case .fill:
             self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.white), for: .normal)
             self.backgroundColor = SacColor.color(.green)
             self.layer.borderWidth = 0
+            self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         case .outline:
             self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.green), for: .normal)
             self.backgroundColor = SacColor.color(.white)
             self.layer.borderWidth = 1
             self.layer.borderColor = SacColor.color(.green).cgColor
+            self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         case .cancel:
             self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(SacColor.color(.black), for: .normal)
             self.backgroundColor = SacColor.color(.gray2)
             self.layer.borderWidth = 0
+            self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         case .disable:
             self.setTitle(self.currentTitle, for: .normal)
             self.setTitleColor(.red, for: .normal)
             self.setTitleColor(SacColor.color(.gray3), for: .normal)
             self.backgroundColor = SacColor.color(.gray6)
             self.layer.borderWidth = 0
+            self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         }
     }
     
