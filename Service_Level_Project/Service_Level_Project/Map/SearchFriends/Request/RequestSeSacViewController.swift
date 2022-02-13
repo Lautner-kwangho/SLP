@@ -159,11 +159,22 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         cell.requestButton.setTitle("수락하기", for: .normal)
         cell.requestButton.backgroundColor = SacColor.color(.success)
+        cell.requestButton.tag = indexPath.row
+        cell.requestButton.addTarget(self, action: #selector(clickedAccept(_:)), for: .touchUpInside)
         
         let data = self.tableData[indexPath.row]
         cell.aroundImage.image = SeSacUserBackgroundImageManager.image(data.background)
         cell.aroundUserImage.image = SeSacUserImageManager.image(data.sesac)
         cell.aroundView.userNickname.text = data.nick
+        
+        let repuFilter = data.reputation.map { $0 > 0 ? ButtonCase.fill : ButtonCase.inactive }
+        
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[0])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[1])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[2])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[3])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[4])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[5])
         
         var hobby = [String]()
         data.hf.forEach { text in
@@ -186,6 +197,55 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
         
         return cell
     }
+    
+    @objc func clickedAccept(_ sender: UIButton) {
+        let buttonTag = sender.tag
+        let data = self.tableData[buttonTag]
+        let alertPage = SeSacAlert("취미 같이 하기를 수락할까요?", "요청을 수락하면 채팅창에서 대화를 나눌 수 있어요") {
+            
+            SeSacURLNetwork.shared.hobbyAccept(userID: data.uid) {
+                let chatView = ChattingViewController()
+                self.navigationController?.pushViewController(chatView, animated: true)
+            } failErrror: { error in
+                guard let code = error else {return}
+                switch code {
+                case "201":
+                    self.view.makeToast("상대방이 이미 다른 사람과 취미를 함께 하는 중입니다")
+                case "202":
+                    self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다")
+                case "203":
+                    self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!")
+                    SeSacURLNetwork.shared.myStatus { data in
+                        if data.matched == 1 {
+                            self.view.makeToast("채팅방으로 이동합니다", duration: 1)
+                            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
+                            let chatView = ChattingViewController()
+                            self.navigationController?.pushViewController(chatView, animated: true)
+                        }
+                    } failErrror: { errorcode in
+                        guard let code = errorcode else {return}
+                        if code == "201" {
+                            self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
+                            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                            DispatchQueue.main.async {
+                                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
+                                windowScene.windows.first?.makeKeyAndVisible()
+                            }
+                        }
+                    }
+
+                default:
+                    break
+                }
+            }
+            
+            self.dismiss(animated: true)
+        }
+        alertPage.modalPresentationStyle = .overFullScreen
+        self.present(alertPage, animated: true, completion: nil)
+    }
+    
     @objc func clickedButton(_ sender: UIButton) {
         let buttonTag = sender.tag
         let data = self.tableData[buttonTag]

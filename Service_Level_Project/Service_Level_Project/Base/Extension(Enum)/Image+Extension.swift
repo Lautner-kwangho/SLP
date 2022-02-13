@@ -29,6 +29,10 @@ enum SeSacUserBackgroundImageManager: Int, CaseIterable {
     case sesac_background_3
     case sesac_background_4
     case sesac_background_5
+    case sesac_background_6
+    case sesac_background_7
+    case sesac_background_8
+    case sesac_background_9
     
     static func image(_ number: Int) -> UIImage {
         return UIImage(named: "\(Self(rawValue: number).value!)")!

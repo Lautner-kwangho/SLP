@@ -158,10 +158,22 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell.selectionStyle = .none
         
+        cell.requestButton.tag = indexPath.row
+        cell.requestButton.addTarget(self, action: #selector(clickedRequest(_:)), for: .touchUpInside)
+        
         let data = self.tableData[indexPath.row]
         cell.aroundImage.image = SeSacUserBackgroundImageManager.image(data.background)
         cell.aroundUserImage.image = SeSacUserImageManager.image(data.sesac)
         cell.aroundView.userNickname.text = data.nick
+        
+        let repuFilter = data.reputation.map { $0 > 0 ? ButtonCase.fill : ButtonCase.inactive }
+        
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[0])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[1])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[2])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[3])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[4])
+        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[5])
         
         var hobby = [String]()
         data.hf.forEach { text in
@@ -184,6 +196,58 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
+    
+    @objc func clickedRequest(_ sender: UIButton) {
+        let buttonTag = sender.tag
+        let data = self.tableData[buttonTag]
+        let alertPage = SeSacAlert("취미 같이 하기를 요청할게요!", "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요") {
+            SeSacURLNetwork.shared.myStatus { model in
+                if model.matched == 1 {
+                    self.view.makeToast("채팅방으로 이동합니다", duration: 1)
+                    UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
+                    let chatView = ChattingViewController()
+                    self.navigationController?.pushViewController(chatView, animated: true)
+                } else {
+                    SeSacURLNetwork.shared.hobbyRequest(userID: data.uid) {
+                        self.view.makeToast("취미 함께 하기 요청을 보냈습니다")
+                    } failErrror: { error in
+                        guard let code = error else {return}
+                        switch code {
+                        case "201":
+                            SeSacURLNetwork.shared.hobbyAccept(userID: data.uid) {
+                                self.view.makeToast("상대방도 취미 함께 하기를 요청했습니다. 채팅방으로 이동합니다")
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    let chatView = ChattingViewController()
+                                    self.navigationController?.pushViewController(chatView, animated: true)
+                                }
+                            } failErrror: { _ in
+                            }
+                        case "202":
+                            self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다")
+                        default:
+                            break
+                        }
+                    }
+                }
+            } failErrror: { errorcode in
+                guard let code = errorcode else {return}
+                if code == "201" {
+                    self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
+                    UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                    DispatchQueue.main.async {
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                }
+            }
+
+            self.dismiss(animated: true)
+        }
+        alertPage.modalPresentationStyle = .overFullScreen
+        self.present(alertPage, animated: true, completion: nil)
+    }
+    
     @objc func clickedButton(_ sender: UIButton) {
         let buttonTag = sender.tag
         let data = self.tableData[buttonTag]

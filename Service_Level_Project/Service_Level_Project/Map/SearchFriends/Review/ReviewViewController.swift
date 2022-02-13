@@ -42,6 +42,7 @@ extension ReviewViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTableCell.reuseIdentifier, for: indexPath) as? ReviewTableCell else {return UITableViewCell()}
         
+        cell.selectionStyle = .none
         cell.review.text = reviewList[indexPath.row]
         
         return cell

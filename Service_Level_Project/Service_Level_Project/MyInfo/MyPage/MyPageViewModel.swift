@@ -26,6 +26,7 @@ final class MyPageViewModel: BaseViewModel {
     
     struct Output {
         let userData: SeSacLoginModel
+        let reputation: [ButtonCase]
     }
     
     var tableData = [
@@ -37,6 +38,7 @@ final class MyPageViewModel: BaseViewModel {
     ]
     var userData = SeSacLoginModel()
     var update: updateData?
+    var reputationData = [ButtonCase]()
     
     static var maleSwitch = false
     static var femaleSwitch = false
@@ -57,10 +59,20 @@ final class MyPageViewModel: BaseViewModel {
             .drive(onNext: { [weak self] data in
                 guard let self = self else {return}
                 self.userData = data
+                
+                self.reputationData = []
+                data.reputation.forEach { value in
+                    if value > 0 {
+                        self.reputationData.append(.fill)
+                    } else {
+                        self.reputationData.append(.inactive)
+                    }
+                }
             })
             .disposed(by: disposeBag)
         
-        return Output(userData: userData)
+        
+        return Output(userData: userData, reputation: reputationData)
     }
     
     func updateUsetInfomation() {

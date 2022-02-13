@@ -60,13 +60,18 @@ class SearchFriendsViewController: TabmanViewController {
     }
     
     @objc private func backButtonClicked(_ sender: Any) {
-        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
-        self.navigationController?.popViewController(animated: true)
+        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(1), forKey: UserDefaultsManager.mapButton)
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
+
     }
     
     @objc private func stopButtonClicked(_ sender: Any) {
         SeSacURLNetwork.shared.friendsRequestStop {
-            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(1), forKey: UserDefaultsManager.mapButton)
+            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
             DispatchQueue.main.async {
                 guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                 windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())

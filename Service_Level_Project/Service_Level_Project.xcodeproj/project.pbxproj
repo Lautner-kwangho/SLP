@@ -50,6 +50,8 @@
 		E459D3E227B7E4200075A17C /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E127B7E4200075A17C /* ReviewViewController.swift */; };
 		E459D3E427B7E5420075A17C /* TableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E327B7E5420075A17C /* TableBackgroundView.swift */; };
 		E459D3E627B82F5E0075A17C /* ReviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E527B82F5E0075A17C /* ReviewTableCell.swift */; };
+		E459D3E927B853200075A17C /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3E827B853200075A17C /* ChattingViewController.swift */; };
+		E459D3EB27B8FD6B0075A17C /* SeSacStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3EA27B8FD6B0075A17C /* SeSacStateModel.swift */; };
 		E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = E461BFEE27AFFEFF00840173 /* MultiSlider */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
@@ -127,6 +129,8 @@
 		E459D3E127B7E4200075A17C /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		E459D3E327B7E5420075A17C /* TableBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBackgroundView.swift; sourceTree = "<group>"; };
 		E459D3E527B82F5E0075A17C /* ReviewTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableCell.swift; sourceTree = "<group>"; };
+		E459D3E827B853200075A17C /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		E459D3EA27B8FD6B0075A17C /* SeSacStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacStateModel.swift; sourceTree = "<group>"; };
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E47AB08A2799D28F001A50A1 /* AuthBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +368,14 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
+		E459D3E727B8530A0075A17C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3E827B853200075A17C /* ChattingViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		E46AF3FF27A3A738009F381C /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */,
+				E459D3EA27B8FD6B0075A17C /* SeSacStateModel.swift */,
 				E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */,
 			);
 			path = NetworkModel;
@@ -520,6 +533,7 @@
 				E41ED01C279DB7A000A2F0CE /* Auth */,
 				E4ABC3C3279FD3B000CE3A99 /* MyInfo */,
 				E4AF001F27B2720200D8572C /* Map */,
+				E459D3E727B8530A0075A17C /* Chat */,
 				E4AF002027B2721D00D8572C /* Shop */,
 				E4C31EB62796D5CE00ACE886 /* CustomView */,
 				E4C31EB52796D59700ACE886 /* Base */,
@@ -536,11 +550,11 @@
 		E4C31EB52796D59700ACE886 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				E4AF001727B1786F00D8572C /* Model */,
 				E46AF40327A3A92D009F381C /* View */,
 				E46AF40427A3A935009F381C /* Protocol */,
 				E46AF40527A3A941009F381C /* Extension(Enum) */,
 				E418161327ABA50000CB693A /* Network */,
+				E4AF001727B1786F00D8572C /* Model */,
 				E4B986AC27AC326B007C824B /* NetworkModel */,
 				E46AF40827A84C47009F381C /* UserDefaultsManager.swift */,
 			);
@@ -715,6 +729,7 @@
 				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
+				E459D3E927B853200075A17C /* ChattingViewController.swift in Sources */,
 				E415B93927B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				E459D3E427B7E5420075A17C /* TableBackgroundView.swift in Sources */,
 				E49CE70427B6BFB7005F65AB /* SearchFriendsViewController.swift in Sources */,
@@ -748,6 +763,7 @@
 				E4AF001E27B23E0000D8572C /* BaseTabBarViewController.swift in Sources */,
 				E41ED02C279DD8E400A2F0CE /* SeSacURLManager.swift in Sources */,
 				E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */,
+				E459D3EB27B8FD6B0075A17C /* SeSacStateModel.swift in Sources */,
 				E4C31EA92796CD8D00ACE886 /* BaseViewController.swift in Sources */,
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
 				E459D3D227B7A0DC0075A17C /* AroundSeSacViewController.swift in Sources */,
@@ -911,10 +927,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Service_Level_Project/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SLP;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "새싹 친구 사용할 때 필요합니다(Always + When In Use)";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용할 때 필요합니다(when in use useage)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -941,10 +961,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Service_Level_Project/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SLP;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "새싹 친구 사용할 때 필요합니다(Always + When In Use)";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용할 때 필요합니다(when in use useage)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

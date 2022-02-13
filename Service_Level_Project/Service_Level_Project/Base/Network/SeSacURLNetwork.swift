@@ -206,6 +206,69 @@ class SeSacURLNetwork {
         }
     }
     
+    // 친구 요청하기
+    func hobbyRequest(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
+        let URL = Point.hobbyRequest.url
+        
+        let parameter: Parameters = [
+          "otheruid": "\(userID)"
+        ]
+        
+        SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
+            switch response.result {
+            case .success:
+                successData()
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
+    
+    // 친구 수락하기
+    func hobbyAccept(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
+        let URL = Point.hobbyRequest.url
+        
+        let parameter: Parameters = [
+          "otheruid": "\(userID)"
+        ]
+        
+        SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
+            switch response.result {
+            case .success:
+                successData()
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
+    // 본인 상태 확인
+    func myStatus(successData: @escaping (SeSacStateModel) -> (), failErrror: @escaping (String?) -> ()) {
+        let URL = Point.queueState.url
+        
+        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .post) { response in
+            switch response.result {
+            case .success:
+                guard let data = response.value else { return }
+                let decoder = JSONDecoder()
+                let json = try? decoder.decode(SeSacStateModel.self, from: data)
+                guard let json = json else {return}
+                
+                successData(json)
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
+    
     // 취미 함께할 친구 검색 (메인 맵 페이지)
     static func friendsWithMe(region: Int, latitude: Double, longitude: Double) {
         let URL = Point.mapFindFriends.url

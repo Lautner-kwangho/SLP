@@ -76,6 +76,15 @@ class MyPageViewController: BaseViewController {
         userBackgroudImage.image = SeSacUserBackgroundImageManager.image(output.userData.background)
         userFace.image = SeSacUserBackgroundImageManager.image(output.userData.sesac)
         
+        headerView.userTitleButton.firstLeftButton.customLayout(output.reputation[0])
+        headerView.userTitleButton.firstRightButton.customLayout(output.reputation[1])
+        headerView.userTitleButton.middleLeftButton.customLayout(output.reputation[2])
+        headerView.userTitleButton.middleRightButton.customLayout(output.reputation[3])
+        headerView.userTitleButton.lastLeftButton.customLayout(output.reputation[4])
+        headerView.userTitleButton.lastRightButton.customLayout(output.reputation[5])
+        
+        let review = output.userData.comment.first == nil ? "첫 리뷰를 기다리는 중이에요" : output.userData.comment.first
+        headerView.userReview.text = review
         title = "정보 관리"
         self.navigationController?.navigationBar.tintColor = .black
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(clickedSaveButton))
@@ -177,7 +186,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.searchSwitch.isOn = searchable
             MyPageViewModel.searchSwitch = searchable
         }
-        
         
         cell.slider.value = [CGFloat(output.userData.ageMin), CGFloat(output.userData.ageMax)]
         cell.startAge.accept(output.userData.ageMin)
