@@ -90,6 +90,9 @@
 		E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */; };
 		E4C31EBE2797C27C00ACE886 /* Custom+UIButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */; };
 		E4C31EC02798610E00ACE886 /* Custom+textArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */; };
+		E4EFE4A027BA2FCB00C47139 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE49F27BA2FCB00C47139 /* UITextView+Extension.swift */; };
+		E4EFE4A327BA3B8900C47139 /* ChatTableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A227BA3B8900C47139 /* ChatTableView+Extension.swift */; };
+		E4EFE4A527BA3BB800C47139 /* ChatTextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */; };
 		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +173,9 @@
 		E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+UIButton+Rx.swift"; sourceTree = "<group>"; };
 		E4C31EBF2798610E00ACE886 /* Custom+textArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+textArea.swift"; sourceTree = "<group>"; };
+		E4EFE49F27BA2FCB00C47139 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
+		E4EFE4A227BA3B8900C47139 /* ChatTableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatTableView+Extension.swift"; sourceTree = "<group>"; };
+		E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatTextView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,9 +386,9 @@
 			isa = PBXGroup;
 			children = (
 				E459D3E827B853200075A17C /* ChattingViewController.swift */,
-				E459D3EF27B97B090075A17C /* ReceiveChatTableViewCell.swift */,
-				E459D3F127B97FB10075A17C /* SendChatTableViewCell.swift */,
-				E459D3F527B993B70075A17C /* ChattingHeaderView.swift */,
+				E4EFE4A127BA31AA00C47139 /* Extension */,
+				E4EFE49E27BA0BF600C47139 /* Section_0_Cell */,
+				E4EFE49D27BA0BE800C47139 /* Section_1_Cell */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -429,6 +435,7 @@
 				E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */,
 				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
 				E415B92F27B5396600831D50 /* Image+Extension.swift */,
+				E4EFE49F27BA2FCB00C47139 /* UITextView+Extension.swift */,
 			);
 			path = "Extension(Enum)";
 			sourceTree = "<group>";
@@ -581,6 +588,32 @@
 				E46AF40027A3A746009F381C /* TextField */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		E4EFE49D27BA0BE800C47139 /* Section_1_Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3EF27B97B090075A17C /* ReceiveChatTableViewCell.swift */,
+				E459D3F127B97FB10075A17C /* SendChatTableViewCell.swift */,
+			);
+			path = Section_1_Cell;
+			sourceTree = "<group>";
+		};
+		E4EFE49E27BA0BF600C47139 /* Section_0_Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E459D3F527B993B70075A17C /* ChattingHeaderView.swift */,
+			);
+			path = Section_0_Cell;
+			sourceTree = "<group>";
+		};
+		E4EFE4A127BA31AA00C47139 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E4EFE4A227BA3B8900C47139 /* ChatTableView+Extension.swift */,
+				E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -740,8 +773,10 @@
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
+				E4EFE4A527BA3BB800C47139 /* ChatTextView+Extension.swift in Sources */,
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
+				E4EFE4A027BA2FCB00C47139 /* UITextView+Extension.swift in Sources */,
 				E459D3F627B993B70075A17C /* ChattingHeaderView.swift in Sources */,
 				E459D3E927B853200075A17C /* ChattingViewController.swift in Sources */,
 				E415B93927B580DD00831D50 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
@@ -759,6 +794,7 @@
 				E459C3D127AA9E870084FE0C /* MyInfoViewController.swift in Sources */,
 				E4ABC3C727A02AAC00CE3A99 /* AuthError.swift in Sources */,
 				E459D3DF27B7E2FD0075A17C /* RequestSeSacViewModel.swift in Sources */,
+				E4EFE4A327BA3B8900C47139 /* ChatTableView+Extension.swift in Sources */,
 				E45256B027AF1A2300AF4130 /* MyPageViewModel.swift in Sources */,
 				E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */,
 				E415B93527B56D1A00831D50 /* HobbyViewModel.swift in Sources */,

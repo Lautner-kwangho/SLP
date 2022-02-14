@@ -147,7 +147,7 @@ final class HobbyViewController: BaseViewController {
         self.view.endEditing(true)
         searchBar.resignFirstResponder()
     }
-    func touchManager() {
+    private func touchManager() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(endEditing))
         self.touchView.addGestureRecognizer(tap)
     }
