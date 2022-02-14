@@ -74,7 +74,7 @@ class MyPageViewController: BaseViewController {
         userTableView.rowHeight = UITableView.automaticDimension
         
         userBackgroudImage.image = SeSacUserBackgroundImageManager.image(output.userData.background)
-        userFace.image = SeSacUserBackgroundImageManager.image(output.userData.sesac)
+        userFace.image = SeSacUserImageManager.image(output.userData.sesac)
         
         headerView.userTitleButton.firstLeftButton.customLayout(output.reputation[0])
         headerView.userTitleButton.firstRightButton.customLayout(output.reputation[1])

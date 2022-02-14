@@ -74,6 +74,7 @@ final class MapViewController: BaseViewController {
         super.viewWillAppear(animated)
         mapAuthorizationStatus()
         self.navigationController?.navigationBar.backgroundColor = .clear
+        self.tabBarController?.tabBar.isHidden = false
         let mapIconName = UserDefaults.standard.string(forKey: UserDefaultsManager.mapButton)
         if let mapIconName = mapIconName {
             matchButton.setImage(UIImage(named: mapIconName), for: .normal)
