@@ -93,6 +93,10 @@
 		E4EFE4A027BA2FCB00C47139 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE49F27BA2FCB00C47139 /* UITextView+Extension.swift */; };
 		E4EFE4A327BA3B8900C47139 /* ChatTableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A227BA3B8900C47139 /* ChatTableView+Extension.swift */; };
 		E4EFE4A527BA3BB800C47139 /* ChatTextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */; };
+		E4EFE4A727BA499300C47139 /* SendChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A627BA499300C47139 /* SendChatModel.swift */; };
+		E4EFE4A927BA742B00C47139 /* SocketIOMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */; };
+		E4EFE4AB27BA968600C47139 /* TempRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */; };
+		E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */; };
 		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +180,10 @@
 		E4EFE49F27BA2FCB00C47139 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		E4EFE4A227BA3B8900C47139 /* ChatTableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatTableView+Extension.swift"; sourceTree = "<group>"; };
 		E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatTextView+Extension.swift"; sourceTree = "<group>"; };
+		E4EFE4A627BA499300C47139 /* SendChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatModel.swift; sourceTree = "<group>"; };
+		E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOMananger.swift; sourceTree = "<group>"; };
+		E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempRealmModel.swift; sourceTree = "<group>"; };
+		E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +243,7 @@
 			children = (
 				E41ED02B279DD8E400A2F0CE /* SeSacURLManager.swift */,
 				E418161427ABA54100CB693A /* SeSacURLNetwork.swift */,
+				E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -492,6 +501,7 @@
 			isa = PBXGroup;
 			children = (
 				E4AF001827B1787D00D8572C /* CheckDataModel.swift */,
+				E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -520,6 +530,7 @@
 				E4B986AD27AC3286007C824B /* SeSacLoginModel.swift */,
 				E459D3EA27B8FD6B0075A17C /* SeSacStateModel.swift */,
 				E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */,
+				E4EFE4A627BA499300C47139 /* SendChatModel.swift */,
 			);
 			path = NetworkModel;
 			sourceTree = "<group>";
@@ -575,6 +586,7 @@
 				E4AF001727B1786F00D8572C /* Model */,
 				E4B986AC27AC326B007C824B /* NetworkModel */,
 				E46AF40827A84C47009F381C /* UserDefaultsManager.swift */,
+				E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -770,6 +782,7 @@
 				E459D3D427B7A0E80075A17C /* RequestSeSacViewController.swift in Sources */,
 				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
+				E4EFE4AB27BA968600C47139 /* TempRealmModel.swift in Sources */,
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
@@ -823,12 +836,15 @@
 				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
 				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
+				E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */,
 				E459D3F227B97FB20075A17C /* SendChatTableViewCell.swift in Sources */,
 				E49CE6FA27B645B5005F65AB /* HobbyCollectionViewHeader.swift in Sources */,
 				E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */,
 				E458E333279EFBAF004C68AC /* CreateNicknameViewController.swift in Sources */,
+				E4EFE4A927BA742B00C47139 /* SocketIOMananger.swift in Sources */,
 				E45256AC27AF069C00AF4130 /* Custom+View.swift in Sources */,
 				E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */,
+				E4EFE4A727BA499300C47139 /* SendChatModel.swift in Sources */,
 				E458E33D279F2016004C68AC /* EmailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

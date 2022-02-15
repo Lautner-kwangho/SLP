@@ -21,6 +21,11 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let headCell = tableView.dequeueReusableCell(withIdentifier: ChattingHeaderView.reuseIdentifier, for: indexPath) as? ChattingHeaderView else {return UITableViewCell()}
+            self.statusData.asSignal()
+                .emit(onNext: { model in
+                    headCell.chatTitle.text = "\(model.matchedNick) 유저와 매칭되었습니다"
+                })
+                .disposed(by: disposeBag)
             
             return headCell
         } else {

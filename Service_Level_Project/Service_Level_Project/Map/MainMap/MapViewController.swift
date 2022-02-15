@@ -45,7 +45,6 @@ final class MapViewController: BaseViewController {
     
     let myPlaceButton = ButtonConfiguration(customType: .h48(type: .inactive, icon: false)).then {
         $0.setImage(UIImage(named: "place"), for: .normal)
-//        let place = NMFNaverMapView().showLocationButton
     }
     
     let matchButton = UIButton().then {
@@ -74,6 +73,7 @@ final class MapViewController: BaseViewController {
         super.viewWillAppear(animated)
         mapAuthorizationStatus()
         self.navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.tabBarController?.tabBar.isHidden = false
         let mapIconName = UserDefaults.standard.string(forKey: UserDefaultsManager.mapButton)
         if let mapIconName = mapIconName {
@@ -137,12 +137,33 @@ final class MapViewController: BaseViewController {
             .asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                let hobbyVC = HobbyViewController()
+                // 화면 분기 처리
                 
-                hobbyVC.recommendHobby = self.recommendDB
-                hobbyVC.aroundHobby = self.aroundDB
-                
-                self.navigationController?.pushViewController(hobbyVC, animated: true)
+                 
+                if let mapIconName = UserDefaults.standard.string(forKey: UserDefaultsManager.mapButton) {
+                    switch mapIconName {
+                    case SeSacMapButtonImageManager.imageName(0):
+                        let vc = HobbyViewController()
+                        vc.recommendHobby = self.recommendDB
+                        vc.aroundHobby = self.aroundDB
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    case SeSacMapButtonImageManager.imageName(1):
+                        let vc = SearchFriendsViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    case SeSacMapButtonImageManager.imageName(2):
+                        let vc = ChattingViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    default:
+                        break
+                    }
+                } else {
+                    let hobbyVC = HobbyViewController()
+                    
+                    hobbyVC.recommendHobby = self.recommendDB
+                    hobbyVC.aroundHobby = self.aroundDB
+                    
+                    self.navigationController?.pushViewController(hobbyVC, animated: true)
+                }
             })
             .disposed(by: disposeBag)
         

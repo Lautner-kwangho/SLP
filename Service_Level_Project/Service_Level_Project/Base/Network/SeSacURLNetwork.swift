@@ -6,9 +6,11 @@
 //
 
 import Foundation
+
 import Alamofire
 import Firebase
 import RxSwift
+import SocketIO
 
 class SeSacURLNetwork {
     
@@ -257,6 +259,37 @@ class SeSacURLNetwork {
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SeSacStateModel.self, from: data)
+                guard let json = json else {return}
+                
+                successData(json)
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
+    // 채팅 보내기
+    func sendChat(uid: String, sendMessage: String, successData: @escaping (SendChatModel) -> (), failErrror: @escaping (String?) -> ()) {
+        let url = Point.sendChat.url.path + "\(uid)"
+        let URL = URL(string: url)!
+        
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        
+        let parameter = [
+            "chat" : "\(sendMessage)"
+        ]
+        
+        AF.request(URL, method: .post, parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets), headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData { response in
+            switch response.result {
+            case .success:
+                guard let data = response.value else { return }
+                let decoder = JSONDecoder()
+                let json = try? decoder.decode(SendChatModel.self, from: data)
                 guard let json = json else {return}
                 
                 successData(json)

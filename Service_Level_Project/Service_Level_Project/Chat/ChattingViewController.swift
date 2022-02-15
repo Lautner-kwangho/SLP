@@ -8,6 +8,7 @@
 import UIKit
 
 import RxSwift
+import RxRelay
 import RxKeyboard
 
 final class ChattingViewController: BaseViewController {
@@ -81,24 +82,100 @@ final class ChattingViewController: BaseViewController {
     }
     let chatInputSendButton = UIButton().then {
         $0.setImage(UIImage(named: "arrow.sesac"), for: .normal)
+        $0.isEnabled = false
     }
     
     //MARK: Input & Output
     let disposeBag = DisposeBag()
     
+    var tempChatData = [TempRealmModel]()
+    
+    var otherUID = String()
+    var otherUid = PublishRelay<String>()
+    var statusData = PublishRelay<SeSacStateModel>()
+    
     //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        socketConnect()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        otherUid.asSignal()
+            .emit(onNext: { [weak self] text in
+                guard let self = self else {return}
+                print("other UID :", text)
+                SeSacURLNetwork.shared.myStatus { model in
+                    self.statusData.accept(model)
+                } failErrror: { errorCode in
+                    guard let error = errorCode else {return}
+                    if error == "201" {
+                        self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
+                        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        DispatchQueue.main.async {
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
+                            windowScene.windows.first?.makeKeyAndVisible()
+                        }
+                    }
+                }
+
+            })
+            .disposed(by: disposeBag)
+        
+        statusData.asSignal()
+            .emit(onNext: { [weak self] model in
+                guard let self = self else {return}
+                self.title = model.matchedNick
+                self.otherUID = model.matchedUid
+                if model.dodged == 1 || model.reviewed == 1 {
+                    self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
+                } else {
+                    SocketIOMananger.shared.establishConnection()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        SocketIOMananger.shared.closeConnection()
+    }
+    
+    private func socketConnect() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: Notification.Name(NotificationCenterName.getMessage), object: nil)
+    }
+    
+    @objc private func getMessage(notification: NSNotification) {
+        
     }
     
     private func bind() {
-
+        chatInputSendButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                SeSacURLNetwork.shared.sendChat(uid: self.otherUID, sendMessage: self.chatInputTextView.text) { model in
+                    // 🍎 보내는 거
+                    let tempData = TempRealmModel(friendsUid: model.to, myUid: model.from, chat: model.chat, createAt: model.createdAt)
+                    self.tempChatData.append(tempData)
+                    self.chatTableView.reloadData()
+                    // 여기 스크롤도 해줘야 한다ㅏㅏㅏㅏ 잊지 말기ㅣㅣㅣㅣㅣ
+                    
+                } failErrror: { errorCode in
+                    guard let code = errorCode else {return}
+                    if code == "201" {
+                        self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다", position: .center)
+                    }
+                }
+                self.chatInputTextView.text = ""
+            })
+            .disposed(by: disposeBag)
     }
     
     override func configure() {
         view.backgroundColor = SacColor.color(.white)
-        self.title = "매칭 유저 이름"
         
         chatInputTextView.delegate = self
         
@@ -202,7 +279,12 @@ final class ChattingViewController: BaseViewController {
     }
     
     @objc private func backButtonClicked(_ sender: Any) {
-        print("뒤로 가기 버튼 클리")
+        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
+        DispatchQueue.main.async {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
     }
     
     @objc private func moreButtonClicked(_ sender: Any) {

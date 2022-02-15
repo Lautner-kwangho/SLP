@@ -37,15 +37,39 @@ final class AroundSeSacViewController: BaseViewController {
     private var tableData = [QueueData]()
     private var tableDataCount = BehaviorRelay<Bool>(value: false)
     
+    var timer = Timer()
+    
     //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        checkMyState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.friendsList()
+    }
+    
+    private func checkMyState() {
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(fiveSecondReqeustMyState), userInfo: nil, repeats: true)
+    }
+    @objc private func fiveSecondReqeustMyState() {
+        SeSacURLNetwork.shared.myStatus { model in
+            if model.matched == 1 {
+                self.view.makeToast("\(model.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다", duration: 1)
+                UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
+                self.timer.invalidate()
+                let chatView = ChattingViewController()
+                chatView.statusData.accept(model)
+                self.navigationController?.pushViewController(chatView, animated: true)
+            }
+        } failErrror: { error in
+            guard let error = error else {return}
+            
+            print("나 에러: ", error)
+        }
+
     }
     
     func bind() {
@@ -206,6 +230,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
                     self.view.makeToast("채팅방으로 이동합니다", duration: 1)
                     UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
                     let chatView = ChattingViewController()
+                    chatView.statusData.accept(model)
                     self.navigationController?.pushViewController(chatView, animated: true)
                 } else {
                     SeSacURLNetwork.shared.hobbyRequest(userID: data.uid) {
@@ -218,6 +243,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
                                 self.view.makeToast("상대방도 취미 함께 하기를 요청했습니다. 채팅방으로 이동합니다")
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     let chatView = ChattingViewController()
+                                    chatView.otherUid.accept(data.uid)
                                     self.navigationController?.pushViewController(chatView, animated: true)
                                 }
                             } failErrror: { _ in

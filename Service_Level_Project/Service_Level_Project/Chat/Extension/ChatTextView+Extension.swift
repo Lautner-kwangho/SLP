@@ -37,8 +37,10 @@ extension ChattingViewController: UITextViewDelegate {
         
         if textView.text.count > 0 {
             chatInputSendButton.setImage(UIImage(named: "arrow.sesac.fill"), for: .normal)
+            chatInputSendButton.isEnabled = true
         } else {
             chatInputSendButton.setImage(UIImage(named: "arrow.sesac"), for: .normal)
+            chatInputSendButton.isEnabled = false
         }
     }
 }

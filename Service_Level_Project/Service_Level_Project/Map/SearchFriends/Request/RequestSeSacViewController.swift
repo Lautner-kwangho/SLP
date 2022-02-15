@@ -205,6 +205,7 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
             
             SeSacURLNetwork.shared.hobbyAccept(userID: data.uid) {
                 let chatView = ChattingViewController()
+                chatView.otherUid.accept(data.uid)
                 self.navigationController?.pushViewController(chatView, animated: true)
             } failErrror: { error in
                 guard let code = error else {return}
@@ -220,6 +221,7 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
                             self.view.makeToast("채팅방으로 이동합니다", duration: 1)
                             UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
                             let chatView = ChattingViewController()
+                            chatView.statusData.accept(data)
                             self.navigationController?.pushViewController(chatView, animated: true)
                         }
                     } failErrror: { errorcode in
