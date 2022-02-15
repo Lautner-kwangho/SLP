@@ -97,6 +97,8 @@
 		E4EFE4A927BA742B00C47139 /* SocketIOMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */; };
 		E4EFE4AB27BA968600C47139 /* TempRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */; };
 		E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */; };
+		E4EFE4AF27BB586E00C47139 /* Button+Collection+(2x3).swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */; };
+		E4EFE4B127BB59F900C47139 /* Custom+TextView+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */; };
 		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +186,8 @@
 		E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOMananger.swift; sourceTree = "<group>"; };
 		E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempRealmModel.swift; sourceTree = "<group>"; };
 		E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterName.swift; sourceTree = "<group>"; };
+		E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Collection+(2x3).swift"; sourceTree = "<group>"; };
+		E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+TextView+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,6 +411,7 @@
 			children = (
 				E4C31EBD2797C27C00ACE886 /* Custom+UIButton+Rx.swift */,
 				E4B986B227AEEDBA007C824B /* Button+Collection+(3x2).swift */,
+				E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -493,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				E4AF001527B0EF1100D8572C /* Custom+Alert.swift */,
+				E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -786,6 +792,7 @@
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
+				E4EFE4AF27BB586E00C47139 /* Button+Collection+(2x3).swift in Sources */,
 				E4EFE4A527BA3BB800C47139 /* ChatTextView+Extension.swift in Sources */,
 				E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */,
 				E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */,
@@ -846,6 +853,7 @@
 				E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */,
 				E4EFE4A727BA499300C47139 /* SendChatModel.swift in Sources */,
 				E458E33D279F2016004C68AC /* EmailViewController.swift in Sources */,
+				E4EFE4B127BB59F900C47139 /* Custom+TextView+Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

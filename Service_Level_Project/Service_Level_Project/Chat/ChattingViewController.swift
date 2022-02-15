@@ -91,6 +91,7 @@ final class ChattingViewController: BaseViewController {
     var tempChatData = [TempRealmModel]()
     
     var otherUID = String()
+    var otherNICK = String()
     var otherUid = PublishRelay<String>()
     var statusData = PublishRelay<SeSacStateModel>()
     
@@ -126,6 +127,7 @@ final class ChattingViewController: BaseViewController {
                 guard let self = self else {return}
                 self.title = model.matchedNick
                 self.otherUID = model.matchedUid
+                self.otherNICK = model.matchedNick
                 if model.dodged == 1 || model.reviewed == 1 {
                     self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
                 } else {
@@ -166,6 +168,42 @@ final class ChattingViewController: BaseViewController {
                     }
                 }
                 self.chatInputTextView.text = ""
+            })
+            .disposed(by: disposeBag)
+        // 버튼 기능 구현
+        reportButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                let alertPage = SeSacTextViewAlert("새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") {
+                    self.dismiss(animated: true)
+                    // 신고 기능 구현 예정
+                }
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        cancelButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                let alertPage = SeSacAlert("약속을 취소하겠습니까?", "약속을 취소하시면 패널티가 부과됩니다") {
+                    self.dismiss(animated: true)
+                    // 약속 취소 네트워크 구현 예정
+                }
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        reviewButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else {return}
+                let alertPage = SeSacTextViewAlert("리뷰 등록", "\(self.otherNICK)님과의 취미 활동은 어떠셨나요?", "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)") {
+                    self.dismiss(animated: true)
+                    // 리뷰 기능 구현 예정
+                }
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
