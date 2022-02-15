@@ -260,11 +260,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
                 if code == "201" {
                     self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
                     UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
-                    DispatchQueue.main.async {
-                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MapViewController())
-                        windowScene.windows.first?.makeKeyAndVisible()
-                    }
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
 
