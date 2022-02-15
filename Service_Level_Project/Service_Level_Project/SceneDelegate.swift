@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
 //         여기에 작업
         
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
-        
+//
 //        if idToken == nil {
 //            window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
 //        } else {

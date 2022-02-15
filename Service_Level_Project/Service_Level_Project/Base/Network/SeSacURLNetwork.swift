@@ -17,12 +17,12 @@ class SeSacURLNetwork {
     static let shared = SeSacURLNetwork()
     
     let formatter = DateFormatter()
-    let birthday = UserDefaults.standard.string(forKey: UserDefaultsManager.birthday)!
     
     // 1차 작업
     func registMember(successData: @escaping (AFDataResponse<Data>?) -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.regist.url
-
+        let birthday = UserDefaults.standard.string(forKey: UserDefaultsManager.birthday)!
+        
         let header: HTTPHeaders = [
             "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
             "Content-Type" : "application/x-www-form-urlencoded"
@@ -72,8 +72,9 @@ class SeSacURLNetwork {
     // 1차 작업
     func loginMember(successData: @escaping (SeSacLoginModel?) -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.regist.url
+        guard let idtoken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken) else {return}
         let header: HTTPHeaders = [
-            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "idtoken" : "\(idtoken)",
             "Content-Type" : "application/x-www-form-urlencoded"
         ]
         let dataRequest = AF.request(URL, method: .get, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200)
@@ -207,7 +208,6 @@ class SeSacURLNetwork {
             }
         }
     }
-    
     // 친구 요청하기
     func hobbyRequest(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.hobbyRequest.url
@@ -228,7 +228,6 @@ class SeSacURLNetwork {
             }
         }
     }
-    
     // 친구 수락하기
     func hobbyAccept(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.hobbyRequest.url
@@ -253,7 +252,7 @@ class SeSacURLNetwork {
     func myStatus(successData: @escaping (SeSacStateModel) -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.queueState.url
         
-        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .post) { response in
+        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .get) { response in
             switch response.result {
             case .success:
                 guard let data = response.value else { return }
@@ -264,7 +263,6 @@ class SeSacURLNetwork {
                 successData(json)
             case let .failure(error):
                 guard let errorCode = error.responseCode else { return }
-                print(errorCode)
                 let status = self.checkError(errorCode)
                 failErrror(status)
             }
@@ -301,6 +299,74 @@ class SeSacURLNetwork {
             }
         }
     }
+    // 약속 취소
+    func cancelApointment(uid: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
+        let URL = Point.cancelApointment.url
+        let paramters = [
+            "otheruid" : "\(uid)"
+        ]
+        SeSacURLNetwork.callNetwork(url: URL, parameter: paramters, method: .post) { response in
+            switch response.result {
+            case .success:
+                successData()
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
+    
+    // * 신고하기 기능
+    func reportUser(otherUid: String ,report: [Int], comment: String, successData: @escaping () -> ()) {
+        let comment = comment == "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다" ? "" : comment
+        let URL = Point.reportUser.url
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        let paramters: Parameters? = [
+           "otheruid" : "\(otherUid)",
+           "reportedReputation" : report,
+           "comment" : comment
+        ]
+        
+        AF.request(URL, method: .post, parameters: paramters, encoding: URLEncoding(arrayEncoding: .noBrackets), headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData { response in
+            switch response.result {
+            case .success:
+                successData()
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+            }
+        }
+    }
+    // * 리뷰하기 기능
+    func reviewUser(otherUid: String ,report: [Int], comment: String, successData: @escaping () -> ()) {
+        let comment = comment == "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)" ? "" : comment
+        let url = Point.review.url.path + "\(otherUid)"
+        let URL = URL(string: url)!
+        
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        let paramters: Parameters? = [
+           "otheruid" : "\(otherUid)",
+           "reportedReputation" : report,
+           "comment" : comment
+        ]
+        
+        AF.request(URL, method: .post, parameters: paramters, encoding: URLEncoding(arrayEncoding: .noBrackets), headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData { response in
+            switch response.result {
+            case .success:
+                successData()
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+            }
+        }
+    }
     
     // 취미 함께할 친구 검색 (메인 맵 페이지)
     static func friendsWithMe(region: Int, latitude: Double, longitude: Double) {
@@ -313,7 +379,7 @@ class SeSacURLNetwork {
         ]
         SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
             switch response.result {
-            case .success(let success):
+            case .success:
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SeSacSearchFreindsModel.self, from: data)

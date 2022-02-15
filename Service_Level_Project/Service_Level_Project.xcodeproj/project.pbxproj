@@ -99,6 +99,11 @@
 		E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */; };
 		E4EFE4AF27BB586E00C47139 /* Button+Collection+(2x3).swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */; };
 		E4EFE4B127BB59F900C47139 /* Custom+TextView+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */; };
+		E4EFE4B527BBE7C500C47139 /* UserImageShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4B427BBE7C500C47139 /* UserImageShopCell.swift */; };
+		E4EFE4B727BBE7FF00C47139 /* UserImageBackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4B627BBE7FF00C47139 /* UserImageBackgroundCell.swift */; };
+		E4EFE4B927BBE89800C47139 /* UserImageShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4B827BBE89800C47139 /* UserImageShopViewController.swift */; };
+		E4EFE4BB27BBE8C700C47139 /* UserImageBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4BA27BBE8C700C47139 /* UserImageBackgroundViewController.swift */; };
+		E4EFE4BD27BBEAC000C47139 /* UserImageBackground+TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4BC27BBEAC000C47139 /* UserImageBackground+TableView+Extension.swift */; };
 		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +193,11 @@
 		E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterName.swift; sourceTree = "<group>"; };
 		E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Collection+(2x3).swift"; sourceTree = "<group>"; };
 		E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+TextView+Alert.swift"; sourceTree = "<group>"; };
+		E4EFE4B427BBE7C500C47139 /* UserImageShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageShopCell.swift; sourceTree = "<group>"; };
+		E4EFE4B627BBE7FF00C47139 /* UserImageBackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageBackgroundCell.swift; sourceTree = "<group>"; };
+		E4EFE4B827BBE89800C47139 /* UserImageShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageShopViewController.swift; sourceTree = "<group>"; };
+		E4EFE4BA27BBE8C700C47139 /* UserImageBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageBackgroundViewController.swift; sourceTree = "<group>"; };
+		E4EFE4BC27BBEAC000C47139 /* UserImageBackground+TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserImageBackground+TableView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +536,8 @@
 			isa = PBXGroup;
 			children = (
 				E4AF002327B2727400D8572C /* ShopViewController.swift */,
+				E4EFE4B227BBE79100C47139 /* UserImage */,
+				E4EFE4B327BBE79D00C47139 /* UserBackground */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -632,6 +644,25 @@
 				E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E4EFE4B227BBE79100C47139 /* UserImage */ = {
+			isa = PBXGroup;
+			children = (
+				E4EFE4B827BBE89800C47139 /* UserImageShopViewController.swift */,
+				E4EFE4B427BBE7C500C47139 /* UserImageShopCell.swift */,
+			);
+			path = UserImage;
+			sourceTree = "<group>";
+		};
+		E4EFE4B327BBE79D00C47139 /* UserBackground */ = {
+			isa = PBXGroup;
+			children = (
+				E4EFE4BA27BBE8C700C47139 /* UserImageBackgroundViewController.swift */,
+				E4EFE4BC27BBEAC000C47139 /* UserImageBackground+TableView+Extension.swift */,
+				E4EFE4B627BBE7FF00C47139 /* UserImageBackgroundCell.swift */,
+			);
+			path = UserBackground;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -782,6 +813,7 @@
 				E459D3DD27B7E2E60075A17C /* AroundSeSacViewModel.swift in Sources */,
 				E459D3E227B7E4200075A17C /* ReviewViewController.swift in Sources */,
 				E4B986AE27AC3286007C824B /* SeSacLoginModel.swift in Sources */,
+				E4EFE4B727BBE7FF00C47139 /* UserImageBackgroundCell.swift in Sources */,
 				E41ED019279DA56600A2F0CE /* AuthPhoneViewController.swift in Sources */,
 				E459D3D827B7B41F0075A17C /* SearchFriendsTableCell.swift in Sources */,
 				E4AF002427B2727400D8572C /* ShopViewController.swift in Sources */,
@@ -804,6 +836,7 @@
 				E49CE70427B6BFB7005F65AB /* SearchFriendsViewController.swift in Sources */,
 				E458E342279F2518004C68AC /* SelectGenderViewController.swift in Sources */,
 				E4B986B027AC6811007C824B /* MyInfoHeaderView.swift in Sources */,
+				E4EFE4B927BBE89800C47139 /* UserImageShopViewController.swift in Sources */,
 				E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */,
 				E458E338279F0DC2004C68AC /* BirthdayViewController.swift in Sources */,
 				E459D3E627B82F5E0075A17C /* ReviewTableCell.swift in Sources */,
@@ -827,6 +860,7 @@
 				E4335D7C27B2CAD400245879 /* MapViewModel.swift in Sources */,
 				E458E344279F253E004C68AC /* SelectGenderViewModel.swift in Sources */,
 				E41ED01B279DB78F00A2F0CE /* AuthPhoneMessageViewController.swift in Sources */,
+				E4EFE4BB27BBE8C700C47139 /* UserImageBackgroundViewController.swift in Sources */,
 				E458E33A279F0DF8004C68AC /* BirthdayViewModel.swift in Sources */,
 				E415B93027B5396600831D50 /* Image+Extension.swift in Sources */,
 				E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */,
@@ -845,12 +879,14 @@
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
 				E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */,
 				E459D3F227B97FB20075A17C /* SendChatTableViewCell.swift in Sources */,
+				E4EFE4BD27BBEAC000C47139 /* UserImageBackground+TableView+Extension.swift in Sources */,
 				E49CE6FA27B645B5005F65AB /* HobbyCollectionViewHeader.swift in Sources */,
 				E418161527ABA54100CB693A /* SeSacURLNetwork.swift in Sources */,
 				E458E333279EFBAF004C68AC /* CreateNicknameViewController.swift in Sources */,
 				E4EFE4A927BA742B00C47139 /* SocketIOMananger.swift in Sources */,
 				E45256AC27AF069C00AF4130 /* Custom+View.swift in Sources */,
 				E47AB08B2799D28F001A50A1 /* AuthBaseViewController.swift in Sources */,
+				E4EFE4B527BBE7C500C47139 /* UserImageShopCell.swift in Sources */,
 				E4EFE4A727BA499300C47139 /* SendChatModel.swift in Sources */,
 				E458E33D279F2016004C68AC /* EmailViewController.swift in Sources */,
 				E4EFE4B127BB59F900C47139 /* Custom+TextView+Alert.swift in Sources */,

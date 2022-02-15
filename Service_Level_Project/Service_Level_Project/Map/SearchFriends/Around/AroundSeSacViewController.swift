@@ -52,10 +52,12 @@ final class AroundSeSacViewController: BaseViewController {
     }
     
     private func checkMyState() {
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(fiveSecondReqeustMyState), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(fiveSecondReqeustMyState), userInfo: nil, repeats: true)
     }
+    
     @objc private func fiveSecondReqeustMyState() {
         SeSacURLNetwork.shared.myStatus { model in
+            print("반복되는 모델",model)
             if model.matched == 1 {
                 self.view.makeToast("\(model.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다", duration: 1)
                 UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
@@ -66,10 +68,8 @@ final class AroundSeSacViewController: BaseViewController {
             }
         } failErrror: { error in
             guard let error = error else {return}
-            
             print("나 에러: ", error)
         }
-
     }
     
     func bind() {
@@ -117,7 +117,7 @@ final class AroundSeSacViewController: BaseViewController {
                     self.tableData.append(data)
                     self.tableDataCount.accept(true)
                 }
-                print("주변 데이터 : ", self.tableData)
+                print("주변데이터 : ", self.tableData)
                 self.aroundTableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -198,16 +198,18 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
         cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[3])
         cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[4])
         cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[5])
-        
-        var hobby = [String]()
-        data.hf.forEach { text in
-            if text == "anything" {
-                hobby.append("아무거나")
-            } else {
-                hobby.append(text)
+        DispatchQueue.global().sync {
+            var hobby = [String]()
+            data.hf.forEach { text in
+                if text == "anything" {
+                    hobby.append("아무거나")
+                } else {
+                    hobby.append(text)
+                }
             }
+            print("취미 활동 확인하기 \(indexPath.row): ", hobby)
+            cell.addButtonTitle.accept(hobby)
         }
-        cell.addButtonTitle.accept(hobby)
         
         let review = data.reviews.first == nil ? "첫 리뷰를 기다리는 중이에요" : data.reviews.first
         cell.aroundView.userReview.text = review

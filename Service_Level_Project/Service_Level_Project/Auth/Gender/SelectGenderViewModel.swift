@@ -53,7 +53,7 @@ class SelectGenderViewModel {
                     
                     DispatchQueue.main.async {
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
+                        windowScene.windows.first?.rootViewController = BaseTabBarViewController()
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 } failErrror: { error in

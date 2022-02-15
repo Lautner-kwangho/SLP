@@ -90,6 +90,7 @@ final class ChattingViewController: BaseViewController {
     
     var tempChatData = [TempRealmModel]()
     
+    var toastMessage = String()
     var otherUID = String()
     var otherNICK = String()
     var otherUid = PublishRelay<String>()
@@ -174,9 +175,10 @@ final class ChattingViewController: BaseViewController {
         reportButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                let alertPage = SeSacTextViewAlert("새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") {
-                    self.dismiss(animated: true)
-                    // 신고 기능 구현 예정
+                let alertPage = SeSacTextViewAlert("새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") { array, text in
+                    SeSacURLNetwork.shared.reportUser(otherUid: self.otherUID, report: array, comment: text) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
                 alertPage.modalPresentationStyle = .overFullScreen
                 self.present(alertPage, animated: true, completion: nil)
@@ -187,8 +189,27 @@ final class ChattingViewController: BaseViewController {
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
                 let alertPage = SeSacAlert("약속을 취소하겠습니까?", "약속을 취소하시면 패널티가 부과됩니다") {
-                    self.dismiss(animated: true)
-                    // 약속 취소 네트워크 구현 예정
+                    SeSacURLNetwork.shared.cancelApointment(uid: self.otherUID) {
+                        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        self.dismiss(animated: true)
+                    } failErrror: { errorCode in
+                        guard let error = errorCode else {return}
+                        switch error {
+                        case "201":
+                            self.toastMessage = "잘못된 회원입니다"
+                        case "406":
+                            self.toastMessage = "상대방이 약속을 취소했기 때문에 패널티가 부과되지 않습니다"
+                        default:
+                            self.toastMessage = "잠시 후 재시도 해주시길 바랍니다"
+                        }
+                        // Toast Message
+                        let alertPage = SeSacAlert("약속을 종료하시겠습니까", "\(self.toastMessage)") {
+                            self.dismiss(animated: true)
+                        }
+                        alertPage.cancelButton.isHidden = true
+                        alertPage.modalPresentationStyle = .overFullScreen
+                        self.present(alertPage, animated: true, completion: nil)
+                    }
                 }
                 alertPage.modalPresentationStyle = .overFullScreen
                 self.present(alertPage, animated: true, completion: nil)
@@ -198,9 +219,12 @@ final class ChattingViewController: BaseViewController {
         reviewButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                let alertPage = SeSacTextViewAlert("리뷰 등록", "\(self.otherNICK)님과의 취미 활동은 어떠셨나요?", "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)") {
-                    self.dismiss(animated: true)
-                    // 리뷰 기능 구현 예정
+                let alertPage = SeSacTextViewAlert("리뷰 등록", "\(self.otherNICK)님과의 취미 활동은 어떠셨나요?", "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)") { array, text in
+                    SeSacURLNetwork.shared.reviewUser(otherUid: self.otherUID, report: array, comment: text) {
+                        self.dismiss(animated: true, completion: nil)
+                        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 }
                 alertPage.modalPresentationStyle = .overFullScreen
                 self.present(alertPage, animated: true, completion: nil)

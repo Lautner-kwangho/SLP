@@ -49,6 +49,7 @@ final class MyInfoViewModel: BaseViewModel {
         MyInfoViewModel.myData.asDriver()
             .drive(onNext: { [weak self] model in
                 self?.userName = model.nick
+                UserDefaults.standard.set(model.uid, forKey: UserDefaultsManager.uid)
             })
             .disposed(by: disposeBag)
         

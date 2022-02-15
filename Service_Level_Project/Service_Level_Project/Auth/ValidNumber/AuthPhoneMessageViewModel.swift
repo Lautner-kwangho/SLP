@@ -121,13 +121,10 @@ class AuthPhoneMessageViewModel {
 //                    print("id 토큰 프린트 : ", idToken)
 //                    dump(authResult.user.refreshToken)
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.global().sync {
                     
                         let currentUser = Auth.auth().currentUser
                         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                            // 내가 이상하게 생각하고 있는지 모르겠는데 guard let 써서 내려가면 에러 없는 경우에 내려가야 정상일텐데 이건 nil로 들어가서 바로 중지네;
-//                            guard let error = error else {
-//                                let authError = error as! NSError
                             guard let idToken = idToken else { return }
                             UserDefaults.standard.set(idToken, forKey: UserDefaultsManager.authIdToken)
                         }

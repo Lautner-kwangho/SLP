@@ -66,7 +66,7 @@ class SearchFriendsViewController: TabmanViewController {
     
     @objc private func stopButtonClicked(_ sender: Any) {
         SeSacURLNetwork.shared.friendsRequestStop {
-            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                    UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
             self.navigationController?.popToRootViewController(animated: true)
         } failErrror: { errorCode in
             guard let code = errorCode else {return}

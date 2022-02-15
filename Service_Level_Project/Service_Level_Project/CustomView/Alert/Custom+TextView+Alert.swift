@@ -52,23 +52,56 @@ class SeSacTextViewAlert: BaseViewController {
     
     let submitButton = ButtonConfiguration(customType: .h48(type: .disable, icon: false)).then {
         $0.setTitle("확인", for: .normal)
+        $0.isEnabled = false
     }
     
     var placeholder = ""
+    var textFieldText = String()
+    var clickArray = [Int]()
     var disposeBag = DisposeBag()
-    typealias completion = (() -> Void)
+    typealias completion = (([Int], String) -> Void)
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    convenience init(_ title: String, _ content: String, _ placeholder: String, submitAction: @escaping completion) {
+    convenience init(_ title: String, _ content: String, _ placeholder: String, clickAction: @escaping completion) {
         self.init()
 
         self.placeholder = placeholder
         setConstraints()
         configure(title: title, content: content, placeholder: placeholder)
-        buttonClick(action: submitAction)
+        setAlertSignButton()
+        buttonClick(action: clickAction)
+    }
+    
+    func setAlertSignButton() {
+        let first = alertSignButton.firstLeftButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let second = alertSignButton.firstMiddelButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let third = alertSignButton.firstRightButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let fourth = alertSignButton.lastLeftButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let fivth = alertSignButton.lastMiddleButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let sixth = alertSignButton.lastRightButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        
+        Observable.combineLatest(first, second, third, fourth, fivth, sixth)
+            .asDriver(onErrorJustReturn: (false, false, false, false, false, false))
+            .drive(onNext: { [weak self] one, two, three, four, five, six in
+                guard let self = self else {return}
+                self.clickArray = []
+                [one, two, three, four, five, six].forEach { state in
+                    let number = state ? 1 : 0
+                    self.clickArray.append(number)
+                }
+                let status = self.clickArray.contains(1)
+                if status {
+                    self.submitButton.customLayout(.fill)
+                    self.submitButton.isEnabled = true
+                } else {
+                    self.submitButton.customLayout(.disable)
+                    self.submitButton.isEnabled = false
+                }
+                
+            }).disposed(by: disposeBag)
     }
     
     // 음 그냥 Static으로 빼도 됐으려나 일단 사용해보면서 고민해보기
@@ -81,9 +114,20 @@ class SeSacTextViewAlert: BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        self.signTextview.rx.text.asDriver()
+            .drive(onNext: { [weak self] text in
+                guard let self = self else {return}
+                guard let text = text else {return}
+                self.textFieldText = text
+            })
+            .disposed(by: disposeBag)
+        
         self.submitButton.rx.tap
             .asDriver()
-            .drive(onNext: action)
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                action(self.clickArray, self.textFieldText)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -166,20 +210,13 @@ extension SeSacTextViewAlert: UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.text.count > 0 {
-            self.submitButton.customLayout(.fill)
-        } else {
-            self.submitButton.customLayout(.disable)
-        }
-    }
-    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let text = textView.text ?? ""
         guard let range = Range(range, in: text)
         else {return false}
         
         let inputText = text.replacingCharacters(in: range, with: text)
-        return inputText.count <= 500
+        let limitCount = self.placeholder == "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다" ? 300 : 500
+        return inputText.count <= limitCount
     }
 }
