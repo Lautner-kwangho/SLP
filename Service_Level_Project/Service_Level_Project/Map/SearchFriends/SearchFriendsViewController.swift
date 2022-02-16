@@ -9,7 +9,7 @@ import UIKit
 import Tabman
 import Pageboy
 
-class SearchFriendsViewController: TabmanViewController {
+final class SearchFriendsViewController: TabmanViewController {
     
     private var viewController = [AroundSeSacViewController(), RequestSeSacViewController()]
     
@@ -102,6 +102,4 @@ extension SearchFriendsViewController: PageboyViewControllerDataSource, TMBarDat
         let title = index == 0 ? "주변 새싹" : "받은 요청"
         return TMBarItem(title: title)
     }
-    
-    
 }

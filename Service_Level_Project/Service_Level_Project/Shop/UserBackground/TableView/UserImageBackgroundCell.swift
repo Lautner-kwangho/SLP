@@ -9,7 +9,10 @@ import UIKit
 
 class UserImageBackgroundCell: UITableViewCell {
     let backgroundImage = UIImageView().then {
-        $0.backgroundColor = .gray
+        $0.image = SeSacUserBackgroundImageManager.image(0)
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 8
     }
     
     let backgroundTitle = UILabel().then {
@@ -31,13 +34,15 @@ class UserImageBackgroundCell: UITableViewCell {
     }
     let backgroundPrice = UILabel().then {
         $0.text = "보유"
-        $0.backgroundColor = SacColor.color(.gray2)
+        $0.backgroundColor = SacColor.color(.green)
         let lineHeight = $0.setLineHeight(font: .title5_M)
         $0.attributedText = lineHeight
         $0.numberOfLines = 0
-        $0.textColor = SacColor.color(.gray7)
+        $0.textColor = SacColor.color(.white)
         $0.textAlignment = .center
         $0.font = Font.title5_M12()
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 10
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -48,39 +53,34 @@ class UserImageBackgroundCell: UITableViewCell {
     
     private func setConstraints() {
         addSubview(backgroundImage)
-//        contentView.addSubview(backgroundTitle)
-//        contentView.addSubview(backgroundContent)
-//        contentView.addSubview(backgroundPrice)
+        addSubview(backgroundTitle)
+        addSubview(backgroundContent)
+        addSubview(backgroundPrice)
         
         backgroundImage.snp.makeConstraints { make in
             make.top.equalTo(self).inset(17)
-            make.height.equalTo(100)
             make.leading.equalTo(self).inset(17)
             make.bottom.equalTo(self).inset(16)
-            make.trailing.equalTo(self.snp.trailing).dividedBy(2.2)
-//            make.centerY.equalTo(self)
-//            make.height.equalTo(100)
-//            make.width.equalTo(self.frame.width * 0.44)
-//            make.height.equalTo(100)
+            make.trailing.equalTo(self.snp.trailing).dividedBy(2.1)
+            make.width.equalTo(self.frame.width * 0.44)
         }
         
-//        backgroundTitle.snp.makeConstraints { make in
-//            make.leading.equalTo(backgroundImage.snp.trailing).offset(12)
-//            make.centerY.equalTo(backgroundImage)
-////            make.centerY.equalTo(self.snp.centerY).multipliedBy(0.43)
-//        }
-//        
-//        backgroundPrice.snp.makeConstraints { make in
-//            make.trailing.equalTo(self).inset(17)
-//            make.top.equalTo(backgroundTitle)
-//            make.centerY.equalTo(backgroundTitle)
-//        }
-//        backgroundContent.snp.makeConstraints { make in
-//            make.leading.equalTo(backgroundTitle)
-//            make.trailing.equalTo(backgroundPrice)
-//            make.top.equalTo(backgroundTitle.snp.bottom).offset(8)
-//        }
+        backgroundTitle.snp.makeConstraints { make in
+            make.leading.equalTo(backgroundImage.snp.trailing).offset(12)
+            make.centerY.equalTo(self.snp.centerY).multipliedBy(0.8)
+        }
         
+        backgroundPrice.snp.makeConstraints { make in
+            make.trailing.equalTo(self).inset(17)
+            make.top.equalTo(backgroundTitle)
+            make.centerY.equalTo(backgroundTitle)
+            make.width.equalTo(52)
+        }
+        backgroundContent.snp.makeConstraints { make in
+            make.leading.equalTo(backgroundTitle)
+            make.trailing.equalTo(backgroundPrice)
+            make.top.equalTo(backgroundTitle.snp.bottom).offset(8)
+        }
         
     }
     

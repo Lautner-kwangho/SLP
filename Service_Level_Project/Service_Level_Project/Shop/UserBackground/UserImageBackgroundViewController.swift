@@ -10,7 +10,9 @@ import UIKit
 class UserImageBackgroundViewController: BaseViewController {
     let userImageTableView = UITableView().then {
         $0.register(UserImageBackgroundCell.self, forCellReuseIdentifier: UserImageBackgroundCell.reuseIdentifier)
+        $0.showsVerticalScrollIndicator = false
     }
+    let viewModel = UserImageBackgroundViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +27,7 @@ class UserImageBackgroundViewController: BaseViewController {
     override func setConstraints() {
         view.addSubview(userImageTableView)
         userImageTableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

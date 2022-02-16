@@ -8,15 +8,29 @@
 import UIKit
 
 class UserImageShopViewController: BaseViewController {
+    
+    let userImageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        let layer = UICollectionViewFlowLayout()
+        layer.scrollDirection = .vertical
+        $0.collectionViewLayout = layer
+        $0.register(UserImageShopCell.self, forCellWithReuseIdentifier: UserImageShopCell.reuseIdentifier)
+        $0.showsVerticalScrollIndicator = false
+    }
+    
+    let viewModel = UserImageShopViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func configure() {
-         
+        userImageCollectionView.delegate = self
+        userImageCollectionView.dataSource = self
     }
     
     override func setConstraints() {
-         
+        view.addSubview(userImageCollectionView)
+        userImageCollectionView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
