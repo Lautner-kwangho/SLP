@@ -126,6 +126,7 @@ final class ChattingViewController: BaseViewController {
         statusData.asSignal()
             .emit(onNext: { [weak self] model in
                 guard let self = self else {return}
+                
                 self.title = model.matchedNick
                 self.otherUID = model.matchedUid
                 self.otherNICK = model.matchedNick

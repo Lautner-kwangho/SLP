@@ -18,6 +18,24 @@ class SeSacURLNetwork {
     
     let formatter = DateFormatter()
     
+    //fcm 토큰 갱신 : 홈화면 들어와서 흠...
+    func updateFCMToken() {
+        let URL = Point.updateFCMToken.url
+        guard let fcmToken = UserDefaults.standard.string(forKey: UserDefaultsManager.fcmToken) else { return }
+        let parameter = [
+            "FCMtoken": "\(fcmToken)"
+        ]
+        SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .put) { response in
+            switch response.result {
+            case .success:
+                print("토큰 업데이트 성공")
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print("토큰 업데이트 실패: ", errorCode)
+            }
+        }
+    }
+    
     // 1차 작업
     func registMember(successData: @escaping (AFDataResponse<Data>?) -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.regist.url
@@ -103,22 +121,17 @@ class SeSacURLNetwork {
         }
     }
     // 2차 작업 : 3차요청에서는 조금 더 반복된 내용 줄여서 사용하면 될 거 같은데
-    func withdraw() {
+    func withdraw(successData: @escaping () -> ()) {
         let URL = Point.withdraw.url
-        let header: HTTPHeaders = [
-            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
-            "Content-Type" : "application/x-www-form-urlencoded"
-        ]
-        let withdrawRequest = AF.request(URL, method: .post, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200)
-            
-            withdrawRequest.responseData { response in
+        
+        SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .post) { response in
             switch response.result {
             case .success(_):
-                guard let data = response.value else { return }
+                successData()
             case let .failure(error):
                 guard let errorCode = error.responseCode else { return }
                 let status = self.checkError(errorCode)
-                print(status)
+                print("탈퇴 에러 ",status)
             }
         }
     }
@@ -157,7 +170,7 @@ class SeSacURLNetwork {
             "Content-Type" : "application/x-www-form-urlencoded"
         ]
         let parameter: Parameters? = parameter
-        AF.request(URL, method: method, parameters: parameter, headers: header, interceptor: checkSesacNetWork() ).validate(statusCode: 200...200).responseData(completionHandler: handler)
+        AF.request(URL, method: method, parameters: parameter, headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData(completionHandler: handler)
     }
     
     // 취미 친구 찾기
@@ -231,12 +244,14 @@ class SeSacURLNetwork {
     // 친구 수락하기
     func hobbyAccept(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.hobbyRequest.url
-        
+        print("수락하기에서 받은 모델 데이터",userID)
         let parameter: Parameters = [
           "otheruid": "\(userID)"
         ]
         
         SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
+            print("수락하기에서 받은 모델 데이터",response.response?.statusCode)
+            print("수락하기에서 받은 모델 데이터",response.request?.headers)
             switch response.result {
             case .success:
                 successData()
@@ -254,12 +269,11 @@ class SeSacURLNetwork {
         
         SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .get) { response in
             switch response.result {
-            case .success:
+            case .success(let succe):
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SeSacStateModel.self, from: data)
                 guard let json = json else {return}
-                
                 successData(json)
             case let .failure(error):
                 guard let errorCode = error.responseCode else { return }

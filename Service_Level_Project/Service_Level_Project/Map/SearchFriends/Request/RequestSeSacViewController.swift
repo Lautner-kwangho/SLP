@@ -202,7 +202,7 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
         let buttonTag = sender.tag
         let data = self.tableData[buttonTag]
         let alertPage = SeSacAlert("취미 같이 하기를 수락할까요?", "요청을 수락하면 채팅창에서 대화를 나눌 수 있어요") {
-            
+            print("나도 수락한 모델이야", data.uid)
             SeSacURLNetwork.shared.hobbyAccept(userID: data.uid) {
                 let chatView = ChattingViewController()
                 chatView.otherUid.accept(data.uid)

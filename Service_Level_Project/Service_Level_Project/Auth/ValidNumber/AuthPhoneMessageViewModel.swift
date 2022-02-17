@@ -127,6 +127,7 @@ class AuthPhoneMessageViewModel {
                         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
                             guard let idToken = idToken else { return }
                             UserDefaults.standard.set(idToken, forKey: UserDefaultsManager.authIdToken)
+                            UserDefaults.standard.set(true, forKey: UserDefaultsManager.onboarding)
                         }
                     
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }

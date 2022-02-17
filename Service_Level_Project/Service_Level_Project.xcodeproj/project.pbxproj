@@ -56,6 +56,7 @@
 		E459D3F027B97B090075A17C /* ReceiveChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3EF27B97B090075A17C /* ReceiveChatTableViewCell.swift */; };
 		E459D3F227B97FB20075A17C /* SendChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3F127B97FB10075A17C /* SendChatTableViewCell.swift */; };
 		E459D3F627B993B70075A17C /* ChattingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E459D3F527B993B70075A17C /* ChattingHeaderView.swift */; };
+		E45E7AED27BCDFEA007383D0 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45E7AEC27BCDFEA007383D0 /* OnBoardingViewController.swift */; };
 		E461BFEF27AFFEFF00840173 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = E461BFEE27AFFEFF00840173 /* MultiSlider */; };
 		E46AF40227A3A780009F381C /* ViewModel+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */; };
 		E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46AF40827A84C47009F381C /* UserDefaultsManager.swift */; };
@@ -156,6 +157,7 @@
 		E459D3EF27B97B090075A17C /* ReceiveChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveChatTableViewCell.swift; sourceTree = "<group>"; };
 		E459D3F127B97FB10075A17C /* SendChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatTableViewCell.swift; sourceTree = "<group>"; };
 		E459D3F527B993B70075A17C /* ChattingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingHeaderView.swift; sourceTree = "<group>"; };
+		E45E7AEC27BCDFEA007383D0 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		E46AF40127A3A780009F381C /* ViewModel+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Protocol.swift"; sourceTree = "<group>"; };
 		E46AF40827A84C47009F381C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E46ECD3127BC7880001B8612 /* UserImageShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageShopViewModel.swift; sourceTree = "<group>"; };
@@ -424,6 +426,14 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		E45E7AEB27BCDFD1007383D0 /* OnBoarding View */ = {
+			isa = PBXGroup;
+			children = (
+				E45E7AEC27BCDFEA007383D0 /* OnBoardingViewController.swift */,
+			);
+			path = "OnBoarding View";
+			sourceTree = "<group>";
+		};
 		E46AF3FF27A3A738009F381C /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,6 +616,7 @@
 		E4C31EB52796D59700ACE886 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E45E7AEB27BCDFD1007383D0 /* OnBoarding View */,
 				E46AF40327A3A92D009F381C /* View */,
 				E46AF40427A3A935009F381C /* Protocol */,
 				E46AF40527A3A941009F381C /* Extension(Enum) */,
@@ -890,6 +901,7 @@
 				E459C3D727AA9F110084FE0C /* MyInfoViewModel.swift in Sources */,
 				E415B93527B56D1A00831D50 /* HobbyViewModel.swift in Sources */,
 				E459C3D927AAB77D0084FE0C /* MyInfoCell.swift in Sources */,
+				E45E7AED27BCDFEA007383D0 /* OnBoardingViewController.swift in Sources */,
 				E41ED02E279DE59C00A2F0CE /* AuthPhoneMessageViewModel.swift in Sources */,
 				E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */,
 				E459D3F027B97B090075A17C /* ReceiveChatTableViewCell.swift in Sources */,

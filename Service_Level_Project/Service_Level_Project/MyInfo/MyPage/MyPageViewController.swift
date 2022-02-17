@@ -199,7 +199,11 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 4 {
             let alertPage = SeSacAlert("정말 탈퇴하시겠습니까?", "탈퇴하시면 새싹 프렌즈를 이용할실 수 없어요 ㅜㅜ\noh nooooooo") {
-                SeSacURLNetwork.shared.withdraw()
+                SeSacURLNetwork.shared.withdraw {
+                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                        UserDefaults.standard.removeObject(forKey: key.description)
+                    }
+                }
                 self.dismiss(animated: true) {
                     DispatchQueue.main.async {
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }

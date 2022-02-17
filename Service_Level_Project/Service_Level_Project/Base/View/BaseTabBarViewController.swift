@@ -27,7 +27,7 @@ final class BaseTabBarViewController: UITabBarController {
         
         setViewControllers([first, second, third], animated: true)
         
-        selectedIndex = 0 // 2로 바꿔주기
+        selectedIndex = 2 // 2로 바꿔주기
         
         tabBar.barTintColor = SacColor.color(.white)
         tabBar.backgroundColor = SacColor.color(.white)

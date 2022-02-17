@@ -50,6 +50,10 @@ final class AroundSeSacViewController: BaseViewController {
         super.viewWillAppear(animated)
         viewModel.friendsList()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        timer.invalidate()
+    }
     
     private func checkMyState() {
         timer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(fiveSecondReqeustMyState), userInfo: nil, repeats: true)
@@ -69,6 +73,18 @@ final class AroundSeSacViewController: BaseViewController {
         } failErrror: { error in
             guard let error = error else {return}
             print("나 에러: ", error)
+            switch error {
+            case "201":
+                let alertPage = SeSacAlert("친구 찾기 중단","오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다") {
+                    self.timer.invalidate()
+                    self.dismiss(animated: true)
+                }
+                alertPage.cancelButton.isHidden = true
+                alertPage.modalPresentationStyle = .overFullScreen
+                self.present(alertPage, animated: true, completion: nil)
+            default:
+                break
+            }
         }
     }
     
@@ -201,7 +217,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
         DispatchQueue.global().sync {
             var hobby = [String]()
             data.hf.forEach { text in
-                if text == "anything" {
+                if text.lowercased() == "anything" {
                     hobby.append("아무거나")
                 } else {
                     hobby.append(text)
@@ -228,6 +244,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
         let data = self.tableData[buttonTag]
         let alertPage = SeSacAlert("취미 같이 하기를 요청할게요!", "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요") {
             SeSacURLNetwork.shared.myStatus { model in
+                print("나 주변 보낸 모델이야", model)
                 if model.matched == 1 {
                     self.view.makeToast("채팅방으로 이동합니다", duration: 1)
                     UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
@@ -259,6 +276,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
                 }
             } failErrror: { errorcode in
                 guard let code = errorcode else {return}
+                print("나 주변 보낸 모델이야", code)
                 if code == "201" {
                     self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
                     UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)

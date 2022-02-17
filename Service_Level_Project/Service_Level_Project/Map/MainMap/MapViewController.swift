@@ -66,7 +66,9 @@ final class MapViewController: BaseViewController {
         super.viewDidLoad()
         bind()
         
+        //FCM Token
         print("내 id 토큰 :",UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken))
+        SeSacURLNetwork.shared.updateFCMToken()
     }
     
     override func viewWillAppear(_ animated: Bool) {

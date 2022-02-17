@@ -9,6 +9,8 @@ import Foundation
 
 //enum으로 처리해줘도 될 듯
 class UserDefaultsManager {
+    static let onboarding = "onboarding"
+    
     static let idToken = "idToken"
     static let authIdToken = "authIdToken"
     static let fcmToken = "fcmToken"
