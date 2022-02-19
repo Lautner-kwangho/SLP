@@ -39,6 +39,7 @@ class SeSacTextViewAlert: BaseViewController {
         $0.font = Font.title4_R14()
     }
     
+    let alartReviewButton = ButtonCollection(isEnable: true)
     let alertSignButton = ButtonSignCollection(isEnable: true)
     
     let signTextview = UITextView().then {
@@ -65,17 +66,71 @@ class SeSacTextViewAlert: BaseViewController {
         super.viewDidLoad()
     }
     
-    convenience init(_ title: String, _ content: String, _ placeholder: String, clickAction: @escaping completion) {
+    convenience init(_ reviewAlert: Bool, _ title: String, _ content: String, _ placeholder: String, clickAction: @escaping completion) {
         self.init()
-
+        
         self.placeholder = placeholder
         setConstraints()
         configure(title: title, content: content, placeholder: placeholder)
-        setAlertSignButton()
         buttonClick(action: clickAction)
+        
+        if reviewAlert {
+            // 리뷰 이벤트 얼럿일 때
+            alartReviewButton.isHidden = false
+            alertSignButton.isHidden = true
+            setAlertReviewButton()
+            // 여기 부분 체크
+            signTextview.snp.remakeConstraints { make in
+                make.top.equalTo(alartReviewButton.snp.bottom).offset(24)
+                make.leading.trailing.equalTo(alartReviewButton)
+                make.height.equalTo(self.view.frame.height * 0.15)
+            }
+        } else {
+            // 신고 이벤트 얼럿일 때
+            alartReviewButton.isHidden = true
+            alertSignButton.isHidden = false
+            setSignAlertSignButton()
+            
+            signTextview.snp.remakeConstraints { make in
+                make.top.equalTo(alertSignButton.snp.bottom).offset(24)
+                make.leading.trailing.equalTo(alertSignButton)
+                make.height.equalTo(self.view.frame.height * 0.15)
+            }
+        }
+
     }
     
-    func setAlertSignButton() {
+    func setAlertReviewButton() {
+        let first = alartReviewButton.firstLeftButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let second = alartReviewButton.firstRightButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let third = alartReviewButton.middleLeftButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let fourth = alartReviewButton.middleRightButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let fivth = alartReviewButton.lastLeftButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        let sixth = alartReviewButton.lastRightButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
+        
+        Observable.combineLatest(first, second, third, fourth, fivth, sixth)
+            .asDriver(onErrorJustReturn: (false, false, false, false, false, false))
+            .drive(onNext: { [weak self] one, two, three, four, five, six in
+                guard let self = self else {return}
+                self.clickArray = []
+                [one, two, three, four, five, six].forEach { state in
+                    let number = state ? 1 : 0
+                    self.clickArray.append(number)
+                }
+                let status = self.clickArray.contains(1)
+                if status {
+                    self.submitButton.customLayout(.fill)
+                    self.submitButton.isEnabled = true
+                } else {
+                    self.submitButton.customLayout(.disable)
+                    self.submitButton.isEnabled = false
+                }
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func setSignAlertSignButton() {
         let first = alertSignButton.firstLeftButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
         let second = alertSignButton.firstMiddelButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
         let third = alertSignButton.firstRightButton.rx.tap.scan(false) { state, value in !state }.startWith(false)
@@ -145,7 +200,9 @@ class SeSacTextViewAlert: BaseViewController {
         alertView.addSubview(cancelButton)
         alertView.addSubview(alertContent)
         
+        alertView.addSubview(alartReviewButton)
         alertView.addSubview(alertSignButton)
+        
         alertView.addSubview(signTextview)
         
         alertView.addSubview(submitButton)
@@ -172,6 +229,11 @@ class SeSacTextViewAlert: BaseViewController {
         }
         
         alertSignButton.snp.makeConstraints { make in
+            make.top.equalTo(alertContent.snp.bottom).offset(24)
+            make.leading.trailing.equalTo(alertContent)
+        }
+        
+        alartReviewButton.snp.makeConstraints { make in
             make.top.equalTo(alertContent.snp.bottom).offset(24)
             make.leading.trailing.equalTo(alertContent)
         }

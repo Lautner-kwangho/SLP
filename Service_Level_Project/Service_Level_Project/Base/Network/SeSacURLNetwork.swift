@@ -243,7 +243,7 @@ class SeSacURLNetwork {
     }
     // 친구 수락하기
     func hobbyAccept(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
-        let URL = Point.hobbyRequest.url
+        let URL = Point.hobbyAccept.url
         print("수락하기에서 받은 모델 데이터",userID)
         let parameter: Parameters = [
           "otheruid": "\(userID)"

@@ -207,7 +207,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
                 self.dismiss(animated: true) {
                     DispatchQueue.main.async {
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 }

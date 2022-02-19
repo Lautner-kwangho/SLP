@@ -176,7 +176,7 @@ final class ChattingViewController: BaseViewController {
         reportButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                let alertPage = SeSacTextViewAlert("새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") { array, text in
+                let alertPage = SeSacTextViewAlert(false, "새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") { array, text in
                     SeSacURLNetwork.shared.reportUser(otherUid: self.otherUID, report: array, comment: text) {
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -220,7 +220,7 @@ final class ChattingViewController: BaseViewController {
         reviewButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
-                let alertPage = SeSacTextViewAlert("리뷰 등록", "\(self.otherNICK)님과의 취미 활동은 어떠셨나요?", "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)") { array, text in
+                let alertPage = SeSacTextViewAlert(true, "리뷰 등록", "\(self.otherNICK)님과의 취미 활동은 어떠셨나요?", "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)") { array, text in
                     SeSacURLNetwork.shared.reviewUser(otherUid: self.otherUID, report: array, comment: text) {
                         self.dismiss(animated: true, completion: nil)
                         UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)

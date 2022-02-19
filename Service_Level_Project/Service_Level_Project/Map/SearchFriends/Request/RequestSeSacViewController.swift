@@ -208,6 +208,7 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
                 chatView.otherUid.accept(data.uid)
                 self.navigationController?.pushViewController(chatView, animated: true)
             } failErrror: { error in
+                print("나 수락하기 오류 체크 : ", error)
                 guard let code = error else {return}
                 switch code {
                 case "201":
