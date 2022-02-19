@@ -74,6 +74,7 @@ final class SearchFriendsViewController: TabmanViewController {
             case "201":
                 let alertPage = SeSacAlert("나갈거에요?", "엇..이미 매칭되어 있는 상태입니다") {
                     self.dismiss(animated: true)
+                    self.navigationController?.pushViewController(ChattingViewController(), animated: true)
                 }
                 alertPage.cancelButton.isHidden = true
                 alertPage.modalPresentationStyle = .overFullScreen

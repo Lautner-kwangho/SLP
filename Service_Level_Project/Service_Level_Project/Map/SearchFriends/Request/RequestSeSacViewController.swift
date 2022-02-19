@@ -170,11 +170,11 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
         let repuFilter = data.reputation.map { $0 > 0 ? ButtonCase.fill : ButtonCase.inactive }
         
         cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[0])
-        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[1])
-        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[2])
-        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[3])
-        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[4])
-        cell.aroundView.userTitleButton.firstLeftButton.customLayout(repuFilter[5])
+        cell.aroundView.userTitleButton.firstRightButton.customLayout(repuFilter[1])
+        cell.aroundView.userTitleButton.middleLeftButton.customLayout(repuFilter[2])
+        cell.aroundView.userTitleButton.middleRightButton.customLayout(repuFilter[3])
+        cell.aroundView.userTitleButton.lastLeftButton.customLayout(repuFilter[4])
+        cell.aroundView.userTitleButton.lastRightButton.customLayout(repuFilter[5])
         
         var hobby = [String]()
         data.hf.forEach { text in
@@ -205,7 +205,9 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
             print("나도 수락한 모델이야", data.uid)
             SeSacURLNetwork.shared.hobbyAccept(userID: data.uid) {
                 let chatView = ChattingViewController()
-                chatView.otherUid.accept(data.uid)
+                chatView.otherNICK = data.nick
+                chatView.otherUID = data.uid
+                UserDefaults.standard.set(data.uid, forKey: UserDefaultsManager.otherUid)
                 self.navigationController?.pushViewController(chatView, animated: true)
             } failErrror: { error in
                 print("나 수락하기 오류 체크 : ", error)
@@ -223,6 +225,7 @@ extension RequestSeSacViewController: UITableViewDelegate, UITableViewDataSource
                             UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
                             let chatView = ChattingViewController()
                             chatView.statusData.accept(data)
+                            UserDefaults.standard.set(data.matchedUid, forKey: UserDefaultsManager.otherUid)
                             self.navigationController?.pushViewController(chatView, animated: true)
                         }
                     } failErrror: { errorcode in

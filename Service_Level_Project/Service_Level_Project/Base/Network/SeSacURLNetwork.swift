@@ -224,7 +224,6 @@ class SeSacURLNetwork {
     // 친구 요청하기
     func hobbyRequest(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.hobbyRequest.url
-        
         let parameter: Parameters = [
           "otheruid": "\(userID)"
         ]
@@ -244,14 +243,11 @@ class SeSacURLNetwork {
     // 친구 수락하기
     func hobbyAccept(userID: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.hobbyAccept.url
-        print("수락하기에서 받은 모델 데이터",userID)
         let parameter: Parameters = [
           "otheruid": "\(userID)"
         ]
         
         SeSacURLNetwork.callNetwork(url: URL, parameter: parameter, method: .post) { response in
-            print("수락하기에서 받은 모델 데이터",response.response?.statusCode)
-            print("수락하기에서 받은 모델 데이터",response.request?.headers)
             switch response.result {
             case .success:
                 successData()
@@ -269,7 +265,7 @@ class SeSacURLNetwork {
         
         SeSacURLNetwork.callNetwork(url: URL, parameter: nil, method: .get) { response in
             switch response.result {
-            case .success(let succe):
+            case .success:
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SeSacStateModel.self, from: data)
@@ -284,7 +280,7 @@ class SeSacURLNetwork {
     }
     // 채팅 보내기
     func sendChat(uid: String, sendMessage: String, successData: @escaping (SendChatModel) -> (), failErrror: @escaping (String?) -> ()) {
-        let url = Point.sendChat.url.path + "\(uid)"
+        let url = "\(Point.sendChat.url)" + "\(uid)"
         let URL = URL(string: url)!
         
         let header: HTTPHeaders = [
@@ -299,11 +295,12 @@ class SeSacURLNetwork {
         AF.request(URL, method: .post, parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets), headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData { response in
             switch response.result {
             case .success:
+                print("프린트 챗 보내는 거 테스트",response.response?.statusCode)
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SendChatModel.self, from: data)
                 guard let json = json else {return}
-                
+                print(json)
                 successData(json)
             case let .failure(error):
                 guard let errorCode = error.responseCode else { return }
@@ -314,7 +311,7 @@ class SeSacURLNetwork {
         }
     }
     // 약속 취소
-    func cancelApointment(uid: String, successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
+    func cancelApointment(uid: String,successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.cancelApointment.url
         let paramters = [
             "otheruid" : "\(uid)"
@@ -358,7 +355,7 @@ class SeSacURLNetwork {
     // * 리뷰하기 기능
     func reviewUser(otherUid: String ,report: [Int], comment: String, successData: @escaping () -> ()) {
         let comment = comment == "자세한 피드백은 다른 새싹들에게도 도움이 됩니다 (500자 이내 작성)" ? "" : comment
-        let url = Point.review.url.path + "\(otherUid)"
+        let url = "\(Point.review.url)" + "\(otherUid)"
         let URL = URL(string: url)!
         
         let header: HTTPHeaders = [
@@ -367,7 +364,7 @@ class SeSacURLNetwork {
         ]
         let paramters: Parameters? = [
            "otheruid" : "\(otherUid)",
-           "reportedReputation" : report,
+           "reputation" : report,
            "comment" : comment
         ]
         

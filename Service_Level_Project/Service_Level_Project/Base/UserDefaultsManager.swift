@@ -21,6 +21,7 @@ class UserDefaultsManager {
     static let gender = "gender"
 
     static let uid = "uid"
+    static let otherUid = "otherUid"
     static let region = "region"
     static let latitude = "latitude"
     static let longitude = "longitude"

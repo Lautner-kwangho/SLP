@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class OnBoardingViewController: BaseViewController {
@@ -40,6 +41,10 @@ class OnBoardingViewController: BaseViewController {
     var titleNames = ["관심사가 같은 친구를 찾을 수 있어요", "위치 기반으로 빠르게 주위 친구를 확인", "SeSAC Frineds"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Messaging.messaging().token { token, error in
+            if let token = token { UserDefaults.standard.set(token, forKey: "fcmToken") }
+        }
     }
     
     @objc private func clickedButton() {

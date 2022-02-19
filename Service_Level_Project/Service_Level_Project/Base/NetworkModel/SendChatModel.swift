@@ -11,7 +11,7 @@ struct SendChatModel: Codable {
     let id: String
     let v: Int
     let to, from, chat: String
-    let createdAt: Date
+    let createdAt: String //  Date 가 아닌가;
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"

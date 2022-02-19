@@ -93,7 +93,6 @@ final class ChattingViewController: BaseViewController {
     var toastMessage = String()
     var otherUID = String()
     var otherNICK = String()
-    var otherUid = PublishRelay<String>()
     var statusData = PublishRelay<SeSacStateModel>()
     
     //MARK: View Life Cycle
@@ -105,38 +104,55 @@ final class ChattingViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        otherUid.asSignal()
-            .emit(onNext: { [weak self] text in
-                guard let self = self else {return}
-                print("other UID :", text)
-                SeSacURLNetwork.shared.myStatus { model in
-                    self.statusData.accept(model)
-                } failErrror: { errorCode in
-                    guard let error = errorCode else {return}
-                    if error == "201" {
-                        self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
-                        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
-                        self.navigationController?.popToRootViewController(animated: true)
-                    }
-                }
-
-            })
-            .disposed(by: disposeBag)
         
+        SeSacURLNetwork.shared.myStatus { [weak self] model in
+            guard let self = self else {return}
+            self.statusData.accept(model)
+            if model.dodged == 1 {
+                UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        } failErrror: { error in
+            guard let error = error else {return}
+            if error == "201" {
+                UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            print("어떻게 해야 될지 고민해보자 (상태 확인 에러): ",error)
+        }
+        
+        
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
+            
         statusData.asSignal()
             .emit(onNext: { [weak self] model in
                 guard let self = self else {return}
                 
                 self.title = model.matchedNick
-                self.otherUID = model.matchedUid
-                self.otherNICK = model.matchedNick
+                self.otherUID = model.matchedUid!
+                self.otherNICK = model.matchedNick!
+                UserDefaults.standard.set(model.matchedUid!, forKey: UserDefaultsManager.otherUid)
                 if model.dodged == 1 || model.reviewed == 1 {
                     self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
                 } else {
                     SocketIOMananger.shared.establishConnection()
                 }
+                print("첵 들어와서 에러 확인용 프린트 Data:", model)
             })
             .disposed(by: disposeBag)
+            
+        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+            print("첵 들어와서 에러 확인용 프린트 토스트메시지:", self.toastMessage)
+            print("첵 들어와서 에러 확인용 프린트 uid:", self.otherUID)
+            print("첵 들어와서 에러 확인용 프린트 nick:", self.otherNICK)
+            print("쳇 들어와서 에러 확인용 프린트 UserDefault:", UserDefaults.standard.string(forKey: UserDefaultsManager.otherUid))
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -157,21 +173,29 @@ final class ChattingViewController: BaseViewController {
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
                 SeSacURLNetwork.shared.sendChat(uid: self.otherUID, sendMessage: self.chatInputTextView.text) { model in
-                    // 🍎 보내는 거
+                    print("채팅 받는 거 확인", model)
+                    //🍎 보내는 거
                     let tempData = TempRealmModel(friendsUid: model.to, myUid: model.from, chat: model.chat, createAt: model.createdAt)
                     self.tempChatData.append(tempData)
                     self.chatTableView.reloadData()
+                    
                     // 여기 스크롤도 해줘야 한다ㅏㅏㅏㅏ 잊지 말기ㅣㅣㅣㅣㅣ
                     
                 } failErrror: { errorCode in
                     guard let code = errorCode else {return}
                     if code == "201" {
                         self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다", position: .center)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
                     }
+                    print("채팅 보내는 거 오류", code)
                 }
                 self.chatInputTextView.text = ""
             })
             .disposed(by: disposeBag)
+        
         // 버튼 기능 구현
         reportButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
@@ -179,6 +203,8 @@ final class ChattingViewController: BaseViewController {
                 let alertPage = SeSacTextViewAlert(false, "새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") { array, text in
                     SeSacURLNetwork.shared.reportUser(otherUid: self.otherUID, report: array, comment: text) {
                         self.dismiss(animated: true, completion: nil)
+                        UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
                 }
                 alertPage.modalPresentationStyle = .overFullScreen
@@ -193,6 +219,7 @@ final class ChattingViewController: BaseViewController {
                     SeSacURLNetwork.shared.cancelApointment(uid: self.otherUID) {
                         UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
                         self.dismiss(animated: true)
+                        self.navigationController?.popToRootViewController(animated: true)
                     } failErrror: { errorCode in
                         guard let error = errorCode else {return}
                         switch error {

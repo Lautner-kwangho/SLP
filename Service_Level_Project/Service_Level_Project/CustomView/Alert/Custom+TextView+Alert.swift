@@ -117,6 +117,9 @@ class SeSacTextViewAlert: BaseViewController {
                     let number = state ? 1 : 0
                     self.clickArray.append(number)
                 }
+                for _ in 0...2 {
+                    self.clickArray.append(0)
+                }
                 let status = self.clickArray.contains(1)
                 if status {
                     self.submitButton.customLayout(.fill)

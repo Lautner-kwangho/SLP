@@ -28,7 +28,8 @@ class RequestSeSacViewModel: BaseViewModel {
         
         RequestSeSacViewModel.myData.asSignal()
             .emit(onNext: { [weak self] model in
-                guard let self = self else {return }
+                guard let self = self else {return}
+                print("나 테스트용 프린트 하는거임 : ", model)
                 self.fromRequestData.accept(model.fromQueueDBRequested)
             })
             .disposed(by: disposeBag)

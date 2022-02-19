@@ -8,9 +8,6 @@
 import Foundation
 
 struct SeSacStateModel: Codable {
-    
     let dodged, matched, reviewed: Int
-    let matchedNick: String = ""
-    let matchedUid: String = ""
-    
+    let matchedNick, matchedUid: String?
 }

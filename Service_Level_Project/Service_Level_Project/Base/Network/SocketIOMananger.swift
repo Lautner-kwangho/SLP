@@ -25,6 +25,13 @@ class SocketIOMananger: NSObject {
         
         socket.on(clientEvent: .connect) { data, ack in
             print("SOCKET IS CONNECTED: ", data, ack)
+            
+            let myUid = UserDefaults.standard.string(forKey: UserDefaultsManager.uid)
+            let otherUid = UserDefaults.standard.string(forKey: UserDefaultsManager.otherUid)
+            
+            if let uid = myUid, let other = otherUid {
+                self.socket.emit(other, uid)
+            }
         }
         
         socket.on(clientEvent: .disconnect) { data, ack in
