@@ -125,12 +125,6 @@ final class ChattingViewController: BaseViewController {
                 break
             }
         }
-        
-        try! localRealm.write {
-            // 모든 것 삭제(나중에 제출하기 전에 삭제)
-            localRealm.deleteAll()
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,7 +230,6 @@ final class ChattingViewController: BaseViewController {
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
                 SeSacURLNetwork.shared.sendChat(uid: self.otherUID, sendMessage: self.chatInputTextView.text) { model in
-                    //🍎 보내는 거
                     try! self.localRealm.write({
                         let chatData = ChatRealmModel(to: model.to, from: model.from, chat: model.chat, createdAt: model.createdAt)
                         self.localRealm.add(chatData)
@@ -265,6 +258,9 @@ final class ChattingViewController: BaseViewController {
                 let alertPage = SeSacTextViewAlert(false, "새싹 신고", "다시는 해당 새싹과 매칭되지 않습니다", "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다") { array, text in
                     SeSacURLNetwork.shared.reportUser(otherUid: self.otherUID, report: array, comment: text) {
                         self.dismiss(animated: true, completion: nil)
+                        try! self.localRealm.write {
+                            self.localRealm.deleteAll()
+                        }
                         UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
                         self.navigationController?.popToRootViewController(animated: true)
                     }
@@ -280,6 +276,10 @@ final class ChattingViewController: BaseViewController {
                 let alertPage = SeSacAlert("약속을 취소하겠습니까?", "약속을 취소하시면 패널티가 부과됩니다") {
                     SeSacURLNetwork.shared.cancelApointment(uid: self.otherUID) {
                         UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        try! self.localRealm.write {
+                            // 나중에는 회원탈퇴 시에 달아주면 되지 않을까 싶은데
+                            self.localRealm.deleteAll()
+                        }
                         self.dismiss(animated: true)
                         self.navigationController?.popToRootViewController(animated: true)
                     } failErrror: { errorCode in
@@ -313,6 +313,9 @@ final class ChattingViewController: BaseViewController {
                     SeSacURLNetwork.shared.reviewUser(otherUid: self.otherUID, report: array, comment: text) {
                         self.dismiss(animated: true, completion: nil)
                         UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
+                        try! self.localRealm.write {
+                            self.localRealm.deleteAll()
+                        }
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 }
