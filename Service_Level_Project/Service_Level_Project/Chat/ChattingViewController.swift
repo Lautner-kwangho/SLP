@@ -7,10 +7,11 @@
 
 import UIKit
 
+import RealmSwift
+
 import RxSwift
 import RxRelay
 import RxKeyboard
-import SocketIO
 
 final class ChattingViewController: BaseViewController {
     
@@ -96,11 +97,40 @@ final class ChattingViewController: BaseViewController {
     var otherNICK = String()
     var statusData = PublishRelay<SeSacStateModel>()
     
+    //MARK: Realm Data
+    let localRealm = try! Realm()
+    var tasks: Results<ChatRealmModel>!
+    var notificationRealm: NotificationToken!
+    
     //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
         socketConnect()
+        realmDataManager()
+    }
+    
+    func realmDataManager() {
+        tasks = localRealm.objects(ChatRealmModel.self)
+        
+        print("램 저장 위치 :",Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        notificationRealm = tasks.observe { change in
+            switch change {
+            case .initial(_):
+                break
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                print("노티 달아서 확인한거어어 : ",deletions, insertions, modifications)
+            case .error(_):
+                break
+            }
+        }
+        
+        try! localRealm.write {
+            // 모든 것 삭제(나중에 제출하기 전에 삭제)
+            localRealm.deleteAll()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,17 +183,24 @@ final class ChattingViewController: BaseViewController {
     }
     
      private func requestChats() {
-         SeSacURLNetwork.shared.getChat(otherUid: self.otherUID) { data in
-             print("채팅 내용 요청하기", data)
+         let yesterdayString = "2000-01-01T00:00:00.000Z"
+         let getDate = tasks.last?.createdAt == nil ? yesterdayString : tasks.last!.createdAt
+         
+         SeSacURLNetwork.shared.getChat(lastChatDate: getDate, otherUid: self.otherUID) { data in
              self.tempChatData = []
              data.payload.forEach { model in
-                 let tempData = TempRealmModel(to: model.to, from: model.from, chat: model.chat, createAt: model.createdAt)
-                 self.tempChatData.append(tempData)
-                 self.chatTableView.reloadData()
-                 
-                 self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
+                 //Realm Data
+                 try! self.localRealm.write({
+                     let chatData = ChatRealmModel(to: model.to, from: model.from, chat: model.chat, createdAt: model.createdAt)
+                     self.localRealm.add(chatData)
+                     self.chatTableView.reloadData()
+                     self.chatTableView.scrollToRow(at: IndexPath(row: self.tasks.count - 1, section: 1), at: .bottom, animated: false)
+                 })
              }
-             SocketIOMananger.shared.establishConnection()
+             SocketIOMananger.shared.establishConnection {
+                 self.chatTableView.reloadData()
+                 self.chatTableView.scrollToRow(at: IndexPath(row: self.tasks.count - 1, section: 1), at: .bottom, animated: false)
+             }
          } failErrror: { _ in
          }
     }
@@ -171,6 +208,7 @@ final class ChattingViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         SocketIOMananger.shared.closeConnection()
+        notificationRealm.invalidate()
     }
     
     private func socketConnect() {
@@ -184,11 +222,12 @@ final class ChattingViewController: BaseViewController {
         let from = notification.userInfo!["from"] as! String
         let to = notification.userInfo!["to"] as! String
         
-        let tempData = TempRealmModel(to: to, from: from, chat: chat, createAt: creatAt)
-        self.tempChatData.append(tempData)
-        self.chatTableView.reloadData()
-        
-        self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
+        try! self.localRealm.write({
+            let chatData = ChatRealmModel(to: to, from: from, chat: chat, createdAt: creatAt)
+            self.localRealm.add(chatData)
+            self.chatTableView.reloadData()
+            self.chatTableView.scrollToRow(at: IndexPath(row: self.tasks.count - 1, section: 1), at: .bottom, animated: false)
+        })
     }
     
     private func bind() {
@@ -197,13 +236,13 @@ final class ChattingViewController: BaseViewController {
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
                 SeSacURLNetwork.shared.sendChat(uid: self.otherUID, sendMessage: self.chatInputTextView.text) { model in
-                    print("채팅 받는 거 확인", model)
                     //🍎 보내는 거
-                    let tempData = TempRealmModel(to: model.to, from: model.from, chat: model.chat, createAt: model.createdAt)
-                    self.tempChatData.append(tempData)
-                    self.chatTableView.reloadData()
-                    
-                    self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
+                    try! self.localRealm.write({
+                        let chatData = ChatRealmModel(to: model.to, from: model.from, chat: model.chat, createdAt: model.createdAt)
+                        self.localRealm.add(chatData)
+                        self.chatTableView.reloadData()
+                        self.chatTableView.scrollToRow(at: IndexPath(row: self.tasks.count - 1, section: 1), at: .bottom, animated: false)
+                    })
                 } failErrror: { errorCode in
                     guard let code = errorCode else {return}
                     if code == "201" {
@@ -345,7 +384,7 @@ final class ChattingViewController: BaseViewController {
                                 $0.top.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
                                 $0.bottom.equalTo(self.chatInputView.snp.top).inset(-16)
                             }
-                            self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
+                            self.chatTableView.scrollToRow(at: IndexPath(row: self.tasks.count - 1, section: 1), at: .bottom, animated: false)
                         }
                     }
                 } else {
@@ -353,7 +392,7 @@ final class ChattingViewController: BaseViewController {
                         self.chatInputView.snp.updateConstraints {
                             $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(16)
                         }
-                        self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
+                        self.chatTableView.scrollToRow(at: IndexPath(row: self.tasks.count - 1, section: 1), at: .bottom, animated: false)
                     }
                 }
             })

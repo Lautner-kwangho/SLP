@@ -309,8 +309,8 @@ class SeSacURLNetwork {
         }
     }
     // 채팅 가져오기
-    func getChat(otherUid: String, successData: @escaping (GetChatModel) -> (), failErrror: @escaping (String?) -> ()) {
-        let url = "\(Point.sendChat.url)" + "\(otherUid)?lastchatDate=2022-01-01"
+    func getChat(lastChatDate: String, otherUid: String, successData: @escaping (GetChatModel) -> (), failErrror: @escaping (String?) -> ()) {
+        let url = "\(Point.sendChat.url)" + "\(otherUid)?lastchatDate=\(lastChatDate)"
         let URL = URL(string: url)!
         
         let header: HTTPHeaders = [

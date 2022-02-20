@@ -52,8 +52,9 @@ class SocketIOMananger: NSObject {
         
     }
     
-    func establishConnection() {
+    func establishConnection(completion: @escaping ()-> ()) {
         socket.connect()
+        completion()
     }
     
     func closeConnection() {

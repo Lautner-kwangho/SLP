@@ -111,6 +111,8 @@
 		E4EFE4C627BC6D6500C47139 /* UserImageShop+CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4C527BC6D6500C47139 /* UserImageShop+CollectionView+Extension.swift */; };
 		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
 		E4F5001C27C264260085D170 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5001B27C264260085D170 /* String+extension.swift */; };
+		E4F5002127C26A490085D170 /* ChatRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5002027C26A490085D170 /* ChatRealmModel.swift */; };
+		E4F5002727C273930085D170 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4F5002627C273930085D170 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,6 +212,7 @@
 		E4EFE4C127BC662300C47139 /* ShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopModel.swift; sourceTree = "<group>"; };
 		E4EFE4C527BC6D6500C47139 /* UserImageShop+CollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserImageShop+CollectionView+Extension.swift"; sourceTree = "<group>"; };
 		E4F5001B27C264260085D170 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		E4F5002027C26A490085D170 /* ChatRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRealmModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,7 @@
 				E459D3D027B7A0510075A17C /* Tabman in Frameworks */,
 				E418161827ABA58500CB693A /* Alamofire in Frameworks */,
 				E49CE70127B67B69005F65AB /* RxKeyboard in Frameworks */,
+				E4F5002727C273930085D170 /* RealmSwift in Frameworks */,
 				E41ED02A279DD77B00A2F0CE /* Toast in Frameworks */,
 				E4C31EB22796D44B00ACE886 /* RxCocoa in Frameworks */,
 				E41ED025279DD5F200A2F0CE /* FirebaseAuth in Frameworks */,
@@ -539,6 +543,7 @@
 			children = (
 				E4AF001827B1787D00D8572C /* CheckDataModel.swift */,
 				E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */,
+				E4F5002027C26A490085D170 /* ChatRealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -748,6 +753,7 @@
 				E49CE70027B67B69005F65AB /* RxKeyboard */,
 				E459D3CF27B7A0510075A17C /* Tabman */,
 				E459D3ED27B97A810075A17C /* SocketIO */,
+				E4F5002627C273930085D170 /* RealmSwift */,
 			);
 			productName = Service_Level_Project;
 			productReference = E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */;
@@ -789,6 +795,7 @@
 				E49CE6FF27B67B69005F65AB /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				E459D3CE27B7A0510075A17C /* XCRemoteSwiftPackageReference "Tabman" */,
 				E459D3EC27B97A810075A17C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				E4F5002527C273920085D170 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = E4C31E8E27967B2800ACE886 /* Products */;
 			projectDirPath = "";
@@ -932,6 +939,7 @@
 				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
 				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
+				E4F5002127C26A490085D170 /* ChatRealmModel.swift in Sources */,
 				E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */,
 				E459D3F227B97FB20075A17C /* SendChatTableViewCell.swift in Sources */,
 				E4EFE4BD27BBEAC000C47139 /* UserImageBackground+TableView+Extension.swift in Sources */,
@@ -1262,6 +1270,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		E4F5002527C273920085D170 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1334,6 +1350,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E4F2135827B30655004FE47D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		E4F5002627C273930085D170 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4F5002527C273920085D170 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
