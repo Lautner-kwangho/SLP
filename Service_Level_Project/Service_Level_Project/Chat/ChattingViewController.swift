@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxRelay
 import RxKeyboard
+import SocketIO
 
 final class ChattingViewController: BaseViewController {
     
@@ -140,19 +141,31 @@ final class ChattingViewController: BaseViewController {
                         UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)
                         self.navigationController?.popToRootViewController(animated: true)
                     }
-                } else {
-                    SocketIOMananger.shared.establishConnection()
                 }
                 print("첵 들어와서 에러 확인용 프린트 Data:", model)
             })
             .disposed(by: disposeBag)
             
-        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-            print("첵 들어와서 에러 확인용 프린트 토스트메시지:", self.toastMessage)
-            print("첵 들어와서 에러 확인용 프린트 uid:", self.otherUID)
-            print("첵 들어와서 에러 확인용 프린트 nick:", self.otherNICK)
-            print("쳇 들어와서 에러 확인용 프린트 UserDefault:", UserDefaults.standard.string(forKey: UserDefaultsManager.otherUid))
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.requestChats()
         }
+        
+    }
+    
+     private func requestChats() {
+         SeSacURLNetwork.shared.getChat(otherUid: self.otherUID) { data in
+             print("채팅 내용 요청하기", data)
+             self.tempChatData = []
+             data.payload.forEach { model in
+                 let tempData = TempRealmModel(to: model.to, from: model.from, chat: model.chat, createAt: model.createdAt)
+                 self.tempChatData.append(tempData)
+                 self.chatTableView.reloadData()
+                 
+                 self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
+             }
+             SocketIOMananger.shared.establishConnection()
+         } failErrror: { _ in
+         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -165,22 +178,32 @@ final class ChattingViewController: BaseViewController {
     }
     
     @objc private func getMessage(notification: NSNotification) {
+        let chat = notification.userInfo!["chat"] as! String
+        let id = notification.userInfo!["id"] as! String
+        let creatAt = notification.userInfo!["creatAt"] as! String
+        let from = notification.userInfo!["from"] as! String
+        let to = notification.userInfo!["to"] as! String
         
+        let tempData = TempRealmModel(to: to, from: from, chat: chat, createAt: creatAt)
+        self.tempChatData.append(tempData)
+        self.chatTableView.reloadData()
+        
+        self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
     }
     
     private func bind() {
+        
         chatInputSendButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
                 SeSacURLNetwork.shared.sendChat(uid: self.otherUID, sendMessage: self.chatInputTextView.text) { model in
                     print("채팅 받는 거 확인", model)
                     //🍎 보내는 거
-                    let tempData = TempRealmModel(friendsUid: model.to, myUid: model.from, chat: model.chat, createAt: model.createdAt)
+                    let tempData = TempRealmModel(to: model.to, from: model.from, chat: model.chat, createAt: model.createdAt)
                     self.tempChatData.append(tempData)
                     self.chatTableView.reloadData()
                     
-                    // 여기 스크롤도 해줘야 한다ㅏㅏㅏㅏ 잊지 말기ㅣㅣㅣㅣㅣ
-                    
+                    self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
                 } failErrror: { errorCode in
                     guard let code = errorCode else {return}
                     if code == "201" {
@@ -322,16 +345,15 @@ final class ChattingViewController: BaseViewController {
                                 $0.top.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
                                 $0.bottom.equalTo(self.chatInputView.snp.top).inset(-16)
                             }
-                            self.chatTableView.scrollToRow(at: IndexPath(row: 9, section: 1), at: .bottom, animated: false)
+                            self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
                         }
-                        
                     }
                 } else {
                     UIView.animate(withDuration: 1) {
                         self.chatInputView.snp.updateConstraints {
                             $0.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(16)
                         }
-                        self.chatTableView.scrollToRow(at: IndexPath(row: 9, section: 1), at: .bottom, animated: false)
+                        self.chatTableView.scrollToRow(at: IndexPath(row: self.tempChatData.count - 1, section: 1), at: .bottom, animated: false)
                     }
                 }
             })

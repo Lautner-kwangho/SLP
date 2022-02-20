@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct GetChatModel: Codable {
+    let payload: [SendChatModel]
+}
+
 struct SendChatModel: Codable {
     let id: String
     let v: Int

@@ -14,7 +14,7 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rowCount = section == 0 ? 1 : 10
+        let rowCount = section == 0 ? 1 : self.tempChatData.count
         return rowCount
     }
     
@@ -31,23 +31,29 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
             
             return headCell
         } else {
-            if indexPath.row % 2 == 0 {
+            
+            let data = self.tempChatData[indexPath.row]
+            
+            if data.to == UserDefaults.standard.string(forKey: UserDefaultsManager.uid) {
                 guard let receiveCell = tableView.dequeueReusableCell(withIdentifier: ReceiveChatTableViewCell.reuseIdentifier, for: indexPath) as? ReceiveChatTableViewCell else {return UITableViewCell()}
                 receiveCell.selectionStyle = .none
                 
-                
+                receiveCell.receiveMessageBox.text = data.chat
+                receiveCell.receiveMessageTime.text = data.createAt.subDateString()
                 
                 return receiveCell
             } else {
                 guard let sendCell = tableView.dequeueReusableCell(withIdentifier: SendChatTableViewCell.reuseIdentifier, for: indexPath) as? SendChatTableViewCell else {return UITableViewCell()}
                 sendCell.selectionStyle = .none
-                
-                
-                
-                
+ 
+                sendCell.sendMessageBox.text = data.chat
+                sendCell.sendMessageTime.text = data.createAt.subDateString()
+                sendCell.sendMessageStatus.isHidden = true
                 
                 return sendCell
             }
+            
+            
         }
         
     }

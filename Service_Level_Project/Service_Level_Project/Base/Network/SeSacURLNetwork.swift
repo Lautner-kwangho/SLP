@@ -295,12 +295,10 @@ class SeSacURLNetwork {
         AF.request(URL, method: .post, parameters: parameter, encoding: URLEncoding(arrayEncoding: .noBrackets), headers: header, interceptor: checkSesacNetWork()).validate(statusCode: 200...200).responseData { response in
             switch response.result {
             case .success:
-                print("프린트 챗 보내는 거 테스트",response.response?.statusCode)
                 guard let data = response.value else { return }
                 let decoder = JSONDecoder()
                 let json = try? decoder.decode(SendChatModel.self, from: data)
                 guard let json = json else {return}
-                print(json)
                 successData(json)
             case let .failure(error):
                 guard let errorCode = error.responseCode else { return }
@@ -310,6 +308,30 @@ class SeSacURLNetwork {
             }
         }
     }
+    // 채팅 가져오기
+    func getChat(otherUid: String, successData: @escaping (GetChatModel) -> (), failErrror: @escaping (String?) -> ()) {
+        let url = "\(Point.sendChat.url)" + "\(otherUid)?lastchatDate=2022-01-01"
+        let URL = URL(string: url)!
+        
+        let header: HTTPHeaders = [
+            "idtoken" : UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)!,
+            "Content-Type" : "application/x-www-form-urlencoded"
+        ]
+        
+        AF.request(URL, method: .get, headers: header).responseDecodable(of: GetChatModel.self) { response in
+            switch response.result {
+            case .success(let success):
+                successData(success)
+            case let .failure(error):
+                guard let errorCode = error.responseCode else { return }
+                print(errorCode)
+                let status = self.checkError(errorCode)
+                failErrror(status)
+            }
+        }
+    }
+    
+    
     // 약속 취소
     func cancelApointment(uid: String,successData: @escaping () -> (), failErrror: @escaping (String?) -> ()) {
         let URL = Point.cancelApointment.url

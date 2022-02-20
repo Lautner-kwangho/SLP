@@ -40,6 +40,7 @@ class ReceiveChatTableViewCell: UITableViewCell {
         receiveMessageBox.snp.makeConstraints {
             $0.width.equalTo(self.frame.width * 0.7)
             $0.leading.equalTo(self).inset(16)
+            $0.top.bottom.equalTo(self).inset(5)
             $0.centerY.equalTo(self)
         }
         

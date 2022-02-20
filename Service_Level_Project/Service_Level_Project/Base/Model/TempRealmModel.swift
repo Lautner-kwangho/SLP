@@ -8,5 +8,5 @@
 import Foundation
 
 struct TempRealmModel {
-    let friendsUid, myUid, chat, createAt: String
+    let to, from, chat, createAt: String
 }

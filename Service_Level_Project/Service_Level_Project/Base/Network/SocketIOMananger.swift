@@ -12,12 +12,15 @@ class SocketIOMananger: NSObject {
     static let shared = SocketIOMananger()
     
     var manager: SocketManager!
+    
     var socket: SocketIOClient!
     
     override init() {
         super.init()
-        manager = SocketManager(socketURL: URL(string: URL.SesacURL)!, config: [
-            .log(true),
+        
+        let URL = Point.sendChat.url
+        
+        manager = SocketManager(socketURL: URL, config: [
             .compress
         ])
         
@@ -25,12 +28,10 @@ class SocketIOMananger: NSObject {
         
         socket.on(clientEvent: .connect) { data, ack in
             print("SOCKET IS CONNECTED: ", data, ack)
-            
             let myUid = UserDefaults.standard.string(forKey: UserDefaultsManager.uid)
-            let otherUid = UserDefaults.standard.string(forKey: UserDefaultsManager.otherUid)
             
-            if let uid = myUid, let other = otherUid {
-                self.socket.emit(other, uid)
+            if let uid = myUid {
+                self.socket.emit("changesocketid", uid)
             }
         }
         
@@ -38,9 +39,17 @@ class SocketIOMananger: NSObject {
             print("SOCKET IS DISCONNECTED: ", data, ack)
         }
         
-        socket.on("chat") { dataArray, ack in
-            print("SeSAC RECEIVED", dataArray, ack)
+        self.socket.on("chat") { dataArray, ack in
+            let data = dataArray.first as! NSDictionary
+            let chat = data["chat"] as! String
+            let id = data["_id"] as! String
+            let creatAt = data["createdAt"] as! String
+            let from = data["from"] as! String
+            let to = data["to"] as! String
+            
+            NotificationCenter.default.post(name: NSNotification.Name(NotificationCenterName.getMessage), object: self, userInfo: ["chat": chat, "id": id, "creatAt": creatAt, "from": from, "to": to])
         }
+        
     }
     
     func establishConnection() {

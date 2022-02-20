@@ -53,6 +53,7 @@ class SendChatTableViewCell: UITableViewCell {
         sendMessageBox.snp.makeConstraints {
             $0.trailing.equalTo(self).inset(16)
             $0.centerY.equalTo(self)
+            $0.top.bottom.equalTo(self).inset(5)
             $0.width.equalTo(self.frame.width * 0.7)
         }
         

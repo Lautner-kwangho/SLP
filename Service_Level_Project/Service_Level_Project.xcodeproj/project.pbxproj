@@ -110,6 +110,7 @@
 		E4EFE4C227BC662300C47139 /* ShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4C127BC662300C47139 /* ShopModel.swift */; };
 		E4EFE4C627BC6D6500C47139 /* UserImageShop+CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4C527BC6D6500C47139 /* UserImageShop+CollectionView+Extension.swift */; };
 		E4F2135A27B30655004FE47D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E4F2135927B30655004FE47D /* SnapKit */; };
+		E4F5001C27C264260085D170 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F5001B27C264260085D170 /* String+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -208,6 +209,7 @@
 		E4EFE4BE27BC65B100C47139 /* UserImageBackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageBackgroundViewModel.swift; sourceTree = "<group>"; };
 		E4EFE4C127BC662300C47139 /* ShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopModel.swift; sourceTree = "<group>"; };
 		E4EFE4C527BC6D6500C47139 /* UserImageShop+CollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserImageShop+CollectionView+Extension.swift"; sourceTree = "<group>"; };
+		E4F5001B27C264260085D170 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +480,7 @@
 				E4C31EBB2797B76500ACE886 /* UIColor+Extension.swift */,
 				E415B92F27B5396600831D50 /* Image+Extension.swift */,
 				E4EFE49F27BA2FCB00C47139 /* UITextView+Extension.swift */,
+				E4F5001B27C264260085D170 /* String+extension.swift */,
 			);
 			path = "Extension(Enum)";
 			sourceTree = "<group>";
@@ -924,6 +927,7 @@
 				E458E33F279F2053004C68AC /* EmailViewModel.swift in Sources */,
 				E459D3D227B7A0DC0075A17C /* AroundSeSacViewController.swift in Sources */,
 				E415B93327B56BDB00831D50 /* HobbyViewController.swift in Sources */,
+				E4F5001C27C264260085D170 /* String+extension.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
 				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
 				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
