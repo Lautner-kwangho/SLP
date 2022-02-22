@@ -210,11 +210,11 @@ final class MapViewController: BaseViewController {
             alertPage.modalPresentationStyle = .overFullScreen
             self.present(alertPage, animated: true, completion: nil)
             viewModel.currentCameraMoveToUser(map: mapView)
-            viewModel.makeMarkerUserInMap(map: mapView)
+//            viewModel.makeMarkerUserInMap(map: mapView)
         } else if status.rawValue == 4 {
             // 허용이라 패스
             viewModel.currentCameraMoveToUser(map: mapView)
-            viewModel.makeMarkerUserInMap(map: mapView)
+//            viewModel.makeMarkerUserInMap(map: mapView)
         } else {
             locationManager.requestWhenInUseAuthorization()
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E401F23C27C350C900F32B11 /* PushNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E401F23B27C350C900F32B11 /* PushNotificationModel.swift */; };
 		E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B92D27B4334600831D50 /* MapViewController+Function.swift */; };
 		E415B93027B5396600831D50 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B92F27B5396600831D50 /* Image+Extension.swift */; };
 		E415B93327B56BDB00831D50 /* HobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415B93227B56BDB00831D50 /* HobbyViewController.swift */; };
@@ -97,7 +98,6 @@
 		E4EFE4A527BA3BB800C47139 /* ChatTextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */; };
 		E4EFE4A727BA499300C47139 /* SendChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A627BA499300C47139 /* SendChatModel.swift */; };
 		E4EFE4A927BA742B00C47139 /* SocketIOMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */; };
-		E4EFE4AB27BA968600C47139 /* TempRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */; };
 		E4EFE4AD27BA9F1400C47139 /* NotificationCenterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */; };
 		E4EFE4AF27BB586E00C47139 /* Button+Collection+(2x3).swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */; };
 		E4EFE4B127BB59F900C47139 /* Custom+TextView+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */; };
@@ -118,6 +118,7 @@
 /* Begin PBXFileReference section */
 		28CD9C90B15321C9F6115728 /* Pods-Service_Level_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.release.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.release.xcconfig"; sourceTree = "<group>"; };
 		56D43E2BE139B0F66CB58993 /* Pods-Service_Level_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Service_Level_Project.debug.xcconfig"; path = "Target Support Files/Pods-Service_Level_Project/Pods-Service_Level_Project.debug.xcconfig"; sourceTree = "<group>"; };
+		E401F23B27C350C900F32B11 /* PushNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationModel.swift; sourceTree = "<group>"; };
 		E415B92D27B4334600831D50 /* MapViewController+Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewController+Function.swift"; sourceTree = "<group>"; };
 		E415B92F27B5396600831D50 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		E415B93227B56BDB00831D50 /* HobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewController.swift; sourceTree = "<group>"; };
@@ -199,7 +200,6 @@
 		E4EFE4A427BA3BB800C47139 /* ChatTextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatTextView+Extension.swift"; sourceTree = "<group>"; };
 		E4EFE4A627BA499300C47139 /* SendChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendChatModel.swift; sourceTree = "<group>"; };
 		E4EFE4A827BA742B00C47139 /* SocketIOMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOMananger.swift; sourceTree = "<group>"; };
-		E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempRealmModel.swift; sourceTree = "<group>"; };
 		E4EFE4AC27BA9F1400C47139 /* NotificationCenterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterName.swift; sourceTree = "<group>"; };
 		E4EFE4AE27BB586E00C47139 /* Button+Collection+(2x3).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Collection+(2x3).swift"; sourceTree = "<group>"; };
 		E4EFE4B027BB59F900C47139 /* Custom+TextView+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+TextView+Alert.swift"; sourceTree = "<group>"; };
@@ -542,7 +542,6 @@
 			isa = PBXGroup;
 			children = (
 				E4AF001827B1787D00D8572C /* CheckDataModel.swift */,
-				E4EFE4AA27BA968600C47139 /* TempRealmModel.swift */,
 				E4F5002027C26A490085D170 /* ChatRealmModel.swift */,
 			);
 			path = Model;
@@ -576,6 +575,7 @@
 				E459D3EA27B8FD6B0075A17C /* SeSacStateModel.swift */,
 				E4335D7927B2C58100245879 /* SeSacSearchFreindsModel.swift */,
 				E4EFE4A627BA499300C47139 /* SendChatModel.swift */,
+				E401F23B27C350C900F32B11 /* PushNotificationModel.swift */,
 			);
 			path = NetworkModel;
 			sourceTree = "<group>";
@@ -877,7 +877,6 @@
 				E459D3D427B7A0E80075A17C /* RequestSeSacViewController.swift in Sources */,
 				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
-				E4EFE4AB27BA968600C47139 /* TempRealmModel.swift in Sources */,
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
 				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
@@ -937,6 +936,7 @@
 				E4F5001C27C264260085D170 /* String+extension.swift in Sources */,
 				E41ED01E279DBA5700A2F0CE /* AuthPhoneViewModel.swift in Sources */,
 				E415B93727B57C5E00831D50 /* HobbyCollectionCell.swift in Sources */,
+				E401F23C27C350C900F32B11 /* PushNotificationModel.swift in Sources */,
 				E4335D7A27B2C58100245879 /* SeSacSearchFreindsModel.swift in Sources */,
 				E46AF40927A84C47009F381C /* UserDefaultsManager.swift in Sources */,
 				E4F5002127C26A490085D170 /* ChatRealmModel.swift in Sources */,

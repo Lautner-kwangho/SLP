@@ -13,18 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
-//    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-//      for urlContext in URLContexts {
-//          let url = urlContext.url
-//          Auth.auth().canHandle(url)
-//      }
-//      // URL not auth related, developer should handle it.
-//    }
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
@@ -36,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
         let onboarding = UserDefaults.standard.bool(forKey: UserDefaultsManager.onboarding)
-
+        
         if idToken == nil {
             if onboarding {
                 window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
@@ -55,10 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         //Keyboard
         IQKeyboardManager.shared.enable = true
         
-        // Use Firebase library to configure APIs
-        FirebaseApp.configure()
         // Firebase FCM token
-        
         Messaging.messaging().delegate = self
         Messaging.messaging().token { token, error in
             if let error = error {
@@ -89,8 +76,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        // 알림 삭제해주기
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

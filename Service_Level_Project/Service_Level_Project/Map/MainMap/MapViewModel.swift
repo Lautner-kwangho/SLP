@@ -63,6 +63,7 @@ class MapViewModel: BaseViewModel {
         overlay.circleRadius = 70
     }
     
+    /*
     func makeMarkerUserInMap(map: NMFMapView) {
         let place = NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.517819364682694, lng: locationManager.location?.coordinate.longitude ?? 126.88647317074734 )
         
@@ -80,6 +81,7 @@ class MapViewModel: BaseViewModel {
         marker.iconPerspectiveEnabled = true
         marker.isHideCollidedSymbols = false
     }
+    */
     
     // 배열 추가(Set 타입) - > 안되던 오류 추가 수정한 건데 코드가 길어짐
     func insertMarkerFriendsInMap(map: NMFMapView) {

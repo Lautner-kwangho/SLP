@@ -90,8 +90,6 @@ final class ChattingViewController: BaseViewController {
     //MARK: Input & Output
     let disposeBag = DisposeBag()
     
-    var tempChatData = [TempRealmModel]()
-    
     var toastMessage = String()
     var otherUID = String()
     var otherNICK = String()
@@ -181,7 +179,6 @@ final class ChattingViewController: BaseViewController {
          let getDate = tasks.last?.createdAt == nil ? yesterdayString : tasks.last!.createdAt
          
          SeSacURLNetwork.shared.getChat(lastChatDate: getDate, otherUid: self.otherUID) { data in
-             self.tempChatData = []
              data.payload.forEach { model in
                  //Realm Data
                  try! self.localRealm.write({

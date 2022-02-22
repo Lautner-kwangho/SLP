@@ -42,7 +42,15 @@ class ShopViewController: TabmanViewController {
             button.selectedTintColor = SacColor.color(.green)
             button.selectedFont = Font.title6_R12()
         }
+        let vieww = UIView().then {
+            $0.backgroundColor = .blue
+        }
         
+//        self.view.addSubview(vieww)
+//        vieww.snp.makeConstraints { make in
+//            make.top.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+//            make.height.equalTo(100)
+//        }
         addBar(bar, dataSource: self, at: .top)
     }
     

@@ -26,7 +26,7 @@ class ChattingHeaderView: UITableViewCell {
         $0.axis = .horizontal
         $0.distribution = .fill
     }
-    
+    // 예외처리, 시작 분기, 이슈 해결 방안
     let bellImage = UIImageView().then {
         $0.image = UIImage(named: "bell")
     }
