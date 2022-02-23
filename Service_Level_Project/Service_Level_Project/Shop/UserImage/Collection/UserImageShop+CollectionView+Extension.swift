@@ -29,6 +29,10 @@ extension UserImageShopViewController: UICollectionViewDelegate, UICollectionVie
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        ShopViewController.userImageNumber.accept(indexPath.item)
+    }
 }
 
 extension UserImageShopViewController: UICollectionViewDelegateFlowLayout {

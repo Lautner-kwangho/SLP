@@ -8,27 +8,63 @@
 import UIKit
 import Tabman
 import Pageboy
+import RxSwift
+import RxRelay
 
 class ShopViewController: TabmanViewController {
-    static let shared = ShopViewController()
+    static var sharedHeight = BehaviorRelay<CGFloat>(value: 200)
+    
+    static var userBackgroundImageNumber = BehaviorRelay<Int>(value: 0)
+    static var userImageNumber =  BehaviorRelay<Int>(value: 0)
+    
+    let imageWeight: CGFloat = 348
+    let imageHeight: CGFloat = 174
+    
     private var viewController = [UserImageShopViewController(), UserImageBackgroundViewController()]
     
     let bar = TMBar.ButtonBar()
     
     let headerView = UIView().then {
-        $0.backgroundColor = .blue
+        $0.layer.masksToBounds = true
     }
-    let backgroundImage = UIImageView()
-    let userImage = UIImageView()
+    let backgroundImage = UIImageView().then {
+        $0.image = SeSacUserBackgroundImageManager.image(0)
+        $0.contentMode = .scaleAspectFit
+        
+    }
+    let userImage = UIImageView().then {
+        $0.image = SeSacUserImageManager.image(0)
+    }
+    let saveButton = ButtonConfiguration(customType: .h40(type: .fill, icon: false)).then {
+        $0.setTitle("저장하기", for: .normal)
+        $0.sizeToFit()
+    }
     
-    let testTabView = UIView()
-    
+    let TempTabView = UIView()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setNavigation()
         tabmanSetting()
+        bind()
+    }
+    
+    private func bind() {
+        ShopViewController.userBackgroundImageNumber.asDriver()
+            .drive(onNext: { [weak self] value in
+                guard let self = self else {return}
+                self.backgroundImage.image = SeSacUserBackgroundImageManager.image(value)
+            })
+            .disposed(by: disposeBag)
+        
+        ShopViewController.userImageNumber.asDriver()
+            .drive(onNext: { [weak self] value in
+                guard let self = self else {return}
+                self.userImage.image = SeSacUserImageManager.image(value)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setNavigation() {
@@ -55,26 +91,35 @@ class ShopViewController: TabmanViewController {
         self.view.addSubview(headerView)
         headerView.addSubview(backgroundImage)
         headerView.addSubview(userImage)
+        headerView.addSubview(saveButton)
         
-        self.view.addSubview(testTabView)
-
+        self.view.addSubview(TempTabView)
+        
+        let imageviewHeight: CGFloat = ( imageHeight * view.frame.size.width ) / imageWeight
+        
         headerView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(self.view.frame.size.width / 2)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(14)
+            $0.height.equalTo(imageviewHeight)
             $0.bottom.equalTo(backgroundImage)
         }
         
         backgroundImage.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(headerView)
-            $0.height.equalTo(self.view.frame.size.width / 2)
+            $0.height.equalTo(imageviewHeight)
         }
         
         userImage.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalTo(backgroundImage)
+            $0.bottom.equalTo(backgroundImage.snp.bottom)
             $0.centerX.equalTo(backgroundImage)
         }
         
-        addBar(bar, dataSource: self, at: .custom(view: testTabView, layout: { view in
+        saveButton.snp.makeConstraints {
+            $0.top.equalTo(backgroundImage).inset(20)
+            $0.trailing.equalTo(backgroundImage).inset(20)
+        }
+        
+        addBar(bar, dataSource: self, at: .custom(view: TempTabView, layout: { view in
             view.snp.makeConstraints { make in
                 make.top.equalTo(self.headerView.snp.bottom)
                 make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
@@ -82,8 +127,8 @@ class ShopViewController: TabmanViewController {
             }
         }))
         
+        ShopViewController.sharedHeight.accept(imageviewHeight + CGFloat(50.0))
         
-        print("테이블 높이 구하기", headerView.frame.size.height + CGFloat(50.0))
     }
     
 }

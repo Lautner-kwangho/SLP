@@ -35,5 +35,8 @@ extension UserImageBackgroundViewController: UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ShopViewController.userBackgroundImageNumber.accept(indexPath.item)
+    }
     
 }

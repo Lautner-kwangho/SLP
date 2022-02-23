@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class UserImageShopViewController: BaseViewController {
     
@@ -18,6 +19,8 @@ class UserImageShopViewController: BaseViewController {
     }
     
     let viewModel = UserImageShopViewModel()
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -29,11 +32,17 @@ class UserImageShopViewController: BaseViewController {
     
     override func setConstraints() {
         view.addSubview(userImageCollectionView)
-        userImageCollectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(100)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-//            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+        
+        ShopViewController.sharedHeight
+            .asDriver()
+            .drive(onNext: { [weak self] height in
+                guard let self = self else {return}
+                self.userImageCollectionView.snp.updateConstraints {
+                    $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(height)
+                    $0.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
+                }
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class UserImageBackgroundViewController: BaseViewController {
     let userImageTableView = UITableView().then {
         $0.register(UserImageBackgroundCell.self, forCellReuseIdentifier: UserImageBackgroundCell.reuseIdentifier)
         $0.showsVerticalScrollIndicator = false
     }
+    
     let viewModel = UserImageBackgroundViewModel()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +29,18 @@ class UserImageBackgroundViewController: BaseViewController {
     
     override func setConstraints() {
         view.addSubview(userImageTableView)
-        userImageTableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
+        
+        ShopViewController.sharedHeight
+            .asDriver()
+            .drive(onNext: { [weak self] height in
+                guard let self = self else {return}
+                self.userImageTableView.snp.makeConstraints {
+                    $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(height)
+                    $0.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
+                }
+            })
+            .disposed(by: disposeBag)
+        
     }
 }
 
