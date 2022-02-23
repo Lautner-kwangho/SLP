@@ -10,8 +10,19 @@ import Tabman
 import Pageboy
 
 class ShopViewController: TabmanViewController {
-    // Fimga에 있는 거 처럼 하려면 이걸 또 상속 받아서 하면 편할 듯
+    static let shared = ShopViewController()
     private var viewController = [UserImageShopViewController(), UserImageBackgroundViewController()]
+    
+    let bar = TMBar.ButtonBar()
+    
+    let headerView = UIView().then {
+        $0.backgroundColor = .blue
+    }
+    let backgroundImage = UIImageView()
+    let userImage = UIImageView()
+    
+    let testTabView = UIView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +39,6 @@ class ShopViewController: TabmanViewController {
     private func tabmanSetting() {
         self.dataSource = self
         
-        let bar = TMBar.ButtonBar()
-        
         bar.layout.transitionStyle = .snap
         bar.layout.contentMode = .fit
         bar.backgroundView.style = .blur(style: .light)
@@ -42,16 +51,39 @@ class ShopViewController: TabmanViewController {
             button.selectedTintColor = SacColor.color(.green)
             button.selectedFont = Font.title6_R12()
         }
-        let vieww = UIView().then {
-            $0.backgroundColor = .blue
+        
+        self.view.addSubview(headerView)
+        headerView.addSubview(backgroundImage)
+        headerView.addSubview(userImage)
+        
+        self.view.addSubview(testTabView)
+
+        headerView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(self.view.frame.size.width / 2)
+            $0.bottom.equalTo(backgroundImage)
         }
         
-//        self.view.addSubview(vieww)
-//        vieww.snp.makeConstraints { make in
-//            make.top.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
-//            make.height.equalTo(100)
-//        }
-        addBar(bar, dataSource: self, at: .top)
+        backgroundImage.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(headerView)
+            $0.height.equalTo(self.view.frame.size.width / 2)
+        }
+        
+        userImage.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(backgroundImage)
+            $0.centerX.equalTo(backgroundImage)
+        }
+        
+        addBar(bar, dataSource: self, at: .custom(view: testTabView, layout: { view in
+            view.snp.makeConstraints { make in
+                make.top.equalTo(self.headerView.snp.bottom)
+                make.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+                make.height.equalTo(50)
+            }
+        }))
+        
+        
+        print("테이블 높이 구하기", headerView.frame.size.height + CGFloat(50.0))
     }
     
 }

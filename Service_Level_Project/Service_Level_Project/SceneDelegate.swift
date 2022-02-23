@@ -21,25 +21,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         window?.windowScene = windowScene
         
 //         임시로 작업하려고 옮겨 놓음
-//        window?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+        window?.rootViewController = UINavigationController(rootViewController: ShopViewController())
 //         여기에 작업
         
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
         let onboarding = UserDefaults.standard.bool(forKey: UserDefaultsManager.onboarding)
         
-        if idToken == nil {
-            if onboarding {
-                window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
-            } else {
-                window?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
-            }
-        } else {
-            SeSacURLNetwork.shared.loginMember { data in
-                windowScene.windows.first?.rootViewController = BaseTabBarViewController()
-            } failErrror: { error in
-                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
-            }
-        }
+//        if idToken == nil {
+//            if onboarding {
+//                window?.rootViewController = UINavigationController(rootViewController: AuthPhoneViewController())
+//            } else {
+//                window?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+//            }
+//        } else {
+//            SeSacURLNetwork.shared.loginMember { data in
+//                windowScene.windows.first?.rootViewController = BaseTabBarViewController()
+//            } failErrror: { error in
+//                windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
+//            }
+//        }
         window?.makeKeyAndVisible()
         
         //Keyboard

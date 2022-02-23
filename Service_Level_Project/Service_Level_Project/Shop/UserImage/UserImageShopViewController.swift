@@ -30,7 +30,10 @@ class UserImageShopViewController: BaseViewController {
     override func setConstraints() {
         view.addSubview(userImageCollectionView)
         userImageCollectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(100)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+//            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
