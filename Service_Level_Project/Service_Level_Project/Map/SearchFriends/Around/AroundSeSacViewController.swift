@@ -61,7 +61,6 @@ final class AroundSeSacViewController: BaseViewController {
     
     @objc private func fiveSecondReqeustMyState() {
         SeSacURLNetwork.shared.myStatus { model in
-            print("반복되는 모델",model)
             if model.matched == 1 {
                 self.view.makeToast("\(model.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다", duration: 1)
                 UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(2), forKey: UserDefaultsManager.mapButton)
@@ -71,7 +70,6 @@ final class AroundSeSacViewController: BaseViewController {
             }
         } failErrror: { error in
             guard let error = error else {return}
-            print("나 에러: ", error)
             switch error {
             case "201":
                 let alertPage = SeSacAlert("친구 찾기 중단","오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다") {
@@ -113,7 +111,7 @@ final class AroundSeSacViewController: BaseViewController {
         
         reloadButton.rx.tap
             .debounce(.seconds(5), scheduler: MainScheduler.instance)
-            .asDriver(onErrorJustReturn: print("그만좀눌러ㅡㅡ"))
+            .asDriver(onErrorJustReturn: print(""))
             .drive(onNext: { [weak self] _ in
                 guard let self = self else {return}
                 self.viewModel.friendsList()
@@ -132,7 +130,6 @@ final class AroundSeSacViewController: BaseViewController {
                     self.tableData.append(data)
                     self.tableDataCount.accept(true)
                 }
-                print("주변데이터 : ", self.tableData)
                 self.aroundTableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -223,7 +220,6 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
                     hobby.append(text)
                 }
             }
-            print("취미 활동 확인하기 \(indexPath.row): ", hobby)
             cell.addButtonTitle.accept(hobby)
         }
         
@@ -277,9 +273,7 @@ extension AroundSeSacViewController: UITableViewDelegate, UITableViewDataSource 
                     }
                 }
             } failErrror: { errorcode in
-                print("나왜 이거 실행 안되냐ㅑㅑㅑㅑ")
                 guard let code = errorcode else {return}
-                print("나 주변 보낸 에러 모델이야", code)
                 if code == "201" {
                     self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구 찾기를 그만둡니다", duration: 1)
                     UserDefaults.standard.set(SeSacMapButtonImageManager.imageName(0), forKey: UserDefaultsManager.mapButton)

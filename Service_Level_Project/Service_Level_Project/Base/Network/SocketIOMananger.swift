@@ -27,7 +27,6 @@ class SocketIOMananger: NSObject {
         socket = manager.defaultSocket
         
         socket.on(clientEvent: .connect) { data, ack in
-            print("SOCKET IS CONNECTED: ", data, ack)
             let myUid = UserDefaults.standard.string(forKey: UserDefaultsManager.uid)
             
             if let uid = myUid {
@@ -36,7 +35,7 @@ class SocketIOMananger: NSObject {
         }
         
         socket.on(clientEvent: .disconnect) { data, ack in
-            print("SOCKET IS DISCONNECTED: ", data, ack)
+//            print("SOCKET IS DISCONNECTED: ", data, ack)
         }
         
         self.socket.on("chat") { dataArray, ack in

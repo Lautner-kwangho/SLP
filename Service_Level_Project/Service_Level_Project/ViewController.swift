@@ -81,10 +81,8 @@ class ViewController: BaseViewController {
     }
     
     @objc func clicked() {
-        // 후... 하루 다 썼네
         let random: [ButtonCase] = [.outline, .cancel, .fill , .disable]
         button2.customLayout(random.randomElement()!)
-        print("눌렀습니다")
     }
 
 

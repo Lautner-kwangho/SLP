@@ -69,7 +69,6 @@ class AuthPhoneMessageViewModel {
                     .provider()
                     .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
                         if let error = error {
-                            print("폰 에러", error.localizedDescription)
                             return
                         }
                         guard let verificationID = verificationID else { return }
@@ -117,9 +116,6 @@ class AuthPhoneMessageViewModel {
                     }
                     // User is Signed in
                     guard let authResult = authResult else {return}
-//                    print("성공했음", authResult.user.uid)
-//                    print("id 토큰 프린트 : ", idToken)
-//                    dump(authResult.user.refreshToken)
                     
                     DispatchQueue.global().sync {
                     

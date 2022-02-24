@@ -56,21 +56,11 @@ class InputText: UIView {
     }
     
     func textInputEditAction(type: InputTextCase) {
-        
-//        self.textField.rx.text.asDriver()
-//            .distinctUntilChanged()
-//            .map(textFieldValid)
-//            .drive(onNext: { value in
-//                print(value)
-//                self.textFieldStatus(type)
-//            })
-//            .disposed(by: disposeBag)
         statusText
             .distinctUntilChanged()
             .map(textFieldStatus)
             .subscribe(onNext: { value in
                 self.statusText.bind { value in
-//                    print(value)
                 }
             })
             .disposed(by: disposeBag)

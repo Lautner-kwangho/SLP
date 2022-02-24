@@ -174,10 +174,6 @@ final class MapViewController: BaseViewController {
                 guard let self = self else { return }
                 self.recommendDB = []
                 self.aroundDB = []
-//                print("==================새로고침=======================")
-//                print("😇 DB : ", model.fromQueueDB)
-//                print("😇 DBResquest : ", model.fromQueueDBRequested)
-//                print("😇 Recommend : ", model.fromRecommend)
                 
                 model.fromQueueDB.forEach { data in
                     guard let data = data else {return}
@@ -259,15 +255,6 @@ final class MapViewController: BaseViewController {
 
 
 extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        print("Map: ",#function)
-    }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Map: ",#function)
-    }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Map: ",#function)
-    }
     
     // iOS 15 기준으로 하고 나중에 시간되면 분기 처리(얼럿 뜰 때 나옴)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
