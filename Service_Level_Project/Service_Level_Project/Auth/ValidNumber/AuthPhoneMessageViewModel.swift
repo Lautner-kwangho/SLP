@@ -131,6 +131,7 @@ class AuthPhoneMessageViewModel {
                         SeSacURLNetwork.shared.loginMember { data in
                             windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MyInfoViewController())
                         } failErrror: { error in
+                            print("나오는 지 확인하기 :", error)
                             windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: CreateNicknameViewController())
                         }
                     }

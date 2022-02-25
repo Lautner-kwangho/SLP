@@ -81,7 +81,6 @@
 		E4B986B327AEEDBA007C824B /* Button+Collection+(3x2).swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B986B227AEEDBA007C824B /* Button+Collection+(3x2).swift */; };
 		E4C31E9127967B2800ACE886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9027967B2800ACE886 /* AppDelegate.swift */; };
 		E4C31E9327967B2800ACE886 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9227967B2800ACE886 /* SceneDelegate.swift */; };
-		E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31E9427967B2800ACE886 /* ViewController.swift */; };
 		E4C31E9A27967B2900ACE886 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4C31E9927967B2900ACE886 /* Assets.xcassets */; };
 		E4C31E9D27967B2900ACE886 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4C31E9B27967B2900ACE886 /* LaunchScreen.storyboard */; };
 		E4C31EA527968B7600ACE886 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C31EA427968B7600ACE886 /* UIFont+Extension.swift */; };
@@ -186,7 +185,6 @@
 		E4C31E8D27967B2800ACE886 /* Service_Level_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Service_Level_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4C31E9027967B2800ACE886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4C31E9227967B2800ACE886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E4C31E9427967B2800ACE886 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E4C31E9927967B2900ACE886 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4C31E9C27967B2900ACE886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4C31E9E27967B2900ACE886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -606,7 +604,6 @@
 			children = (
 				E4ABC3C927A0791800CE3A99 /* Service_Level_ProjectDebug.entitlements */,
 				E4ABC3C827A0791100CE3A99 /* Service_Level_ProjectRelease.entitlements */,
-				E4C31E9427967B2800ACE886 /* ViewController.swift */,
 				E41ED01C279DB7A000A2F0CE /* Auth */,
 				E4ABC3C3279FD3B000CE3A99 /* MyInfo */,
 				E4AF001F27B2720200D8572C /* Map */,
@@ -881,7 +878,6 @@
 				E4AF001627B0EF1100D8572C /* Custom+Alert.swift in Sources */,
 				E4C31EBC2797B76500ACE886 /* UIColor+Extension.swift in Sources */,
 				E4AF001927B1787D00D8572C /* CheckDataModel.swift in Sources */,
-				E4C31E9527967B2800ACE886 /* ViewController.swift in Sources */,
 				E415B92E27B4334600831D50 /* MapViewController+Function.swift in Sources */,
 				E4EFE4AF27BB586E00C47139 /* Button+Collection+(2x3).swift in Sources */,
 				E4EFE4A527BA3BB800C47139 /* ChatTextView+Extension.swift in Sources */,

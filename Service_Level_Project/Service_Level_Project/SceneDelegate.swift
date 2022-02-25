@@ -20,10 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.windowScene = windowScene
         
-//         임시로 작업하려고 옮겨 놓음
-//        window?.rootViewController = UINavigationController(rootViewController: ShopViewController())
-//         여기에 작업
-        
         let idToken = UserDefaults.standard.string(forKey: UserDefaultsManager.authIdToken)
         let onboarding = UserDefaults.standard.bool(forKey: UserDefaultsManager.onboarding)
         
@@ -53,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, MessagingDelegate {
                 // 앱 지우고 다시 설치하니까 이런 오류 뜸(체크하기) -> 근데 두번째 빌드에서는 받아옴;
                 // Failed to checkin before token registration.
             } else if let token = token {
-//                print("FCM registration token: \(token)")
+                print("FCM registration token: \(token)")
                 UserDefaults.standard.set(token, forKey: "fcmToken")
             }
         }

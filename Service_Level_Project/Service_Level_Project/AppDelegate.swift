@@ -83,19 +83,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
         // 들어온 상태에서는 이게 실행 됨, 베너 누르면 여기 들어오네
-//        let vc = BaseTabBarViewController()
-//
-//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-//
-//        if let root = self.rootString, root == "채팅" {
-//            vc.selectedIndex = 0
-//            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
-//            windowScene.windows.first?.makeKeyAndVisible()
-//        } else {
-//            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
-//            windowScene.windows.first?.makeKeyAndVisible()
-//        }
-//
+        let vc = BaseTabBarViewController()
+
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+
+        if let root = self.rootString, root == "채팅" {
+            vc.selectedIndex = 0
+            windowScene.windows.first?.rootViewController = vc
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
+
     }
     
     // MARK: UISceneSession Lifecycle
