@@ -10,6 +10,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;+ 앱 소개 및 UI / 특징<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 기간<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 사용 Tool<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ 구현 미리보기<br/>
 ### 2. [일일 Iteration](#일일-Iteration)<br/>
 
 <br/><br/>
@@ -27,7 +28,16 @@
 #### Jira, Confluence, Slack, Notion
 #### Swagger
 #### Figma
+<img width="500" alt="스크린샷 2022-02-23 오후 11 19 00" src="https://user-images.githubusercontent.com/80211277/155663672-d31c89c0-ff6c-4031-adec-18afdcc69dc7.png">
+<img width="500" alt="스크린샷 2022-02-23 오후 11 18 35" src="https://user-images.githubusercontent.com/80211277/155663680-02f285ac-1f68-47f1-98c5-dc69c9172d4c.png">
 
+
+<br/><br/>
+### - 구현 미리보기
+<br/><img src="https://user-images.githubusercontent.com/80211277/155662395-2aaaf96e-00ce-4257-862f-dbfc04198029.gif" width="240"> 
+<img src="https://user-images.githubusercontent.com/80211277/155660712-e49c79d0-24d2-4e6c-a4da-1e9932ae75fe.gif" width="240"> 
+<img src="https://user-images.githubusercontent.com/80211277/155660734-620d4a2a-f77b-445d-a605-a1e6e78b4f51.gif" width="240">
+<img src="https://user-images.githubusercontent.com/80211277/155660752-52eb3a0f-37df-4add-b15b-620f535f15c4.gif" width="240">
 
 <br/><br/>
 ## 일일 Iteration
@@ -71,6 +81,5 @@
 |35|2월 21일|- 에러 핸들링 처리 <br/> - 푸시 로직 구현하기 <br/> Chat UI 추가 수정하기|[34일차](IssueReadme/2월%2021일.md)
 |36|2월 22일|- 에러 핸들링 <br/> - 푸시 로직 추가 수정하기 <br/> Shop UI 추가 수정하기|[35일차](IssueReadme/2월%2022일.md)
 |37|2월 23일|- 에러 핸들링 <br/> Shop 기능 추가하기|[36일차](IssueReadme/2월%2023일.md)
-|-|1월 00일|- |-
 ###### * 최소 All day = 10:00 ~ 24:00
 ###### * 일정에 따라 더 많이 프로젝트 진행
