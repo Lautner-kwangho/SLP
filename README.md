@@ -5,12 +5,23 @@
 <br/>
 
 # 목차<br/>
-### 1. [일일 Iteration](#일일-Iteration)<br/>
-### 2. [SLP Info](#SLP-Info)<br/>
+### 1. [SLP Info](#SLP-Info)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 앱 소개 및 UI / 특징<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 기간<br/>
+### 2. [일일 Iteration](#일일-Iteration)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 사용 Tool<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ 구현 미리보기<br/>
+
+<br/><br/>
+## SLP Info
+### - 앱소개 및 UI / 특징
+#### 디자이너가 피그마로 작업 -> 개발자 구현
+#### 서버 및 UI변경 가능
+
+<br/><br/>  
+### - 프로젝트 기간
+#### 2022.01.17 ~ 2022.02.18
+
 
 <br/><br/>
 ## 일일 Iteration
@@ -56,16 +67,6 @@
 |37|2월 23일|- 에러 핸들링 <br/> Shop 기능 추가하기|[36일차](IssueReadme/2월%2023일.md)
 ###### * 최소 All day = 10:00 ~ 24:00
 ###### * 일정에 따라 더 많이 프로젝트 진행
-
-<br/><br/>
-## SLP Info
-### - 앱소개 및 UI / 특징
-#### 디자이너가 피그마로 작업 -> 개발자 구현
-#### 서버 및 UI변경 가능
-
-<br/><br/>  
-### - 프로젝트 기간
-#### 2022.01.17 ~ 2022.02.18
 
 <br/><br/>  
 ### - 사용 Tool
